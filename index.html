@@ -99,39 +99,118 @@
       opacity: 0.7;
     }
 </style>
+
+<style>
+  /* Gold Glass Effect */
+  .glass-gold {
+    background: rgba(255, 215, 0, 0.12);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    border-radius: 15px;
+    padding: 20px;
+  }
+
+  /* Floating Icons */
+  .floating-icon {
+    position: absolute;
+    width: 65px;
+    opacity: 0.7;
+    animation: float 6s infinite ease-in-out;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-18px); }
+    100% { transform: translateY(0px); }
+  }
+
+  /* Sparkle Animation */
+  .sparkle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0));
+    border-radius: 50%;
+    animation: sparkle 2s infinite ease-in-out;
+  }
+
+  @keyframes sparkle {
+    0% { transform: scale(0.4); opacity: 0.4; }
+    50% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.4); opacity: 0.4; }
+  }
+
+  /* Scrolling banner */
+  .marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #ffd700;
+    font-size: 1.2rem;
+    padding: 12px 0;
+    background: rgba(255, 215, 0, 0.15);
+    border-top: 1px solid rgba(255, 215, 0, 0.4);
+    border-bottom: 1px solid rgba(255, 215, 0, 0.4);
+  }
+
+  .marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: slide 12s linear infinite;
+  }
+
+  @keyframes slide {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+</style>
 </head>
 <body>
 
+<!-- Floating Icons -->
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png" class="floating-icon" style="top:40px; left:20px; width:60px;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="floating-icon" style="top:150px; right:20px; width:70px; animation-delay:1s;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" class="floating-icon" style="top:300px; left:25px; width:65px; animation-delay:2s;">
+
+<!-- Sparkles -->
+<div class="sparkle" style="top:120px; left:50%; animation-delay:0.2s;"></div>
+<div class="sparkle" style="top:260px; left:30%; animation-delay:1s;"></div>
+<div class="sparkle" style="top:380px; left:70%; animation-delay:1.8s;"></div>
+
+<!-- Marquee Banner -->
+<div class="marquee glass-gold"><span>🔥 Master Meta Ads • 🚀 Scale Your Telegram Channel • 🎯 Daily Ad Strategies • 💰 Learn Advanced Tracking • 📈 Boost Your ROI • </span></div>
+
   <div class="hero">
     <div class="hero-overlay">
-      <h1>🚀 Scale Your Business with Meta & Telegram Ads</h1>
-      <p>Master ads, tracking, automation, and fast Telegram growth 📈</p>
-      <a href="YOUR_TELEGRAM_LINK" onclick="trackSubscribe()" class="btn">Join Telegram 💙</a>
+      <h1>🚀 Grow Your Business with High‑ROI Meta & Telegram Ads</h1>
+      <p>I run profitable Meta & Telegram ad campaigns that bring you customers, leads & real business growth 💼📈</p>
+      <a href="https://t.me/Meta_ads_raj" onclick="trackSubscribe()" class="btn">Join Telegram 💙</a>
+      <br><br>
+      <a href="https://instagram.com/rajendraa.rwt_" class="btn" style="background:linear-gradient(90deg,#ff0084,#ff4fa1);box-shadow:0 0 20px rgba(255,0,132,0.8);">Message on Instagram 📩</a>
     </div>
 </div>
     <h1>Grow Your Business with Meta & Telegram Ads</h1>
     <p>Learn to run profitable ads, scale your Telegram channel, and master tracking tools 🔥</p>
 
-    <a href="YOUR_TELEGRAM_LINK" onclick="trackSubscribe()" class="btn">Join Telegram 💙</a>
+    <a href="https://t.me/Meta_ads_raj" onclick="trackSubscribe()" class="btn">Join Telegram 💙</a>
   </div>
 
-  <div class="section">
-    <h2>📘 What You Will Learn</h2>
-    <div class="feature-box">✨ How to run high-performing Meta Ads</div>
-    <div class="feature-box">🔗 Telegram Channel Growth Techniques</div>
-    <div class="feature-box">🎯 Perfect Pixel & Event Tracking Setup</div>
-    <div class="feature-box">⚡ Daily Ad Strategies & Copy Paste Templates</div>
+  <div class="section" style="box-shadow:0 0 25px rgba(0,150,255,0.4); border:1px solid rgba(0,150,255,0.4);">
+    <h2>💼 Services I Provide</h2>
+    <div class="feature-box">✨ I manage your complete Meta Ads (Facebook + Instagram) campaigns with targeting, creatives, testing, and optimization to bring the best results.</div>
+    <div class="feature-box">🔗 I run high‑quality Telegram Ads to grow your channel, increase active members, and bring real customers to your business.</div>
+    <div class="feature-box">🎯 I set up Pixel, Events, and advanced tracking so every click, lead, and conversion is correctly tracked for maximum accuracy.</div>
+    <div class="feature-box">⚡ I scale your winning ads using proven strategies to increase profit, reduce costs, and maximize your overall ROI.</div>
   </div>
 
-  <div class="section">
-    <h2>💡 Why Join the Telegram Channel</h2>
-    <div class="feature-box">📚 Free Ads Tutorials</div>
-    <div class="feature-box">📈 Daily Growth Tips</div>
-    <div class="feature-box">🧩 Hidden Strategies</div>
-    <div class="feature-box">🤝 Direct Support</div>
-  </div>
-
-  <div class="footer">This page is not affiliated with Telegram or Meta.</div>
+  <div class="section"><h2>💼 Services I Provide</h2>
+<div class="feature-box">📚 I will create and manage professional Meta Ads for your business to help you get more customers, leads, and conversions every single day.</div>
+<div class="feature-box">📈 I provide complete growth support, analyzing your business goals and running targeted campaigns that deliver real, measurable results.</div>
+<div class="feature-box">🧩 I use advanced and hidden ad strategies such as retargeting, lookalike audiences, creative testing, and funnel optimization for maximum impact.</div>
+<div class="feature-box">🤝 I offer direct support where you can contact me anytime for updates, improvements, suggestions, or changes to your ad campaigns.</div>
+</div>
+<div class="footer">">This page is not affiliated with Telegram or Meta.</div>
 
   <!-- Subscribe Event Tracking -->
   <script>
