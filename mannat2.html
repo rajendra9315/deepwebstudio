@@ -52,22 +52,23 @@
     }
 
     /* SQUARE CAPSULE PROFILE IMAGE */
-   .profile-img {
-  width:90%;
-  height:220px;
-  border-radius:25px;
+.profile-img {
+  width:180px;         /* Round size */
+  height:180px;
+  border-radius:50%;   /* Make it circular */
   margin:0 auto 20px;
-  object-fit:cover;
+  object-fit:cover;    /* Fully adjust image inside circle */
+  object-position:center;
   display:block;
 
-  /* DOUBLE BORDER EFFECT */
-  border:3px solid #ffa500;
-  position:relative;
+  /* DOUBLE BORDER + GLOW */
+  border:4px solid #ffa500;
   box-shadow:
-      0 0 0 5px rgba(255,165,0,0.3),   /* second border */
-      0 0 20px rgba(255,165,0,0.4),   /* outer glow */
-      0 0 35px rgba(255,165,0,0.2);   /* soft glow */
+      0 0 0 5px rgba(255,165,0,0.3),
+      0 0 20px rgba(255,165,0,0.4),
+      0 0 35px rgba(255,165,0,0.2);
 }
+
 
 
     .username {color:#ccc;font-size:0.95rem;margin-bottom:20px;}
