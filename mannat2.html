@@ -53,21 +53,25 @@
 
     /* SQUARE CAPSULE PROFILE IMAGE */
 .profile-img {
-  width:180px;         /* Round size */
-  height:180px;
-  border-radius:50%;   /* Make it circular */
+  width:90%;
+  height:220px;
+  border-radius:25px;
   margin:0 auto 20px;
-  object-fit:cover;    /* Fully adjust image inside circle */
-  object-position:center;
   display:block;
 
-  /* DOUBLE BORDER + GLOW */
-  border:4px solid #ffa500;
+  /* PHOTO FITS COMPLETELY */
+  object-fit:contain;
+  background:#000;  /* Looks premium behind image */
+
+  /* DOUBLE BORDER EFFECT */
+  border:3px solid #ffa500;
+  position:relative;
   box-shadow:
       0 0 0 5px rgba(255,165,0,0.3),
       0 0 20px rgba(255,165,0,0.4),
       0 0 35px rgba(255,165,0,0.2);
 }
+
 
 
 
