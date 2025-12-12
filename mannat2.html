@@ -59,15 +59,18 @@ src="https://www.facebook.com/tr?id=2661881054205893&ev=PageView&noscript=1"
       margin-bottom:20px;
       overflow:hidden;
     }
-    .marquee span {
-      display:inline-block;
-      white-space:nowrap;
-      animation: marquee 15s linear infinite;
-    }
-    @keyframes marquee {
-      0% { transform: translateX(100%); }
-      100% { transform: translateX(-100%); }
-    }
+ .marquee span {
+  display:inline-block;
+  white-space:nowrap;
+  animation: marquee 12s linear infinite;
+  transform: translateX(0); /* visible from first second */
+}
+
+  @keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
 
     /* REDUCED SPACING — UPDATED */
     .profile-img {
