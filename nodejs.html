@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Node.js Master Course – Deep Backend Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Complete Node.js master course with deep backend explanations, real-world examples, input-output, and interview-level knowledge." />
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px;
+      line-height: 1.9;
+      background: #fdfdfd;
+      color: #222;
+    }
+
+    h1 { color: #1b5e20; margin-top: 70px; }
+    h2 { color: #0d47a1; margin-top: 50px; }
+    h3 { color: #b71c1c; margin-top: 30px; }
+
+    pre {
+      background: #f4f4f4;
+      padding: 18px;
+      overflow-x: auto;
+      color: #1b5e20;
+      border-left: 5px solid #2e7d32;
+    }
+
+    .output {
+      background: #e8f5e9;
+      padding: 18px;
+      border-left: 6px solid #2e7d32;
+      margin: 20px 0;
+    }
+
+    .note {
+      background: #fff3cd;
+      padding: 18px;
+      border-left: 6px solid #ff9800;
+      margin: 25px 0;
+    }
+
+    .warning {
+      background: #ffebee;
+      padding: 18px;
+      border-left: 6px solid #c62828;
+      margin: 25px 0;
+    }
+
+    hr { margin: 80px 0; }
+  </style>
+</head>
+
+<body>
+
+<!-- ====================================================== -->
+<!-- MODULE 1: WHAT IS NODE.JS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 1: What is Node.js? (Deep Understanding)</h1>
+
+<h2>1.1 What is Node.js?</h2>
+
+<p>
+Node.js is a <strong>runtime environment</strong> that allows JavaScript
+to run <strong>outside the browser</strong>, mainly on servers.
+</p>
+
+<ul>
+  <li>Browser JS → UI & interaction</li>
+  <li><strong>Node.js → Backend & servers</strong></li>
+</ul>
+
+<div class="note">
+Node.js is NOT a language.  
+It is JavaScript running on a server.
+</div>
+
+<h2>1.2 Why Node.js Was Created</h2>
+
+<p>
+Before Node.js, JavaScript was limited to browsers.
+Servers used PHP, Java, Python.
+</p>
+
+<p>
+Node.js solved:
+</p>
+
+<ul>
+  <li>Same language for frontend & backend</li>
+  <li>High-performance non-blocking servers</li>
+  <li>Real-time applications</li>
+</ul>
+
+<h2>1.3 Where Node.js Is Used</h2>
+
+<ul>
+  <li>APIs & Backend servers</li>
+  <li>Authentication systems</li>
+  <li>Payment handling</li>
+  <li>Real-time apps (chat, live data)</li>
+  <li>Tools (npm, bundlers)</li>
+</ul>
+
+<div class="note">
+Companies using Node.js: Netflix, Uber, PayPal, LinkedIn
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 2: HOW NODE.JS WORKS INTERNALLY -->
+<!-- ====================================================== -->
+
+<h1>MODULE 2: How Node.js Works (ENGINE LEVEL)</h1>
+
+<h2>2.1 JavaScript Engine (V8)</h2>
+
+<p>
+Node.js uses the <strong>V8 engine</strong> (by Google) to execute JavaScript.
+</p>
+
+<pre>
+JS Code
+ ↓
+V8 Engine
+ ↓
+Machine Code
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Fast execution of JavaScript on server
+</div>
+
+<h2>2.2 Single-Threaded but Powerful</h2>
+
+<p>
+Node.js runs on a single thread but handles thousands of requests using
+<strong>non-blocking I/O</strong>.
+</p>
+
+<h3>Blocking vs Non-Blocking</h3>
+
+<pre>
+// Blocking (BAD)
+const data = readFileSync("file.txt");
+
+// Non-blocking (GOOD)
+readFile("file.txt", callback);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Non-blocking code keeps server responsive
+</div>
+
+<div class="warning">
+Blocking code can crash performance in Node.js.
+</div>
+
+<h2>2.3 Event Loop in Node.js</h2>
+
+<pre>
+Call Stack
+↓
+Node APIs
+↓
+Callback Queue
+↓
+Event Loop
+</pre>
+
+<div class="note">
+Same event loop concept as browser, optimized for servers.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 3: SETUP & FIRST NODE PROGRAM -->
+<!-- ====================================================== -->
+
+<h1>MODULE 3: Setup & Your First Node.js Program</h1>
+
+<h2>3.1 Installing Node.js</h2>
+
+<p>
+Download from:
+</p>
+
+<ul>
+  <li>https://nodejs.org</li>
+</ul>
+
+<p>
+Install <strong>LTS version</strong>.
+</p>
+
+<h2>3.2 Verify Installation</h2>
+
+<h3>INPUT (Terminal)</h3>
+<pre>
+node -v
+npm -v
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Node & npm version numbers
+</div>
+
+<h2>3.3 First Node.js Script</h2>
+
+<h3>INPUT (index.js)</h3>
+<pre>
+console.log("Hello from Node.js");
+</pre>
+
+<h3>RUN</h3>
+<pre>
+node index.js
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Hello from Node.js
+</div>
+
+<div class="note">
+Node.js runs JavaScript directly from terminal.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 4: CREATING YOUR FIRST SERVER -->
+<!-- ====================================================== -->
+
+<h1>MODULE 4: Creating Your First Server (CORE)</h1>
+
+<h2>4.1 Why Servers Exist</h2>
+
+<p>
+A server listens for requests and sends responses.
+</p>
+
+<h2>4.2 HTTP Module (BUILT-IN)</h2>
+
+<h3>INPUT</h3>
+<pre>
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  res.write("Hello from server");
+  res.end();
+});
+
+server.listen(3000);
+</pre>
+
+<h3>RUN</h3>
+<pre>
+node index.js
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Server running at http://localhost:3000
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Server starts listening</li>
+  <li>Request comes in</li>
+  <li>Callback executes</li>
+  <li>Response sent back</li>
+</ul>
+
+<div class="warning">
+This is low-level. Real apps use Express.
+</div>
+
+<hr>
+
+<!-- END OF PART 1 (NODE.JS) -->
+  <!-- ====================================================== -->
+<!-- PART 2 START -->
+<!-- MODULE 5: npm & package.json (VERY IMPORTANT) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 5: npm & package.json (Node.js Backbone)</h1>
+
+<h2>5.1 What is npm?</h2>
+
+<p>
+npm (Node Package Manager) manages third-party libraries for Node.js.
+</p>
+
+<ul>
+  <li>Install packages</li>
+  <li>Manage dependencies</li>
+  <li>Run scripts</li>
+</ul>
+
+<div class="note">
+Node.js is powerful because of npm ecosystem.
+</div>
+
+<h2>5.2 Initializing a Project</h2>
+
+<h3>INPUT (Terminal)</h3>
+<pre>
+npm init -y
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+package.json file created
+</div>
+
+<h2>5.3 package.json (DEEP)</h2>
+
+<pre>
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  }
+}
+</pre>
+
+<h3>What Each Field Means</h3>
+<ul>
+  <li><strong>name</strong> → project name</li>
+  <li><strong>main</strong> → entry file</li>
+  <li><strong>scripts</strong> → shortcuts</li>
+</ul>
+
+<h2>5.4 Installing Packages</h2>
+
+<h3>INPUT</h3>
+<pre>
+npm install express
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+node_modules folder created<br>
+express added to dependencies
+</div>
+
+<h2>5.5 Local vs Global Packages</h2>
+
+<pre>
+npm install nodemon --save-dev
+npm install -g nodemon
+</pre>
+
+<div class="note">
+Global packages are for tools, not app logic.
+</div>
+
+<h2>5.6 node_modules (IMPORTANT)</h2>
+
+<div class="warning">
+Never upload node_modules to GitHub.  
+Always use package.json.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 6: CORE NODE.JS MODULES -->
+<!-- ====================================================== -->
+
+<h1>MODULE 6: Core Node.js Modules (No Install Needed)</h1>
+
+<h2>6.1 fs Module (File System)</h2>
+
+<h3>INPUT</h3>
+<pre>
+const fs = require("fs");
+
+fs.writeFileSync("test.txt", "Hello Node");
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+test.txt file created with content
+</div>
+
+<h3>Non-Blocking Version</h3>
+<pre>
+fs.writeFile("test.txt", "Hello Async", () => {
+  console.log("Done");
+});
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+File written without blocking server
+</div>
+
+<h2>6.2 path Module</h2>
+
+<pre>
+const path = require("path");
+
+path.join(__dirname, "files", "data.txt");
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Correct OS-safe file path
+</div>
+
+<h2>6.3 os Module</h2>
+
+<pre>
+const os = require("os");
+
+os.platform();
+os.cpus().length;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+System platform and CPU count
+</div>
+
+<div class="note">
+Core modules are optimized and secure.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 7: HTTP SERVER WITH ROUTING -->
+<!-- ====================================================== -->
+
+<h1>MODULE 7: HTTP Server with Routing (REAL BACKEND)</h1>
+
+<h2>7.1 Understanding Requests & Responses</h2>
+
+<p>
+Every request has:
+</p>
+
+<ul>
+  <li>URL</li>
+  <li>Method (GET, POST)</li>
+  <li>Headers</li>
+</ul>
+
+<h2>7.2 Basic Routing</h2>
+
+<h3>INPUT</h3>
+<pre>
+const http = require("http");
+
+const server = http.createServer((req, res) => {
+  if (req.url === "/") {
+    res.end("Home Page");
+  } else if (req.url === "/about") {
+    res.end("About Page");
+  } else {
+    res.statusCode = 404;
+    res.end("Page Not Found");
+  }
+});
+
+server.listen(3000);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+/ → Home Page<br>
+/about → About Page<br>
+/xyz → 404 Page Not Found
+</div>
+
+<h3>Internal Working</h3>
+<ul>
+  <li>Request comes to server</li>
+  <li>URL matched</li>
+  <li>Correct response sent</li>
+</ul>
+
+<h2>7.3 HTTP Methods</h2>
+
+<pre>
+req.method
+</pre>
+
+<ul>
+  <li>GET → fetch data</li>
+  <li>POST → send data</li>
+  <li>PUT → update</li>
+  <li>DELETE → remove</li>
+</ul>
+
+<div class="warning">
+Manual routing is painful — Express solves this.
+</div>
+
+<hr>
+
+<!-- END OF PART 2 (NODE.JS) -->
+<!-- ====================================================== -->
+<!-- PART 3 START -->
+<!-- MODULE 8: EXPRESS.JS (CORE FRAMEWORK) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 8: Express.js (Core Backend Framework)</h1>
+
+<h2>8.1 Why Express.js?</h2>
+
+<p>
+Express.js is a minimal, fast framework built on top of Node’s HTTP module.
+It simplifies routing, middleware, and request handling.
+</p>
+
+<ul>
+  <li>Clean routing</li>
+  <li>Middleware system</li>
+  <li>JSON APIs</li>
+  <li>Scales well</li>
+</ul>
+
+<div class="note">
+Most Node.js backend jobs expect Express knowledge.
+</div>
+
+<h2>8.2 Installing Express</h2>
+
+<h3>INPUT (Terminal)</h3>
+<pre>
+npm install express
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Express added to dependencies
+</div>
+
+<h2>8.3 Your First Express Server</h2>
+
+<h3>INPUT (index.js)</h3>
+<pre>
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Hello from Express");
+});
+
+app.listen(3000, () => {
+  console.log("Server running on port 3000");
+});
+</pre>
+
+<h3>RUN</h3>
+<pre>
+node index.js
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Open http://localhost:3000 → Hello from Express
+</div>
+
+<h3>Internal Working</h3>
+<ul>
+  <li>Express wraps http.createServer()</li>
+  <li>Routes are matched by method + path</li>
+  <li>Response helpers simplify output</li>
+</ul>
+
+<h2>8.4 Routing by HTTP Methods</h2>
+
+<pre>
+app.get("/users", (req, res) => res.send("GET users"));
+app.post("/users", (req, res) => res.send("POST users"));
+app.put("/users/:id", (req, res) => res.send("UPDATE user"));
+app.delete("/users/:id", (req, res) => res.send("DELETE user"));
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Different actions handled by HTTP methods
+</div>
+
+<div class="note">
+Method + URL = unique route
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 9: MIDDLEWARE (HOW EXPRESS REALLY WORKS) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 9: Middleware (Heart of Express)</h1>
+
+<h2>9.1 What is Middleware?</h2>
+
+<p>
+Middleware is a function that runs
+<strong>between request and response</strong>.
+</p>
+
+<pre>
+Request → Middleware → Route → Response
+</pre>
+
+<h2>9.2 Basic Middleware Example</h2>
+
+<h3>INPUT</h3>
+<pre>
+app.use((req, res, next) => {
+  console.log("Request received");
+  next();
+});
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Message logs for every request
+</div>
+
+<h3>Internal Working</h3>
+<ul>
+  <li>Request enters Express</li>
+  <li>Middleware runs in order</li>
+  <li>next() passes control forward</li>
+</ul>
+
+<h2>9.3 Built-in Middleware</h2>
+
+<h3>Parsing JSON</h3>
+<pre>
+app.use(express.json());
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+req.body available for JSON data
+</div>
+
+<h2>9.4 Custom Middleware (AUTH Example)</h2>
+
+<pre>
+function auth(req, res, next) {
+  if (req.headers.authorization === "secret") {
+    next();
+  } else {
+    res.status(401).send("Unauthorized");
+  }
+}
+
+app.use("/admin", auth);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Only authorized requests reach /admin
+</div>
+
+<div class="warning">
+Order of middleware matters.
+</div>
+
+<h2>9.5 Error Handling Middleware</h2>
+
+<pre>
+app.use((err, req, res, next) => {
+  res.status(500).send("Server Error");
+});
+</pre>
+
+<div class="note">
+Error middleware has 4 parameters.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 10: REST APIs (REAL-WORLD BACKEND) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 10: REST APIs (Professional)</h1>
+
+<h2>10.1 What is a REST API?</h2>
+
+<p>
+REST APIs allow clients (frontend, mobile apps)
+to communicate with backend using HTTP.
+</p>
+
+<h2>10.2 JSON Responses</h2>
+
+<h3>INPUT</h3>
+<pre>
+app.get("/api/user", (req, res) => {
+  res.json({
+    id: 1,
+    name: "Raj",
+    role: "admin"
+  });
+});
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+JSON response returned to client
+</div>
+
+<h2>10.3 Request Parameters</h2>
+
+<h3>URL Params</h3>
+<pre>
+app.get("/users/:id", (req, res) => {
+  res.send(req.params.id);
+});
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+/users/5 → 5
+</div>
+
+<h3>Query Params</h3>
+<pre>
+app.get("/search", (req, res) => {
+  res.send(req.query.q);
+});
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+/search?q=node → node
+</div>
+
+<h2>10.4 Request Body (POST)</h2>
+
+<pre>
+app.post("/users", (req, res) => {
+  res.json(req.body);
+});
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Receives JSON data from client
+</div>
+
+<h2>10.5 HTTP Status Codes (IMPORTANT)</h2>
+
+<ul>
+  <li>200 → OK</li>
+  <li>201 → Created</li>
+  <li>400 → Bad Request</li>
+  <li>401 → Unauthorized</li>
+  <li>404 → Not Found</li>
+  <li>500 → Server Error</li>
+</ul>
+
+<div class="note">
+Correct status codes = professional APIs.
+</div>
+
+<hr>
+
+<!-- END OF PART 3 (NODE.JS) -->
+<!-- ====================================================== -->
+<!-- PART 4 START -->
+<!-- MODULE 11: DATABASES WITH MONGODB & MONGOOSE -->
+<!-- ====================================================== -->
+
+<h1>MODULE 11: Databases (MongoDB + Mongoose – Deep)</h1>
+
+<h2>11.1 Why Databases Are Needed</h2>
+
+<p>
+Databases store data permanently.
+Without a database, data is lost when the server restarts.
+</p>
+
+<ul>
+  <li>Users</li>
+  <li>Orders</li>
+  <li>Messages</li>
+  <li>Logs</li>
+</ul>
+
+<h2>11.2 What is MongoDB?</h2>
+
+<p>
+MongoDB is a <strong>NoSQL document database</strong>.
+Data is stored as JSON-like documents.
+</p>
+
+<div class="note">
+MongoDB stores data as BSON (Binary JSON).
+</div>
+
+<h2>11.3 Installing Mongoose</h2>
+
+<h3>INPUT (Terminal)</h3>
+<pre>
+npm install mongoose
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Mongoose added to dependencies
+</div>
+
+<h2>11.4 Connecting to MongoDB</h2>
+
+<h3>INPUT</h3>
+<pre>
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost:27017/mydb")
+  .then(() => console.log("DB Connected"))
+  .catch(err => console.error(err));
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Database connected successfully
+</div>
+
+<h3>Internal Working</h3>
+<ul>
+  <li>Mongoose opens a connection pool</li>
+  <li>Connection reused for queries</li>
+</ul>
+
+<h2>11.5 Schema & Model (VERY IMPORTANT)</h2>
+
+<h3>INPUT</h3>
+<pre>
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number
+});
+
+const User = mongoose.model("User", userSchema);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+User model created
+</div>
+
+<div class="note">
+Schema = structure  
+Model = interface to database
+</div>
+
+<h2>11.6 CRUD Operations</h2>
+
+<h3>Create</h3>
+<pre>
+await User.create({ name: "Raj", email: "r@x.com", age: 21 });
+</pre>
+
+<h3>Read</h3>
+<pre>
+const users = await User.find();
+</pre>
+
+<h3>Update</h3>
+<pre>
+await User.updateOne({ name: "Raj" }, { age: 22 });
+</pre>
+
+<h3>Delete</h3>
+<pre>
+await User.deleteOne({ name: "Raj" });
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+CRUD operations executed successfully
+</div>
+
+<div class="warning">
+Always validate user input before DB operations.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 12: ENVIRONMENT VARIABLES & CONFIG -->
+<!-- ====================================================== -->
+
+<h1>MODULE 12: Environment Variables & Configuration</h1>
+
+<h2>12.1 Why Environment Variables?</h2>
+
+<p>
+Sensitive data should NEVER be hard-coded:
+</p>
+
+<ul>
+  <li>Database URLs</li>
+  <li>API keys</li>
+  <li>Secrets</li>
+</ul>
+
+<h2>12.2 Using dotenv</h2>
+
+<h3>INPUT (Terminal)</h3>
+<pre>
+npm install dotenv
+</pre>
+
+<h2>12.3 .env File</h2>
+
+<pre>
+PORT=3000
+DB_URL=mongodb://localhost:27017/mydb
+</pre>
+
+<h2>12.4 Accessing Env Variables</h2>
+
+<pre>
+require("dotenv").config();
+
+const port = process.env.PORT;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Configuration loaded securely
+</div>
+
+<div class="warning">
+Never commit <code>.env</code> to GitHub.
+</div>
+
+<h2>12.5 Environment-Based Config</h2>
+
+<pre>
+if (process.env.NODE_ENV === "production") {
+  console.log("Production mode");
+}
+</pre>
+
+<div class="note">
+Used heavily in real deployments.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 13: MVC ARCHITECTURE (PRODUCTION LEVEL) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 13: MVC Architecture (Professional Backend)</h1>
+
+<h2>13.1 What is MVC?</h2>
+
+<p>
+MVC separates code into logical layers:
+</p>
+
+<ul>
+  <li><strong>Model</strong> → Database logic</li>
+  <li><strong>View</strong> → Response / UI</li>
+  <li><strong>Controller</strong> → Business logic</li>
+</ul>
+
+<h2>13.2 Why MVC Matters</h2>
+
+<ul>
+  <li>Clean code</li>
+  <li>Easy maintenance</li>
+  <li>Scalable projects</li>
+</ul>
+
+<h2>13.3 Folder Structure</h2>
+
+<pre>
+project/
+ ├─ models/
+ ├─ controllers/
+ ├─ routes/
+ ├─ app.js
+</pre>
+
+<h2>13.4 Model Example</h2>
+
+<pre>
+const mongoose = require("mongoose");
+
+const userSchema = new mongoose.Schema({
+  name: String
+});
+
+module.exports = mongoose.model("User", userSchema);
+</pre>
+
+<h2>13.5 Controller Example</h2>
+
+<pre>
+exports.getUsers = async (req, res) => {
+  const users = await User.find();
+  res.json(users);
+};
+</pre>
+
+<h2>13.6 Route Example</h2>
+
+<pre>
+const express = require("express");
+const router = express.Router();
+const controller = require("./controller");
+
+router.get("/users", controller.getUsers);
+
+module.exports = router;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Clean, scalable backend structure
+</div>
+
+<div class="note">
+MVC is mandatory for large production apps.
+</div>
+
+<hr>
+
+<!-- END OF PART 4 (NODE.JS) -->
+<!-- ====================================================== -->
+<!-- PART 5 START -->
+<!-- MODULE 14: AUTHENTICATION & AUTHORIZATION -->
+<!-- ====================================================== -->
+
+<h1>MODULE 14: Authentication & Authorization (PRO LEVEL)</h1>
+
+<h2>14.1 Authentication vs Authorization</h2>
+
+<ul>
+  <li><strong>Authentication</strong> → Who are you?</li>
+  <li><strong>Authorization</strong> → What can you access?</li>
+</ul>
+
+<div class="note">
+Login = authentication  
+Permissions = authorization
+</div>
+
+<h2>14.2 Password Hashing (SECURITY CRITICAL)</h2>
+
+<p>
+Passwords must NEVER be stored in plain text.
+</p>
+
+<h3>Installing bcrypt</h3>
+<pre>
+npm install bcrypt
+</pre>
+
+<h3>Hashing Password</h3>
+<pre>
+const bcrypt = require("bcrypt");
+
+const hashedPassword = await bcrypt.hash("mypassword", 10);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Encrypted password stored in database
+</div>
+
+<h3>Verifying Password</h3>
+<pre>
+const isMatch = await bcrypt.compare("mypassword", hashedPassword);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+true or false
+</div>
+
+<div class="warning">
+Never decrypt passwords — always compare hashes.
+</div>
+
+<h2>14.3 JSON Web Tokens (JWT)</h2>
+
+<h3>Installing JWT</h3>
+<pre>
+npm install jsonwebtoken
+</pre>
+
+<h3>Generating Token</h3>
+<pre>
+const jwt = require("jsonwebtoken");
+
+const token = jwt.sign(
+  { userId: 1 },
+  process.env.JWT_SECRET,
+  { expiresIn: "1h" }
+);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Secure token generated
+</div>
+
+<h2>14.4 Verifying Token (AUTH MIDDLEWARE)</h2>
+
+<pre>
+function auth(req, res, next) {
+  const token = req.headers.authorization;
+
+  if (!token) return res.status(401).send("No token");
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) return res.status(403).send("Invalid token");
+    req.user = decoded;
+    next();
+  });
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Protected routes accessible only to logged-in users
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 15: SECURITY BEST PRACTICES -->
+<!-- ====================================================== -->
+
+<h1>MODULE 15: Security Best Practices (MANDATORY)</h1>
+
+<h2>15.1 Common Security Threats</h2>
+
+<ul>
+  <li>XSS (Cross-site scripting)</li>
+  <li>SQL / NoSQL injection</li>
+  <li>Brute-force attacks</li>
+</ul>
+
+<h2>15.2 Security Middleware</h2>
+
+<h3>Install Helmet</h3>
+<pre>
+npm install helmet
+</pre>
+
+<h3>Use Helmet</h3>
+<pre>
+const helmet = require("helmet");
+app.use(helmet());
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Secure HTTP headers applied
+</div>
+
+<h2>15.3 Rate Limiting</h2>
+
+<pre>
+npm install express-rate-limit
+</pre>
+
+<pre>
+const rateLimit = require("express-rate-limit");
+
+app.use(rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+}));
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Prevents abuse & brute-force attacks
+</div>
+
+<div class="warning">
+Security is NOT optional in production.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 16: DEPLOYMENT & INTERVIEWS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 16: Deployment, Scaling & Interviews</h1>
+
+<h2>16.1 Preparing App for Production</h2>
+
+<ul>
+  <li>Use environment variables</li>
+  <li>Enable CORS properly</li>
+  <li>Handle errors gracefully</li>
+</ul>
+
+<h2>16.2 Deploying to Render / Railway</h2>
+
+<h3>Steps</h3>
+<ul>
+  <li>Push code to GitHub</li>
+  <li>Create new Web Service</li>
+  <li>Add env variables</li>
+  <li>Deploy</li>
+</ul>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Live backend URL accessible globally
+</div>
+
+<h2>16.3 Scaling Concepts</h2>
+
+<ul>
+  <li>Stateless APIs</li>
+  <li>Horizontal scaling</li>
+  <li>Load balancers</li>
+</ul>
+
+<h2>16.4 Node.js Interview Questions</h2>
+
+<h3>Beginner</h3>
+<ul>
+  <li>What is Node.js?</li>
+  <li>What is npm?</li>
+</ul>
+
+<h3>Intermediate</h3>
+<ul>
+  <li>Explain middleware</li>
+  <li>How does event loop work?</li>
+</ul>
+
+<h3>Advanced</h3>
+<ul>
+  <li>How do you secure APIs?</li>
+  <li>How does JWT work internally?</li>
+</ul>
+
+<h2>16.5 Real-World Practice Tasks</h2>
+
+<ul>
+  <li>Build auth system with JWT</li>
+  <li>Create REST API with MongoDB</li>
+  <li>Deploy backend online</li>
+</ul>
+
+<hr>
+
+<h1>🎉 NODE.JS MASTER COURSE COMPLETED</h1>
+
+<p>
+If you understand everything in this file, you are now a
+<strong>job-ready backend developer</strong>.
+</p>
+
+<ul>
+  <li>Backend logic</li>
+  <li>APIs & databases</li>
+  <li>Authentication & security</li>
+  <li>Deployment & scaling</li>
+</ul>
+
+<p>
+<strong>Great backend developers think in systems, not just code.</strong>
+</p>
+
+<!-- END OF PART 5 (NODE.JS) -->
+
+</body>
+</html>
+
