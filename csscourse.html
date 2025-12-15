@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CSS Master Course – Basic to Advanced</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <meta name="description" content="Complete CSS master course with deep explanations, input-output examples, layouts, and professional practices." />
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px;
+      line-height: 1.9;
+      background: #fdfdfd;
+      color: #222;
+    }
+
+    h1 {
+      color: #0d47a1;
+      margin-top: 70px;
+    }
+
+    h2 {
+      color: #b71c1c;
+      margin-top: 50px;
+    }
+
+    h3 {
+      color: #2e7d32;
+      margin-top: 30px;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 18px;
+      overflow-x: auto;
+      color: #0d47a1;
+      border-left: 5px solid #1976d2;
+    }
+
+    .output {
+      background: #e3f2fd;
+      padding: 18px;
+      border-left: 6px solid #1565c0;
+      margin: 20px 0;
+    }
+
+    .note {
+      background: #fff3cd;
+      padding: 18px;
+      border-left: 6px solid #ff9800;
+      margin: 25px 0;
+    }
+
+    .warning {
+      background: #ffebee;
+      padding: 18px;
+      border-left: 6px solid #c62828;
+      margin: 25px 0;
+    }
+
+    hr {
+      margin: 80px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ====================================================== -->
+<!-- MODULE 1: WHAT IS CSS & HOW IT WORKS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 1: What is CSS & How It Really Works</h1>
+
+<h2>1.1 What is CSS?</h2>
+
+<p>
+CSS (Cascading Style Sheets) controls the <strong>appearance</strong> of HTML.
+HTML defines structure, CSS defines presentation.
+</p>
+
+<div class="note">
+Professional developers think of CSS as a <strong>rendering instruction language</strong>.
+</div>
+
+<h2>1.2 How CSS Reaches the Browser</h2>
+
+<pre>
+HTML file
+   ↓
+Browser reads HTML
+   ↓
+CSS file is downloaded
+   ↓
+CSSOM is created
+   ↓
+CSSOM + DOM → Render Tree
+   ↓
+Pixels on screen
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+The browser paints colors, spacing, fonts, and layout based on CSS rules.
+</div>
+
+<h2>1.3 CSS Syntax (INPUT)</h2>
+
+<pre>
+p {
+  color: blue;
+  font-size: 18px;
+}
+</pre>
+
+<h3>Browser Processing</h3>
+<ul>
+  <li>Selects all &lt;p&gt; elements</li>
+  <li>Applies color blue</li>
+  <li>Sets font size to 18px</li>
+</ul>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+All paragraphs appear blue and larger than default text.
+</div>
+
+<div class="warning">
+CSS does NOT change HTML structure — only visual rendering.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 2: CSS SELECTORS (DEEP & PROFESSIONAL) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 2: CSS Selectors (Deep & Professional)</h1>
+
+<h2>2.1 Element Selector</h2>
+
+<pre>
+p {
+  color: green;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Every paragraph becomes green.
+</div>
+
+<h2>2.2 Class Selector (MOST USED)</h2>
+
+<pre>
+.card {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Any element with <code>class="card"</code> gets a border and padding.
+</div>
+
+<h2>2.3 ID Selector (USE CAREFULLY)</h2>
+
+<pre>
+#main-title {
+  color: red;
+}
+</pre>
+
+<div class="warning">
+IDs are unique. Overusing them breaks scalability.
+</div>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Only the element with <code>id="main-title"</code> turns red.
+</div>
+
+<h2>2.4 Descendant Selector (REAL WORLD)</h2>
+
+<pre>
+nav a {
+  text-decoration: none;
+  color: black;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Only links inside the navigation lose underline and turn black.
+</div>
+
+<h2>2.5 Multiple Selectors</h2>
+
+<pre>
+h1, h2, h3 {
+  font-family: Arial;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+All headings use the same font.
+</div>
+
+<h2>2.6 Attribute Selector (ADVANCED)</h2>
+
+<pre>
+input[type="text"] {
+  border: 2px solid blue;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Only text inputs get a blue border.
+</div>
+
+<div class="note">
+Attribute selectors are heavily used in form styling.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 3: CASCADE, SPECIFICITY & INHERITANCE -->
+<!-- ====================================================== -->
+
+<h1>MODULE 3: Cascade, Specificity & Inheritance (CORE CONCEPT)</h1>
+
+<h2>3.1 The Cascade</h2>
+
+<p>
+When multiple rules target the same element, the browser decides which one wins.
+</p>
+
+<pre>
+p { color: blue; }
+p { color: red; }
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Paragraph text appears <strong>red</strong> (last rule wins).
+</div>
+
+<h2>3.2 Specificity Order</h2>
+
+<pre>
+p            → low
+.class       → medium
+#id          → high
+inline style → highest
+</pre>
+
+<h2>3.3 Specificity Example</h2>
+
+<pre>
+p { color: blue; }
+.text { color: green; }
+#text { color: red; }
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Text appears <strong>red</strong> because ID selector wins.
+</div>
+
+<div class="warning">
+Overusing IDs causes CSS conflicts and maintenance issues.
+</div>
+
+<hr>
+
+<!-- END OF PART 1 (CSS) -->
+<!-- ====================================================== -->
+<!-- PART 2 START -->
+<!-- MODULE 4: CSS BOX MODEL (VERY DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 4: CSS Box Model (Deep, Real-World)</h1>
+
+<h2>4.1 What is the Box Model?</h2>
+
+<p>
+Every HTML element is a rectangular box.  
+CSS controls how this box is sized, spaced, and rendered.
+</p>
+
+<pre>
+Content → Padding → Border → Margin
+</pre>
+
+<div class="note">
+If you don't understand the box model deeply, layouts will always break.
+</div>
+
+<h2>4.2 Content & Padding (INPUT)</h2>
+
+<pre>
+.box {
+  width: 200px;
+  padding: 20px;
+  background: lightblue;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Visible box width becomes <strong>240px</strong> (200 + 20 + 20)<br>
+• Content is pushed inward from the edges
+</div>
+
+<h3>Browser Thinking</h3>
+<ul>
+  <li>Set content width to 200px</li>
+  <li>Add padding on all sides</li>
+  <li>Increase visual size</li>
+</ul>
+
+<h2>4.3 Border (INPUT)</h2>
+
+<pre>
+.box {
+  border: 5px solid black;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Border adds another 10px to total width<br>
+• Total = content + padding + border
+</div>
+
+<h2>4.4 Margin (INPUT)</h2>
+
+<pre>
+.box {
+  margin: 30px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Space is created OUTSIDE the element<br>
+• Pushes other elements away
+</div>
+
+<div class="warning">
+Margins do NOT affect element size — only spacing around it.
+</div>
+
+<h2>4.5 box-sizing (MOST IMPORTANT)</h2>
+
+<pre>
+.box {
+  width: 200px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Box remains EXACTLY 200px wide<br>
+• Padding is included inside width
+</div>
+
+<div class="note">
+Professionals ALWAYS use <code>box-sizing: border-box</code>.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 5: COLORS, UNITS & TYPOGRAPHY (PRO LEVEL) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 5: Colors, Units & Typography (Professional)</h1>
+
+<h2>5.1 Color Systems</h2>
+
+<h3>INPUT</h3>
+<pre>
+.text {
+  color: #ff0000;
+  background: rgb(240,240,240);
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Text appears red<br>
+• Background becomes light gray
+</div>
+
+<h3>Professional Color Advice</h3>
+<ul>
+  <li>Use HEX or HSL</li>
+  <li>Avoid pure black (#000)</li>
+  <li>Maintain contrast</li>
+</ul>
+
+<h2>5.2 CSS Units (CRITICAL)</h2>
+
+<h3>Absolute Units</h3>
+<pre>
+p { font-size: 16px; }
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Text size is fixed and does not scale
+</div>
+
+<h3>Relative Units (RECOMMENDED)</h3>
+<pre>
+p { font-size: 1.2rem; }
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Text scales relative to root font size
+</div>
+
+<div class="note">
+Modern CSS prefers <code>rem</code>, <code>em</code>, and <code>%</code>.
+</div>
+
+<h2>5.3 Typography (INPUT)</h2>
+
+<pre>
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Text becomes readable<br>
+• Vertical spacing improves dramatically
+</div>
+
+<h2>5.4 Font Weight & Spacing</h2>
+
+<pre>
+h1 {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Heading looks bold and premium
+</div>
+
+<div class="warning">
+Too many fonts = amateur design.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 6: DISPLAY, VISIBILITY & OVERFLOW -->
+<!-- ====================================================== -->
+
+<h1>MODULE 6: Display, Visibility & Overflow (Layout Control)</h1>
+
+<h2>6.1 display Property (CORE)</h2>
+
+<h3>INPUT</h3>
+<pre>
+span {
+  display: block;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Inline element becomes block<br>
+• Starts on new line
+</div>
+
+<h3>Common Display Types</h3>
+<ul>
+  <li>block</li>
+  <li>inline</li>
+  <li>inline-block</li>
+  <li>none</li>
+</ul>
+
+<h2>6.2 display: none vs visibility: hidden</h2>
+
+<pre>
+.hidden {
+  display: none;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Element is removed completely from layout
+</div>
+
+<pre>
+.invisible {
+  visibility: hidden;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Element is invisible but space remains
+</div>
+
+<h2>6.3 Overflow Control</h2>
+
+<pre>
+.box {
+  width: 150px;
+  height: 100px;
+  overflow: auto;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Scrollbar appears if content exceeds box
+</div>
+
+<div class="note">
+Overflow is critical for cards, modals, and layouts.
+</div>
+
+<hr>
+
+<!-- END OF PART 2 (CSS) -->
+<!-- ====================================================== -->
+<!-- PART 3 START -->
+<!-- MODULE 7: CSS POSITIONING (VERY DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 7: CSS Positioning (Complete & Real-World)</h1>
+
+<h2>7.1 Why Positioning Exists</h2>
+
+<p>
+Positioning controls <strong>where</strong> elements appear on the page
+and <strong>how</strong> they interact with other elements.
+</p>
+
+<div class="note">
+If layouts feel “out of control”, positioning is usually misunderstood.
+</div>
+
+<h2>7.2 position: static (DEFAULT)</h2>
+
+<pre>
+.box {
+  position: static;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Element follows normal document flow<br>
+• Top/left/right/bottom have NO effect
+</div>
+
+<h2>7.3 position: relative</h2>
+
+<pre>
+.box {
+  position: relative;
+  top: 20px;
+  left: 30px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Element moves from its original position<br>
+• Original space is still reserved
+</div>
+
+<h3>Browser Thinking</h3>
+<ul>
+  <li>Place element normally</li>
+  <li>Offset it visually</li>
+</ul>
+
+<h2>7.4 position: absolute (CRITICAL)</h2>
+
+<pre>
+.parent {
+  position: relative;
+}
+
+.child {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Child positions itself relative to parent<br>
+• Removed from normal document flow
+</div>
+
+<div class="warning">
+Absolute elements ignore surrounding content.
+</div>
+
+<h2>7.5 position: fixed</h2>
+
+<pre>
+.header {
+  position: fixed;
+  top: 0;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Element stays fixed while scrolling<br>
+• Common for headers & chat buttons
+</div>
+
+<h2>7.6 position: sticky (ADVANCED)</h2>
+
+<pre>
+.nav {
+  position: sticky;
+  top: 0;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Element scrolls normally<br>
+• Sticks when reaching top
+</div>
+
+<div class="note">
+Sticky combines relative + fixed behavior.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 8: FLEXBOX (DEEP & PRODUCTION-READY) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 8: Flexbox (Deep Layout System)</h1>
+
+<h2>8.1 Why Flexbox?</h2>
+
+<p>
+Flexbox is designed for <strong>one-dimensional layouts</strong>
+(rows OR columns).
+</p>
+
+<h2>8.2 Flex Container (INPUT)</h2>
+
+<pre>
+.container {
+  display: flex;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Children align in a row by default
+</div>
+
+<h2>8.3 Main Axis vs Cross Axis</h2>
+
+<ul>
+  <li>Main axis → row or column</li>
+  <li>Cross axis → perpendicular direction</li>
+</ul>
+
+<h2>8.4 justify-content (MAIN AXIS)</h2>
+
+<pre>
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Items spread evenly with space between
+</div>
+
+<h2>8.5 align-items (CROSS AXIS)</h2>
+
+<pre>
+.container {
+  display: flex;
+  align-items: center;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Items align vertically centered
+</div>
+
+<h2>8.6 flex-direction</h2>
+
+<pre>
+.container {
+  display: flex;
+  flex-direction: column;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Items stack vertically
+</div>
+
+<h2>8.7 flex-wrap</h2>
+
+<pre>
+.container {
+  display: flex;
+  flex-wrap: wrap;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Items wrap to next line on small screens
+</div>
+
+<h2>8.8 Real-World Flexbox Example (Navbar)</h2>
+
+<pre>
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Logo on left<br>
+• Menu on right
+</div>
+
+<div class="note">
+Flexbox = best choice for navbars, cards, toolbars.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 9: CSS GRID (ADVANCED & ENTERPRISE LEVEL) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 9: CSS Grid (Two-Dimensional Layout)</h1>
+
+<h2>9.1 Why Grid?</h2>
+
+<p>
+Grid handles <strong>rows AND columns together</strong>.
+Perfect for full page layouts.
+</p>
+
+<h2>9.2 Grid Container (INPUT)</h2>
+
+<pre>
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Two columns created<br>
+• Second column twice as wide
+</div>
+
+<h2>9.3 Grid Rows</h2>
+
+<pre>
+.container {
+  grid-template-rows: 100px auto;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• First row fixed<br>
+• Second row flexible
+</div>
+
+<h2>9.4 Gap (Spacing)</h2>
+
+<pre>
+.container {
+  gap: 20px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Uniform spacing between grid items
+</div>
+
+<h2>9.5 Grid Areas (PRO LEVEL)</h2>
+
+<pre>
+.container {
+  display: grid;
+  grid-template-areas:
+    "header header"
+    "sidebar main"
+    "footer footer";
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Clean, readable page layout<br>
+• Easy maintenance
+</div>
+
+<h2>9.6 When to Use Flexbox vs Grid</h2>
+
+<ul>
+  <li>Flexbox → one-dimensional layouts</li>
+  <li>Grid → two-dimensional layouts</li>
+</ul>
+
+<div class="warning">
+Using Grid everywhere is unnecessary — choose wisely.
+</div>
+
+<hr>
+
+<!-- END OF PART 3 (CSS) -->
+<!-- ====================================================== -->
+<!-- PART 4 START -->
+<!-- MODULE 10: RESPONSIVE DESIGN & MEDIA QUERIES -->
+<!-- ====================================================== -->
+
+<h1>MODULE 10: Responsive Design (Beginner → Advanced)</h1>
+
+<h2>10.1 What is Responsive Design?</h2>
+
+<p>
+Responsive design means your layout adapts to different screen sizes,
+devices, and orientations without breaking.
+</p>
+
+<div class="note">
+Modern CSS is mobile-first by default.
+</div>
+
+<h2>10.2 Viewport Meta (MANDATORY)</h2>
+
+<pre>
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Website scales correctly on mobile devices
+</div>
+
+<h2>10.3 Media Queries (CORE)</h2>
+
+<pre>
+body {
+  background: white;
+}
+
+@media (max-width: 768px) {
+  body {
+    background: lightgray;
+  }
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Desktop → white background<br>
+• Mobile → light gray background
+</div>
+
+<h3>Browser Thinking</h3>
+<ul>
+  <li>Check viewport width</li>
+  <li>If condition matches → apply rules</li>
+</ul>
+
+<h2>10.4 Mobile-First Strategy (PRO)</h2>
+
+<pre>
+.card {
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .card {
+    width: 50%;
+  }
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Mobile: full-width card<br>
+• Desktop: half-width card
+</div>
+
+<div class="note">
+Mobile-first = faster, cleaner, scalable CSS.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 11: ANIMATIONS & TRANSITIONS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 11: Transitions & Animations (Professional)</h1>
+
+<h2>11.1 CSS Transitions (INTERACTION)</h2>
+
+<pre>
+.button {
+  background: blue;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: darkblue;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Smooth color change on hover
+</div>
+
+<h3>Browser Thinking</h3>
+<ul>
+  <li>Detect state change</li>
+  <li>Animate property over time</li>
+</ul>
+
+<h2>11.2 Transition Properties</h2>
+
+<ul>
+  <li>transition-property</li>
+  <li>transition-duration</li>
+  <li>transition-timing-function</li>
+</ul>
+
+<h2>11.3 CSS Animations (KEYFRAMES)</h2>
+
+<pre>
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.box {
+  animation: fadeIn 1s ease-in;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Element fades in smoothly
+</div>
+
+<div class="warning">
+Too many animations = poor UX & performance issues.
+</div>
+
+<h2>11.4 Performance Tip</h2>
+
+<p>
+Animate only:
+</p>
+<ul>
+  <li>opacity</li>
+  <li>transform</li>
+</ul>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 12: PSEUDO-CLASSES & PSEUDO-ELEMENTS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 12: Pseudo-Classes & Pseudo-Elements (Deep)</h1>
+
+<h2>12.1 Pseudo-Classes (STATE-BASED)</h2>
+
+<pre>
+a:hover {
+  color: red;
+}
+
+input:focus {
+  border-color: blue;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Links change color on hover<br>
+• Inputs highlight on focus
+</div>
+
+<h2>12.2 Common Pseudo-Classes</h2>
+
+<ul>
+  <li>:hover</li>
+  <li>:focus</li>
+  <li>:active</li>
+  <li>:nth-child()</li>
+</ul>
+
+<h2>12.3 nth-child Example (ADVANCED)</h2>
+
+<pre>
+li:nth-child(even) {
+  background: #f0f0f0;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Every even list item gets background color
+</div>
+
+<h2>12.4 Pseudo-Elements (::before & ::after)</h2>
+
+<pre>
+h2::after {
+  content: "";
+  display: block;
+  width: 50px;
+  height: 4px;
+  background: red;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Decorative line appears below heading
+</div>
+
+<div class="note">
+Pseudo-elements are for decoration, not content.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 13: CSS ARCHITECTURE & BEST PRACTICES -->
+<!-- ====================================================== -->
+
+<h1>MODULE 13: CSS Architecture & Best Practices</h1>
+
+<h2>13.1 Why CSS Architecture Matters</h2>
+
+<p>
+Large projects fail due to unstructured CSS, not complexity.
+</p>
+
+<h2>13.2 Naming Conventions (BEM INTRO)</h2>
+
+<pre>
+.card {}
+.card__title {}
+.card--featured {}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Clear, predictable class structure
+</div>
+
+<h2>13.3 Reusability Principle</h2>
+
+<ul>
+  <li>Small reusable classes</li>
+  <li>Avoid deep nesting</li>
+  <li>Keep specificity low</li>
+</ul>
+
+<h2>13.4 Common CSS Mistakes</h2>
+
+<ul>
+  <li>Using IDs for styling</li>
+  <li>Over-nesting selectors</li>
+  <li>No responsive planning</li>
+</ul>
+
+<div class="warning">
+Good CSS feels boring — because it just works.
+</div>
+
+<hr>
+
+<!-- END OF PART 4 (CSS) -->
+<!-- ====================================================== -->
+<!-- PART 5 START -->
+<!-- MODULE 14: ADVANCED RESPONSIVE LAYOUTS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 14: Advanced Responsive Layouts (Flex + Grid)</h1>
+
+<h2>14.1 Combining Flexbox & Grid (REAL WORLD)</h2>
+
+<p>
+Professionals NEVER use only one layout system.
+They combine Grid for page structure and Flexbox for components.
+</p>
+
+<h3>INPUT (Page Layout)</h3>
+<pre>
+.page {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #eee;
+}
+
+.content {
+  padding: 20px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Fixed sidebar on left<br>
+• Flexible content area on right
+</div>
+
+<h3>Mobile Adjustment</h3>
+<pre>
+@media (max-width: 768px) {
+  .page {
+    grid-template-columns: 1fr;
+  }
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Sidebar stacks above content on mobile
+</div>
+
+<div class="note">
+Grid = page structure, Flexbox = component alignment.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 15: REAL-WORLD UI PATTERNS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 15: Real-World UI Patterns</h1>
+
+<h2>15.1 Card Component (VERY COMMON)</h2>
+
+<h3>INPUT</h3>
+<pre>
+.card {
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 300px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Clean bordered card<br>
+• Rounded corners<br>
+• Consistent spacing
+</div>
+
+<h2>15.2 Modal Overlay Pattern</h2>
+
+<h3>INPUT</h3>
+<pre>
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Screen darkens<br>
+• Modal centered on screen
+</div>
+
+<h2>15.3 Navigation Bar Pattern</h2>
+
+<pre>
+.nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Logo on left<br>
+• Menu on right
+</div>
+
+<div class="note">
+These patterns appear in 90% of real websites.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 16: CSS PERFORMANCE & OPTIMIZATION -->
+<!-- ====================================================== -->
+
+<h1>MODULE 16: CSS Performance & Optimization</h1>
+
+<h2>16.1 Why CSS Performance Matters</h2>
+
+<p>
+Heavy or poorly written CSS slows rendering and hurts UX.
+</p>
+
+<h2>16.2 Performance Rules (PRO)</h2>
+
+<ul>
+  <li>Avoid deep selector nesting</li>
+  <li>Use class selectors over universal selectors</li>
+  <li>Avoid expensive animations</li>
+</ul>
+
+<h2>16.3 Good vs Bad Selector</h2>
+
+<h3>BAD</h3>
+<pre>
+div ul li a span {
+  color: red;
+}
+</pre>
+
+<h3>GOOD</h3>
+<pre>
+.nav-link {
+  color: red;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+• Same visual result<br>
+• Faster rendering<br>
+• Easier maintenance
+</div>
+
+<div class="warning">
+If CSS is hard to read, it’s probably bad CSS.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 17: INTERVIEW QUESTIONS & PRACTICE -->
+<!-- ====================================================== -->
+
+<h1>MODULE 17: CSS Interview Questions & Practice</h1>
+
+<h2>Beginner</h2>
+<ul>
+  <li>What is the CSS box model?</li>
+  <li>Difference between class and ID?</li>
+  <li>What is display?</li>
+</ul>
+
+<h2>Intermediate</h2>
+<ul>
+  <li>Difference between Flexbox and Grid?</li>
+  <li>Explain specificity.</li>
+  <li>What is position: relative?</li>
+</ul>
+
+<h2>Advanced</h2>
+<ul>
+  <li>How does browser render CSS?</li>
+  <li>How do you optimize CSS performance?</li>
+  <li>When would you avoid animations?</li>
+</ul>
+
+<h2>Scenario Questions</h2>
+<ul>
+  <li>Build a responsive navbar</li>
+  <li>Center a modal vertically and horizontally</li>
+  <li>Fix layout breaking on mobile</li>
+</ul>
+
+<hr>
+
+<h1>🎉 CSS COURSE COMPLETED</h1>
+
+<p>
+If you fully understand everything in this file, you now have
+<strong>professional-level CSS knowledge</strong>.
+</p>
+
+<p>
+You are now ready for:
+</p>
+<ul>
+  <li>Advanced JavaScript</li>
+  <li>Frameworks (React, Vue)</li>
+  <li>UI/UX systems</li>
+</ul>
+
+<p>
+<strong>Great CSS is invisible — because it just works.</strong>
+</p>
+
+<!-- END OF PART 5 (CSS) -->
+
+</body>
+</html>
