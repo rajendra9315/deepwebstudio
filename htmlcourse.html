@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HTML Master Course – Basic to Advanced</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <meta name="description" content="Complete HTML master course from beginner to advanced developer level." />
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px;
+      line-height: 1.9;
+      background: #fafafa;
+      color: #222;
+    }
+
+    h1 {
+      color: #0d47a1;
+      margin-top: 60px;
+    }
+
+    h2 {
+      color: #b71c1c;
+      margin-top: 50px;
+    }
+
+    h3 {
+      color: #2e7d32;
+      margin-top: 30px;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 18px;
+      overflow-x: auto;
+      color: #0d47a1;
+      border-left: 5px solid #1976d2;
+    }
+
+    .note {
+      background: #fff3cd;
+      padding: 18px;
+      border-left: 6px solid #ff9800;
+      margin: 25px 0;
+    }
+
+    .practice {
+      background: #e8f5e9;
+      padding: 18px;
+      border-left: 6px solid #2e7d32;
+      margin: 25px 0;
+    }
+
+    .warning {
+      background: #ffebee;
+      padding: 18px;
+      border-left: 6px solid #c62828;
+      margin: 25px 0;
+    }
+
+    hr {
+      margin: 70px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ====================================================== -->
+<!-- MODULE 1: HOW THE WEB WORKS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 1: How the Web Works (Deep Understanding)</h1>
+
+<h2>1.1 What is the World Wide Web?</h2>
+
+<p>
+The World Wide Web (WWW) is a system of interconnected documents written mainly in HTML.
+These documents are stored on servers and accessed through browsers using the internet.
+</p>
+
+<p>
+HTML is the <strong>foundation layer</strong>.  
+Everything else (CSS, JavaScript, frameworks) is built on top of it.
+</p>
+
+<h2>1.2 Client–Server Architecture</h2>
+
+<p>
+The web works on a <strong>client–server model</strong>.
+</p>
+
+<pre>
+Client (Browser)
+     ↓ HTTP Request
+Server
+     ↓ HTTP Response
+Client renders page
+</pre>
+
+<h3>Client Responsibilities</h3>
+<ul>
+  <li>Send requests (URLs)</li>
+  <li>Receive responses</li>
+  <li>Render HTML</li>
+  <li>Execute CSS & JavaScript</li>
+</ul>
+
+<h3>Server Responsibilities</h3>
+<ul>
+  <li>Store website files</li>
+  <li>Handle requests</li>
+  <li>Send correct responses</li>
+</ul>
+
+<div class="note">
+HTML ALWAYS comes first.  
+Without HTML, nothing appears on screen.
+</div>
+
+<h2>1.3 What Happens When You Enter a URL?</h2>
+
+<pre>
+1. User types URL
+2. DNS lookup happens
+3. Browser finds server IP
+4. Server receives request
+5. Server sends HTML
+6. Browser builds DOM
+7. CSS applied
+8. JavaScript executed
+9. Page rendered
+</pre>
+
+<h2>1.4 Browser Rendering Pipeline (ADVANCED)</h2>
+
+<pre>
+HTML → DOM
+CSS  → CSSOM
+DOM + CSSOM → Render Tree
+Render Tree → Layout
+Layout → Paint → Composite
+</pre>
+
+<div class="warning">
+Bad HTML structure = slower rendering + poor SEO.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 2: HTML FUNDAMENTALS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 2: HTML Fundamentals (Strong Base)</h1>
+
+<h2>2.1 What is HTML?</h2>
+
+<p>
+HTML stands for <strong>HyperText Markup Language</strong>.
+It is NOT a programming language.
+</p>
+
+<p>
+HTML describes:
+</p>
+<ul>
+  <li>Structure</li>
+  <li>Meaning</li>
+  <li>Content hierarchy</li>
+</ul>
+
+<h2>2.2 HTML Document Structure (MANDATORY)</h2>
+
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My Website&lt;/title&gt;
+  &lt;/head&gt;
+
+  &lt;body&gt;
+    Content visible to users
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<h3>Why Each Part Matters</h3>
+<ul>
+  <li><strong>DOCTYPE</strong> → enables modern HTML</li>
+  <li><strong>html</strong> → root element</li>
+  <li><strong>head</strong> → metadata & SEO</li>
+  <li><strong>body</strong> → visible content</li>
+</ul>
+
+<div class="practice">
+Create a basic HTML page that displays:
+<ul>
+  <li>Your name</li>
+  <li>Your profession</li>
+  <li>Your city</li>
+</ul>
+</div>
+
+<h2>2.3 HTML Is NOT Visual Design</h2>
+
+<p>
+HTML does NOT control:
+</p>
+<ul>
+  <li>Colors</li>
+  <li>Fonts</li>
+  <li>Layout</li>
+</ul>
+
+<p>
+That is CSS’s job.
+HTML is about <strong>structure and meaning</strong>.
+</p>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 3: TAGS, ELEMENTS & ATTRIBUTES (DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 3: Tags, Elements & Attributes (Deep)</h1>
+
+<h2>3.1 What is a Tag?</h2>
+
+<p>
+A tag is a keyword enclosed in angle brackets.
+</p>
+
+<pre>
+&lt;p&gt;Paragraph&lt;/p&gt;
+</pre>
+
+<h2>3.2 What is an Element?</h2>
+
+<p>
+An element includes:
+</p>
+<ul>
+  <li>Opening tag</li>
+  <li>Content</li>
+  <li>Closing tag</li>
+</ul>
+
+<pre>
+&lt;h1&gt;This is an element&lt;/h1&gt;
+</pre>
+
+<h2>3.3 What is an Attribute?</h2>
+
+<p>
+Attributes provide extra information about an element.
+</p>
+
+<pre>
+&lt;a href="https://example.com" target="_blank"&gt;
+  Visit Example
+&lt;/a&gt;
+</pre>
+
+<h3>Common Global Attributes</h3>
+<ul>
+  <li>id</li>
+  <li>class</li>
+  <li>title</li>
+  <li>style (avoid inline)</li>
+</ul>
+
+<h2>3.4 Boolean Attributes (ADVANCED)</h2>
+
+<pre>
+&lt;input type="checkbox" checked&gt;
+&lt;input type="text" required&gt;
+</pre>
+
+<p>
+Boolean attributes do not need values.
+</p>
+
+<h2>3.5 Nesting Rules (IMPORTANT)</h2>
+
+<pre>
+&lt;p&gt;
+  This is <strong>correct</strong> nesting.
+&lt;/p&gt;
+</pre>
+
+<div class="warning">
+Incorrect nesting breaks layout, SEO, and accessibility.
+</div>
+
+<div class="practice">
+Inspect any website and identify:
+<ul>
+  <li>Tags used correctly</li>
+  <li>Attributes misused</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- END OF PART 1 -->
+<!-- ====================================================== -->
+<!-- PART 2 START -->
+<!-- MODULE 4: TEXT CONTENT & TYPOGRAPHY (DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 4: Text Content & Typography (Deep + Professional)</h1>
+
+<h2>4.1 Why Text Matters in HTML</h2>
+
+<p>
+Text is the most important content on the web.  
+Search engines, screen readers, and users all depend on well-structured text.
+</p>
+
+<div class="note">
+Advanced developers treat text as <strong>semantic data</strong>, not decoration.
+</div>
+
+<h2>4.2 Headings (h1–h6) — VERY IMPORTANT</h2>
+
+<p>
+Headings define the document hierarchy.  
+They are NOT for styling — they are for structure.
+</p>
+
+<pre>
+&lt;h1&gt;Main Page Title&lt;/h1&gt;
+&lt;h2&gt;Section Title&lt;/h2&gt;
+&lt;h3&gt;Sub-section&lt;/h3&gt;
+</pre>
+
+<h3>Rules Every Professional Follows</h3>
+<ul>
+  <li>Only ONE <code>&lt;h1&gt;</code> per page</li>
+  <li>Never skip heading levels</li>
+  <li>Headings must describe content</li>
+</ul>
+
+<div class="warning">
+Using headings only to make text bigger is a beginner mistake.
+</div>
+
+<h2>4.3 Paragraphs & Line Breaks</h2>
+
+<pre>
+&lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;This is another paragraph.&lt;/p&gt;
+</pre>
+
+<p>
+Use:
+</p>
+<ul>
+  <li><code>&lt;p&gt;</code> for content blocks</li>
+  <li><code>&lt;br&gt;</code> ONLY for line breaks (addresses, poems)</li>
+</ul>
+
+<h2>4.4 Text Emphasis & Meaning</h2>
+
+<pre>
+&lt;strong&gt;Important information&lt;/strong&gt;
+&lt;em&gt;Emphasized text&lt;/em&gt;
+</pre>
+
+<h3>Correct Meaning</h3>
+<ul>
+  <li><code>&lt;strong&gt;</code> → importance</li>
+  <li><code>&lt;em&gt;</code> → emphasis</li>
+</ul>
+
+<div class="note">
+Screen readers announce <code>&lt;strong&gt;</code> and <code>&lt;em&gt;</code> differently.
+</div>
+
+<h2>4.5 Quotes & Citations</h2>
+
+<pre>
+&lt;blockquote&gt;
+  Learning HTML deeply makes everything easier later.
+&lt;/blockquote&gt;
+
+&lt;q&gt;Short inline quote&lt;/q&gt;
+</pre>
+
+<h2>4.6 Lists for Text Structure</h2>
+
+<pre>
+&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<h3>When to Use Lists</h3>
+<ul>
+  <li>Steps</li>
+  <li>Features</li>
+  <li>Navigation</li>
+</ul>
+
+<div class="practice">
+Rewrite a long paragraph into:
+<ul>
+  <li>Proper headings</li>
+  <li>Short paragraphs</li>
+  <li>Lists where applicable</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 5: LINKS & NAVIGATION (ADVANCED) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 5: Links & Navigation (Advanced & SEO-Safe)</h1>
+
+<h2>5.1 What is a Link?</h2>
+
+<p>
+Links connect documents.  
+Without links, the web would not exist.
+</p>
+
+<pre>
+&lt;a href="https://example.com"&gt;Visit Example&lt;/a&gt;
+</pre>
+
+<h2>5.2 Types of Links</h2>
+
+<h3>External Links</h3>
+<pre>
+&lt;a href="https://google.com" target="_blank" rel="noopener"&gt;
+  Google
+&lt;/a&gt;
+</pre>
+
+<h3>Internal Links</h3>
+<pre>
+&lt;a href="/about.html"&gt;About Us&lt;/a&gt;
+</pre>
+
+<h3>Anchor (Page) Links</h3>
+<pre>
+&lt;a href="#contact"&gt;Go to Contact&lt;/a&gt;
+
+&lt;section id="contact"&gt;
+  Contact Content
+&lt;/section&gt;
+</pre>
+
+<h2>5.3 Link Attributes (PRO LEVEL)</h2>
+
+<ul>
+  <li><strong>href</strong> → destination</li>
+  <li><strong>target</strong> → where to open</li>
+  <li><strong>rel</strong> → security & SEO</li>
+</ul>
+
+<pre>
+&lt;a href="https://site.com" rel="nofollow noopener"&gt;
+  External Resource
+&lt;/a&gt;
+</pre>
+
+<div class="note">
+<code>rel="noopener"</code> prevents security vulnerabilities.
+</div>
+
+<h2>5.4 Navigation Menus (Semantic)</h2>
+
+<pre>
+&lt;nav&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="/"&gt;Home&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/about"&gt;About&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="/contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+</pre>
+
+<h2>5.5 Accessibility in Navigation</h2>
+
+<ul>
+  <li>Clear link text</li>
+  <li>No "click here"</li>
+  <li>Logical order</li>
+</ul>
+
+<div class="warning">
+Bad navigation = users leave + SEO penalty.
+</div>
+
+<h2>5.6 Advanced Navigation Thinking</h2>
+
+<p>
+Professional developers think:
+</p>
+
+<ul>
+  <li>Is this link useful?</li>
+  <li>Is it accessible?</li>
+  <li>Does it help SEO?</li>
+</ul>
+
+<div class="practice">
+Create a navigation menu for:
+<ul>
+  <li>Home</li>
+  <li>Services</li>
+  <li>Blog</li>
+  <li>Contact</li>
+</ul>
+Use only semantic HTML.
+</div>
+
+<hr>
+
+<!-- END OF PART 2 -->
+<!-- ====================================================== -->
+<!-- PART 3 START -->
+<!-- MODULE 6: IMAGES, VIDEO & AUDIO (DEEP + PERFORMANCE) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 6: Images, Video & Audio (Deep + Performance)</h1>
+
+<h2>6.1 Why Media Matters</h2>
+
+<p>
+Media elements enhance user experience, but if misused they destroy performance.
+Advanced developers balance <strong>quality, accessibility, and speed</strong>.
+</p>
+
+<div class="note">
+Bad media handling is one of the biggest reasons websites are slow.
+</div>
+
+<h2>6.2 Images – Core Concepts</h2>
+
+<pre>
+&lt;img src="photo.jpg" alt="Professional profile photo"&gt;
+</pre>
+
+<h3>Critical Image Attributes</h3>
+<ul>
+  <li><strong>src</strong> → image path</li>
+  <li><strong>alt</strong> → accessibility + SEO</li>
+  <li><strong>width / height</strong> → layout stability</li>
+</ul>
+
+<div class="warning">
+Missing <code>alt</code> text is an accessibility failure.
+</div>
+
+<h2>6.3 Responsive Images (ADVANCED)</h2>
+
+<pre>
+&lt;img 
+  src="image-small.jpg"
+  srcset="image-small.jpg 480w,
+          image-medium.jpg 768w,
+          image-large.jpg 1200w"
+  sizes="(max-width: 600px) 100vw, 50vw"
+  alt="Responsive example"&gt;
+</pre>
+
+<p>
+The browser chooses the best image based on screen size and resolution.
+</p>
+
+<h2>6.4 Lazy Loading (PERFORMANCE)</h2>
+
+<pre>
+&lt;img src="gallery.jpg" loading="lazy" alt="Gallery image"&gt;
+</pre>
+
+<div class="note">
+Lazy loading delays image loading until needed → faster page load.
+</div>
+
+<h2>6.5 Video Elements</h2>
+
+<pre>
+&lt;video controls width="600"&gt;
+  &lt;source src="movie.mp4" type="video/mp4"&gt;
+  Your browser does not support video.
+&lt;/video&gt;
+</pre>
+
+<h3>Video Best Practices</h3>
+<ul>
+  <li>Use compressed formats</li>
+  <li>Provide controls</li>
+  <li>Avoid autoplay with sound</li>
+</ul>
+
+<h2>6.6 Audio Elements</h2>
+
+<pre>
+&lt;audio controls&gt;
+  &lt;source src="audio.mp3" type="audio/mpeg"&gt;
+&lt;/audio&gt;
+</pre>
+
+<h2>6.7 Media Accessibility</h2>
+
+<ul>
+  <li>Alt text for images</li>
+  <li>Captions for video</li>
+  <li>Transcripts for audio</li>
+</ul>
+
+<div class="practice">
+Create a media gallery page with:
+<ul>
+  <li>Responsive images</li>
+  <li>One video</li>
+  <li>One audio file</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 7: LISTS & TABLES (ADVANCED DATA STRUCTURE) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 7: Lists & Tables (Advanced & Real-World)</h1>
+
+<h2>7.1 Lists – More Than Bullets</h2>
+
+<p>
+Lists represent structured information.  
+They are used heavily by screen readers and search engines.
+</p>
+
+<h2>7.2 Unordered Lists</h2>
+
+<pre>
+&lt;ul&gt;
+  &lt;li&gt;HTML&lt;/li&gt;
+  &lt;li&gt;CSS&lt;/li&gt;
+  &lt;li&gt;JavaScript&lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<h2>7.3 Ordered Lists</h2>
+
+<pre>
+&lt;ol&gt;
+  &lt;li&gt;Install tools&lt;/li&gt;
+  &lt;li&gt;Write HTML&lt;/li&gt;
+  &lt;li&gt;Test in browser&lt;/li&gt;
+&lt;/ol&gt;
+</pre>
+
+<h2>7.4 Nested Lists (ADVANCED)</h2>
+
+<pre>
+&lt;ul&gt;
+  &lt;li&gt;Frontend
+    &lt;ul&gt;
+      &lt;li&gt;HTML&lt;/li&gt;
+      &lt;li&gt;CSS&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+
+<h2>7.5 Tables – When to Use</h2>
+
+<p>
+Tables should be used ONLY for tabular data, never for layout.
+</p>
+
+<h2>7.6 Table Structure (MANDATORY)</h2>
+
+<pre>
+&lt;table&gt;
+  &lt;caption&gt;Student Scores&lt;/caption&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Name&lt;/th&gt;
+      &lt;th&gt;Score&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Raj&lt;/td&gt;
+      &lt;td&gt;95&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</pre>
+
+<h2>7.7 Accessibility in Tables (PRO)</h2>
+
+<ul>
+  <li>Use <code>&lt;th&gt;</code> correctly</li>
+  <li>Use <code>scope</code> attributes</li>
+  <li>Add captions</li>
+</ul>
+
+<pre>
+&lt;th scope="col"&gt;Name&lt;/th&gt;
+&lt;th scope="row"&gt;Raj&lt;/th&gt;
+</pre>
+
+<div class="warning">
+Tables without headers are unusable for screen readers.
+</div>
+
+<div class="practice">
+Build a table for:
+<ul>
+  <li>Products</li>
+  <li>Prices</li>
+  <li>Availability</li>
+</ul>
+Follow accessibility rules.
+</div>
+
+<hr>
+
+<!-- END OF PART 3 -->
+<!-- ====================================================== -->
+<!-- PART 4 START -->
+<!-- MODULE 8: FORMS – COMPLETE & REAL-WORLD -->
+<!-- ====================================================== -->
+
+<h1>MODULE 8: Forms (Complete Guide – Beginner to Advanced)</h1>
+
+<h2>8.1 Why Forms Are Critical</h2>
+
+<p>
+Forms are the primary way users communicate with websites.
+Every login, signup, search, payment, and contact system starts with HTML forms.
+</p>
+
+<div class="note">
+A weak form = broken user experience + lost data.
+</div>
+
+<h2>8.2 Basic Form Structure</h2>
+
+<pre>
+&lt;form action="/submit" method="post"&gt;
+  &lt;label&gt;Name&lt;/label&gt;
+  &lt;input type="text"&gt;
+&lt;/form&gt;
+</pre>
+
+<h3>Key Attributes</h3>
+<ul>
+  <li><strong>action</strong> → where data is sent</li>
+  <li><strong>method</strong> → GET or POST</li>
+</ul>
+
+<h2>8.3 All Common Input Types (COMPLETE)</h2>
+
+<pre>
+&lt;input type="text"&gt;
+&lt;input type="email"&gt;
+&lt;input type="password"&gt;
+&lt;input type="number"&gt;
+&lt;input type="tel"&gt;
+&lt;input type="url"&gt;
+&lt;input type="date"&gt;
+&lt;input type="time"&gt;
+&lt;input type="color"&gt;
+&lt;input type="range"&gt;
+&lt;input type="file"&gt;
+&lt;input type="checkbox"&gt;
+&lt;input type="radio"&gt;
+&lt;input type="hidden"&gt;
+</pre>
+
+<h2>8.4 Labels & Accessibility (MANDATORY)</h2>
+
+<pre>
+&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input id="email" type="email"&gt;
+</pre>
+
+<div class="warning">
+Forms without labels are inaccessible and unprofessional.
+</div>
+
+<h2>8.5 Required, Pattern & Validation</h2>
+
+<pre>
+&lt;input type="email" required&gt;
+&lt;input type="text" pattern="[A-Za-z]{3,}"&gt;
+</pre>
+
+<h3>Built-in Validation Benefits</h3>
+<ul>
+  <li>No JavaScript needed</li>
+  <li>Consistent browser behavior</li>
+  <li>Better UX</li>
+</ul>
+
+<h2>8.6 Select, Textarea & Datalist</h2>
+
+<pre>
+&lt;select&gt;
+  &lt;option&gt;India&lt;/option&gt;
+  &lt;option&gt;USA&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;textarea rows="4"&gt;&lt;/textarea&gt;
+
+&lt;input list="cities"&gt;
+&lt;datalist id="cities"&gt;
+  &lt;option value="Delhi"&gt;
+  &lt;option value="Mumbai"&gt;
+&lt;/datalist&gt;
+</pre>
+
+<h2>8.7 Real-World Form Example (Contact)</h2>
+
+<pre>
+&lt;form&gt;
+  &lt;label&gt;Name&lt;/label&gt;
+  &lt;input type="text" required&gt;
+
+  &lt;label&gt;Email&lt;/label&gt;
+  &lt;input type="email" required&gt;
+
+  &lt;label&gt;Message&lt;/label&gt;
+  &lt;textarea required&gt;&lt;/textarea&gt;
+
+  &lt;button type="submit"&gt;Send&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+
+<div class="practice">
+Create a registration form with:
+<ul>
+  <li>Name</li>
+  <li>Email</li>
+  <li>Password</li>
+  <li>Gender</li>
+  <li>Country</li>
+  <li>Submit button</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 9: SEMANTIC HTML – ADVANCED ARCHITECTURE -->
+<!-- ====================================================== -->
+
+<h1>MODULE 9: Semantic HTML (Advanced & Professional)</h1>
+
+<h2>9.1 What Semantic HTML Really Means</h2>
+
+<p>
+Semantic HTML describes the <strong>purpose</strong> of content, not its appearance.
+</p>
+
+<div class="note">
+Advanced developers design structure before styling.
+</div>
+
+<h2>9.2 Core Semantic Elements</h2>
+
+<pre>
+&lt;header&gt;
+&lt;nav&gt;
+&lt;main&gt;
+&lt;section&gt;
+&lt;article&gt;
+&lt;aside&gt;
+&lt;footer&gt;
+</pre>
+
+<h2>9.3 Semantic Page Layout (REAL WORLD)</h2>
+
+<pre>
+&lt;header&gt;
+  &lt;nav&gt;Navigation&lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;section&gt;
+    &lt;article&gt;Blog Post&lt;/article&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;Footer&lt;/footer&gt;
+</pre>
+
+<h2>9.4 Section vs Article (INTERVIEW LEVEL)</h2>
+
+<ul>
+  <li><strong>section</strong> → thematic grouping</li>
+  <li><strong>article</strong> → standalone content</li>
+</ul>
+
+<h2>9.5 Aside & Complementary Content</h2>
+
+<pre>
+&lt;aside&gt;
+  Related links or ads
+&lt;/aside&gt;
+</pre>
+
+<h2>9.6 Semantic HTML & SEO</h2>
+
+<ul>
+  <li>Search engines understand structure</li>
+  <li>Better ranking signals</li>
+  <li>Rich results support</li>
+</ul>
+
+<h2>9.7 Semantic HTML & Accessibility</h2>
+
+<ul>
+  <li>Screen readers navigate landmarks</li>
+  <li>Keyboard navigation improves</li>
+  <li>ARIA usage reduces</li>
+</ul>
+
+<div class="warning">
+Using div everywhere is a beginner mistake.
+</div>
+
+<div class="practice">
+Rebuild a webpage layout using:
+<ul>
+  <li>header</li>
+  <li>nav</li>
+  <li>main</li>
+  <li>section</li>
+  <li>article</li>
+  <li>footer</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- END OF PART 4 -->
+<!-- ====================================================== -->
+<!-- PART 5 START -->
+<!-- MODULE 10: ACCESSIBILITY (WCAG + PROFESSIONAL PRACTICES) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 10: Accessibility (WCAG – Beginner to Advanced)</h1>
+
+<h2>10.1 What is Web Accessibility?</h2>
+
+<p>
+Web accessibility ensures that websites can be used by everyone, including people with
+visual, auditory, motor, and cognitive disabilities.
+</p>
+
+<div class="note">
+Accessibility is not optional. It is a professional, legal, and ethical requirement.
+</div>
+
+<h2>10.2 WCAG Principles (INTERVIEW LEVEL)</h2>
+
+<pre>
+POUR
+Perceivable
+Operable
+Understandable
+Robust
+</pre>
+
+<h3>Examples</h3>
+<ul>
+  <li>Text alternatives for images</li>
+  <li>Keyboard navigation</li>
+  <li>Readable content</li>
+  <li>Compatible with assistive tech</li>
+</ul>
+
+<h2>10.3 ARIA Basics (WHEN NEEDED)</h2>
+
+<pre>
+&lt;button aria-label="Close dialog"&gt;X&lt;/button&gt;
+</pre>
+
+<div class="warning">
+Do NOT use ARIA when native HTML elements already exist.
+</div>
+
+<h2>10.4 Keyboard Navigation</h2>
+
+<ul>
+  <li>Tab order must be logical</li>
+  <li>Focusable elements must be visible</li>
+  <li>No keyboard traps</li>
+</ul>
+
+<h2>10.5 Accessibility Checklist</h2>
+
+<ul>
+  <li>Alt text on images</li>
+  <li>Labels on inputs</li>
+  <li>Semantic landmarks</li>
+  <li>Contrast readability</li>
+</ul>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 11: HTML FOR SEO (ADVANCED) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 11: HTML for SEO (Advanced & Real-World)</h1>
+
+<h2>11.1 How Search Engines Read HTML</h2>
+
+<p>
+Search engines crawl HTML, not design.
+Correct structure directly affects ranking.
+</p>
+
+<h2>11.2 Meta Tags (CRITICAL)</h2>
+
+<pre>
+&lt;title&gt;Best HTML Course for Developers&lt;/title&gt;
+&lt;meta name="description" content="Complete HTML guide from beginner to advanced"&gt;
+</pre>
+
+<h2>11.3 Heading Structure & SEO</h2>
+
+<ul>
+  <li>One H1 per page</li>
+  <li>Logical hierarchy</li>
+  <li>Keyword relevance</li>
+</ul>
+
+<h2>11.4 Semantic HTML & Rich Results</h2>
+
+<p>
+Semantic HTML enables search engines to understand content meaning and context.
+</p>
+
+<h2>11.5 Internal Linking Strategy</h2>
+
+<ul>
+  <li>Contextual links</li>
+  <li>Descriptive anchor text</li>
+  <li>Logical site hierarchy</li>
+</ul>
+
+<div class="practice">
+Audit a webpage and fix:
+<ul>
+  <li>Missing headings</li>
+  <li>Duplicate titles</li>
+  <li>Poor link text</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 12: HTML PERFORMANCE OPTIMIZATION -->
+<!-- ====================================================== -->
+
+<h1>MODULE 12: HTML Performance (Speed & Efficiency)</h1>
+
+<h2>12.1 Why Performance Matters</h2>
+
+<p>
+Performance affects:
+</p>
+<ul>
+  <li>User experience</li>
+  <li>SEO ranking</li>
+  <li>Conversion rates</li>
+</ul>
+
+<h2>12.2 HTML-Level Performance Techniques</h2>
+
+<ul>
+  <li>Minimal DOM depth</li>
+  <li>Optimized images</li>
+  <li>Lazy loading</li>
+  <li>Proper script placement</li>
+</ul>
+
+<h2>12.3 Async & Defer (HTML Perspective)</h2>
+
+<pre>
+&lt;script src="app.js" defer&gt;&lt;/script&gt;
+&lt;script src="analytics.js" async&gt;&lt;/script&gt;
+</pre>
+
+<h2>12.4 Reducing Render Blocking</h2>
+
+<ul>
+  <li>Avoid inline CSS bloat</li>
+  <li>Load scripts responsibly</li>
+</ul>
+
+<div class="note">
+Fast HTML = faster everything else.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 13: HTML SECURITY BASICS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 13: HTML Security Basics</h1>
+
+<h2>13.1 What HTML Can and Cannot Secure</h2>
+
+<p>
+HTML alone cannot secure a website, but poor HTML can introduce vulnerabilities.
+</p>
+
+<h2>13.2 Common HTML-Level Risks</h2>
+
+<ul>
+  <li>Unescaped user input</li>
+  <li>Improper form handling</li>
+  <li>Exposed sensitive data</li>
+</ul>
+
+<h2>13.3 Basic Security Best Practices</h2>
+
+<ul>
+  <li>Never trust client input</li>
+  <li>Use proper input types</li>
+  <li>Avoid inline JavaScript</li>
+</ul>
+
+<h2>13.4 HTML & XSS Awareness</h2>
+
+<p>
+Cross-Site Scripting (XSS) often starts with poor handling of user input.
+</p>
+
+<div class="warning">
+Security is primarily backend-driven, but HTML is the first defense layer.
+</div>
+
+<div class="practice">
+Review a form and identify:
+<ul>
+  <li>Inputs that need validation</li>
+  <li>Potential misuse</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- END OF PART 5 -->
+</body>
+</html>
