@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JavaScript Master Course – Deep Version</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta name="description" content="Complete JavaScript master course with deep explanations, input-output examples, browser internals, and real-world usage." />
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px;
+      line-height: 1.9;
+      background: #fdfdfd;
+      color: #222;
+    }
+
+    h1 { color: #0d47a1; margin-top: 70px; }
+    h2 { color: #b71c1c; margin-top: 50px; }
+    h3 { color: #2e7d32; margin-top: 30px; }
+
+    pre {
+      background: #f4f4f4;
+      padding: 18px;
+      overflow-x: auto;
+      color: #0d47a1;
+      border-left: 5px solid #1976d2;
+    }
+
+    .output {
+      background: #e3f2fd;
+      padding: 18px;
+      border-left: 6px solid #1565c0;
+      margin: 20px 0;
+    }
+
+    .note {
+      background: #fff3cd;
+      padding: 18px;
+      border-left: 6px solid #ff9800;
+      margin: 25px 0;
+    }
+
+    .warning {
+      background: #ffebee;
+      padding: 18px;
+      border-left: 6px solid #c62828;
+      margin: 25px 0;
+    }
+
+    hr { margin: 80px 0; }
+  </style>
+</head>
+
+<body>
+
+<!-- ====================================================== -->
+<!-- MODULE 1: WHAT IS JAVASCRIPT & HOW IT WORKS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 1: What is JavaScript & How It Works (DEEP)</h1>
+
+<h2>1.1 What is JavaScript?</h2>
+
+<p>
+JavaScript is a <strong>programming language</strong> that adds logic,
+interaction, and behavior to web pages.
+</p>
+
+<ul>
+  <li>HTML → structure</li>
+  <li>CSS → design</li>
+  <li><strong>JavaScript → brain</strong></li>
+</ul>
+
+<div class="note">
+Without JavaScript, websites are mostly static documents.
+</div>
+
+<h2>1.2 Where JavaScript Runs</h2>
+
+<p>
+JavaScript runs in:
+</p>
+<ul>
+  <li>Browser (Chrome, Firefox)</li>
+  <li>Server (Node.js)</li>
+</ul>
+
+<h2>1.3 How Browser Executes JavaScript</h2>
+
+<pre>
+JS Code
+ ↓
+JavaScript Engine (V8)
+ ↓
+Call Stack
+ ↓
+Memory Heap
+ ↓
+Execution
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+JavaScript instructions are executed line-by-line (single-threaded).
+</div>
+
+<div class="warning">
+JavaScript is single-threaded, but can handle async tasks intelligently.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 2: VARIABLES (DEEP & INTERVIEW LEVEL) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 2: Variables (var, let, const – DEEP)</h1>
+
+<h2>2.1 What is a Variable?</h2>
+
+<p>
+A variable stores data in memory so it can be reused.
+</p>
+
+<h3>INPUT</h3>
+<pre>
+let age = 21;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Memory stores value <code>21</code> under name <code>age</code>
+</div>
+
+<h2>2.2 var (OLD & DANGEROUS)</h2>
+
+<pre>
+var x = 10;
+var x = 20;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+No error — value becomes 20
+</div>
+
+<div class="warning">
+<code>var</code> causes bugs due to function scope.
+</div>
+
+<h2>2.3 let (BLOCK SCOPED)</h2>
+
+<pre>
+let y = 10;
+y = 20;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Value updates safely to 20
+</div>
+
+<h2>2.4 const (MOST USED)</h2>
+
+<pre>
+const z = 30;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Value cannot be reassigned
+</div>
+
+<div class="note">
+Use <code>const</code> by default.  
+Use <code>let</code> only when value changes.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 3: DATA TYPES (VERY DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 3: Data Types (Primitive & Non-Primitive)</h1>
+
+<h2>3.1 Primitive Data Types</h2>
+
+<pre>
+string
+number
+boolean
+null
+undefined
+symbol
+bigint
+</pre>
+
+<h3>INPUT</h3>
+<pre>
+let name = "Raj";
+let score = 95;
+let passed = true;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Values stored directly in memory (immutable)
+</div>
+
+<h2>3.2 typeof Operator</h2>
+
+<pre>
+typeof "Hello"
+typeof 10
+typeof true
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+"string", "number", "boolean"
+</div>
+
+<h2>3.3 Non-Primitive (Reference Types)</h2>
+
+<pre>
+object
+array
+function
+</pre>
+
+<h3>INPUT</h3>
+<pre>
+let user = { name: "Raj", age: 21 };
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Variable stores reference to memory, not actual value
+</div>
+
+<div class="warning">
+Objects are mutable — changes affect all references.
+</div>
+
+<hr>
+
+<!-- END OF PART 1 (JS) -->
+<!-- ====================================================== -->
+<!-- PART 2 START -->
+<!-- MODULE 4: OPERATORS & TYPE COERCION (VERY DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 4: Operators & Type Coercion (Deep + Interview Level)</h1>
+
+<h2>4.1 Arithmetic Operators</h2>
+
+<h3>INPUT</h3>
+<pre>
+let a = 10;
+let b = 3;
+
+a + b;
+a - b;
+a * b;
+a / b;
+a % b;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+13, 7, 30, 3.333..., 1
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Numbers are evaluated left-to-right</li>
+  <li>Division returns floating-point values</li>
+</ul>
+
+<h2>4.2 Assignment Operators</h2>
+
+<pre>
+let x = 10;
+x += 5;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+x becomes 15
+</div>
+
+<h2>4.3 Comparison Operators (DANGEROUS AREA)</h2>
+
+<h3>INPUT</h3>
+<pre>
+5 == "5"
+5 === "5"
+null == undefined
+null === undefined
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+true<br>
+false<br>
+true<br>
+false
+</div>
+
+<h3>Engine Thinking (CRITICAL)</h3>
+<ul>
+  <li><code>==</code> allows type coercion</li>
+  <li><code>===</code> checks value + type</li>
+</ul>
+
+<div class="warning">
+Always use <code>===</code> in real projects.
+</div>
+
+<h2>4.4 Type Coercion (CONFUSING BUT IMPORTANT)</h2>
+
+<h3>INPUT</h3>
+<pre>
+"5" + 1
+"5" - 1
+true + 1
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+"51"<br>
+4<br>
+2
+</div>
+
+<h3>Why This Happens</h3>
+<ul>
+  <li>+ favors strings</li>
+  <li>- forces numeric conversion</li>
+  <li>true becomes 1</li>
+</ul>
+
+<div class="note">
+Many JavaScript bugs come from implicit coercion.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 5: CONTROL FLOW (IF / ELSE / SWITCH) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 5: Control Flow (Decision Making)</h1>
+
+<h2>5.1 if / else</h2>
+
+<h3>INPUT</h3>
+<pre>
+let age = 20;
+
+if (age >= 18) {
+  console.log("Adult");
+} else {
+  console.log("Minor");
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Adult
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Condition evaluated to true</li>
+  <li>First block executed</li>
+</ul>
+
+<h2>5.2 else if (Multiple Conditions)</h2>
+
+<pre>
+let score = 85;
+
+if (score >= 90) {
+  console.log("A");
+} else if (score >= 75) {
+  console.log("B");
+} else {
+  console.log("C");
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+B
+</div>
+
+<h2>5.3 switch Statement</h2>
+
+<pre>
+let day = "Monday";
+
+switch (day) {
+  case "Monday":
+    console.log("Start work");
+    break;
+  case "Sunday":
+    console.log("Holiday");
+    break;
+  default:
+    console.log("Normal day");
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Start work
+</div>
+
+<div class="warning">
+Missing <code>break</code> causes fall-through bugs.
+</div>
+
+<h2>5.4 Ternary Operator (SHORT FORM)</h2>
+
+<pre>
+let result = age >= 18 ? "Adult" : "Minor";
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+result = "Adult"
+</div>
+
+<div class="note">
+Ternary is great for simple conditions, not complex logic.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 6: LOOPS (ITERATION – VERY IMPORTANT) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 6: Loops (Beginner → Advanced)</h1>
+
+<h2>6.1 for Loop</h2>
+
+<h3>INPUT</h3>
+<pre>
+for (let i = 1; i <= 3; i++) {
+  console.log(i);
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+1<br>2<br>3
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Initialize i</li>
+  <li>Check condition</li>
+  <li>Execute block</li>
+  <li>Increment i</li>
+</ul>
+
+<h2>6.2 while Loop</h2>
+
+<pre>
+let count = 1;
+
+while (count <= 3) {
+  console.log(count);
+  count++;
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+1<br>2<br>3
+</div>
+
+<h2>6.3 do...while Loop</h2>
+
+<pre>
+let num = 5;
+
+do {
+  console.log(num);
+} while (num < 3);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+5
+</div>
+
+<div class="note">
+do...while runs at least once.
+</div>
+
+<h2>6.4 break & continue</h2>
+
+<pre>
+for (let i = 1; i <= 5; i++) {
+  if (i === 3) continue;
+  if (i === 5) break;
+  console.log(i);
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+1<br>2<br>4
+</div>
+
+<h2>6.5 Real-World Loop Example</h2>
+
+<pre>
+let users = ["Raj", "Amit", "Neha"];
+
+for (let user of users) {
+  console.log("Hello " + user);
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Hello Raj<br>
+Hello Amit<br>
+Hello Neha
+</div>
+
+<div class="warning">
+Infinite loops freeze the browser.
+</div>
+
+<hr>
+
+<!-- END OF PART 2 (JS) -->
+<!-- ====================================================== -->
+<!-- PART 3 START -->
+<!-- MODULE 7: FUNCTIONS (COMPLETE & DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 7: Functions (Beginner → Advanced)</h1>
+
+<h2>7.1 What is a Function?</h2>
+
+<p>
+A function is a reusable block of code designed to perform a specific task.
+</p>
+
+<h3>INPUT</h3>
+<pre>
+function greet() {
+  console.log("Hello World");
+}
+
+greet();
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Hello World
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Function stored in memory</li>
+  <li>Executed only when called</li>
+</ul>
+
+<h2>7.2 Parameters & Arguments</h2>
+
+<pre>
+function greetUser(name) {
+  console.log("Hello " + name);
+}
+
+greetUser("Raj");
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Hello Raj
+</div>
+
+<h2>7.3 Return Statement</h2>
+
+<pre>
+function add(a, b) {
+  return a + b;
+}
+
+let result = add(3, 5);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+result = 8
+</div>
+
+<div class="note">
+Functions without <code>return</code> return <code>undefined</code>.
+</div>
+
+<h2>7.4 Function Expressions</h2>
+
+<pre>
+const multiply = function(a, b) {
+  return a * b;
+};
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+multiply(2,3) → 6
+</div>
+
+<h2>7.5 Arrow Functions (MODERN JS)</h2>
+
+<pre>
+const square = (n) => n * n;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+square(4) → 16
+</div>
+
+<div class="warning">
+Arrow functions do NOT have their own <code>this</code>.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 8: SCOPE, HOISTING & CLOSURES (CRITICAL) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 8: Scope, Hoisting & Closures (INTERVIEW LEVEL)</h1>
+
+<h2>8.1 Scope (Where variables live)</h2>
+
+<pre>
+let x = 10;
+
+function test() {
+  let y = 20;
+  console.log(x);
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+10
+</div>
+
+<div class="note">
+Inner scopes can access outer scopes (lexical scope).
+</div>
+
+<h2>8.2 Block Scope (let vs var)</h2>
+
+<pre>
+if (true) {
+  var a = 1;
+  let b = 2;
+}
+
+console.log(a);
+console.log(b);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+1<br>
+ReferenceError (b is not defined)
+</div>
+
+<h2>8.3 Hoisting (VERY CONFUSING)</h2>
+
+<pre>
+console.log(x);
+var x = 5;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+undefined
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Variable declaration hoisted</li>
+  <li>Assignment not hoisted</li>
+</ul>
+
+<h2>8.4 Hoisting with let / const</h2>
+
+<pre>
+console.log(y);
+let y = 10;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+ReferenceError
+</div>
+
+<div class="warning">
+This is called the Temporal Dead Zone (TDZ).
+</div>
+
+<h2>8.5 Closures (ADVANCED & POWERFUL)</h2>
+
+<pre>
+function outer() {
+  let count = 0;
+
+  return function inner() {
+    count++;
+    return count;
+  };
+}
+
+const counter = outer();
+counter();
+counter();
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+1<br>2
+</div>
+
+<h3>Why This Works</h3>
+<ul>
+  <li>Inner function remembers outer scope</li>
+  <li>Data stays alive in memory</li>
+</ul>
+
+<div class="note">
+Closures power React hooks, private variables, callbacks.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 9: ARRAYS & ARRAY METHODS (VERY DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 9: Arrays & Array Methods (Professional)</h1>
+
+<h2>9.1 What is an Array?</h2>
+
+<pre>
+let numbers = [1, 2, 3, 4];
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Indexed collection starting from 0
+</div>
+
+<h2>9.2 Common Array Operations</h2>
+
+<pre>
+numbers.push(5);
+numbers.pop();
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Add/remove elements from end
+</div>
+
+<h2>9.3 forEach (SIDE EFFECTS)</h2>
+
+<pre>
+numbers.forEach(n => console.log(n));
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Logs each number
+</div>
+
+<h2>9.4 map (TRANSFORMATION)</h2>
+
+<pre>
+let doubled = numbers.map(n => n * 2);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Creates new array with doubled values
+</div>
+
+<h2>9.5 filter (SELECTION)</h2>
+
+<pre>
+let even = numbers.filter(n => n % 2 === 0);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+New array with even numbers
+</div>
+
+<h2>9.6 reduce (MOST POWERFUL)</h2>
+
+<pre>
+let sum = numbers.reduce((acc, n) => acc + n, 0);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Sum of all numbers
+</div>
+
+<div class="warning">
+Avoid mutating arrays inside map/filter/reduce.
+</div>
+
+<div class="note">
+map/filter/reduce = functional programming mindset.
+</div>
+
+<hr>
+
+<!-- END OF PART 3 (JS) -->
+<!-- ====================================================== -->
+<!-- PART 4 START -->
+<!-- MODULE 10: OBJECTS (DEEP & PROFESSIONAL) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 10: Objects (Deep Understanding)</h1>
+
+<h2>10.1 What is an Object?</h2>
+
+<p>
+An object is a collection of key–value pairs.
+Objects model real-world entities in JavaScript.
+</p>
+
+<h3>INPUT</h3>
+<pre>
+const user = {
+  name: "Raj",
+  age: 21,
+  isAdmin: true
+};
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+An object stored in memory with three properties.
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Memory allocated for object</li>
+  <li>Variable stores a reference (address)</li>
+</ul>
+
+<h2>10.2 Accessing Object Properties</h2>
+
+<pre>
+user.name
+user["age"]
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+"Raj"<br>
+21
+</div>
+
+<h2>10.3 Adding & Updating Properties</h2>
+
+<pre>
+user.city = "Delhi";
+user.age = 22;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Object now includes city and updated age.
+</div>
+
+<div class="warning">
+Objects are mutable — changes affect all references.
+</div>
+
+<h2>10.4 Methods (Functions inside Objects)</h2>
+
+<pre>
+const user = {
+  name: "Raj",
+  greet() {
+    return "Hello " + this.name;
+  }
+};
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+user.greet() → "Hello Raj"
+</div>
+
+<div class="note">
+Methods usually rely on <code>this</code>.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 11: THE `this` KEYWORD (VERY CONFUSING) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 11: The <code>this</code> Keyword (Critical Concept)</h1>
+
+<h2>11.1 What is <code>this</code>?</h2>
+
+<p>
+<code>this</code> refers to the object that is currently executing the function.
+Its value is decided at runtime.
+</p>
+
+<h2>11.2 <code>this</code> in Object Method</h2>
+
+<h3>INPUT</h3>
+<pre>
+const person = {
+  name: "Raj",
+  show() {
+    console.log(this.name);
+  }
+};
+
+person.show();
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Raj
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Function called via object</li>
+  <li><code>this</code> points to that object</li>
+</ul>
+
+<h2>11.3 <code>this</code> in Regular Function</h2>
+
+<pre>
+function test() {
+  console.log(this);
+}
+
+test();
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Window object (in browser, non-strict mode)
+</div>
+
+<h2>11.4 <code>this</code> in Arrow Functions</h2>
+
+<pre>
+const obj = {
+  value: 10,
+  show: () => {
+    console.log(this.value);
+  }
+};
+
+obj.show();
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+undefined
+</div>
+
+<div class="warning">
+Arrow functions do NOT bind their own <code>this</code>.
+</div>
+
+<h2>11.5 Fixing <code>this</code> (bind, call, apply)</h2>
+
+<pre>
+function greet() {
+  console.log(this.name);
+}
+
+const user = { name: "Raj" };
+
+greet.call(user);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Raj
+</div>
+
+<div class="note">
+<code>call</code>, <code>apply</code>, and <code>bind</code> manually set <code>this</code>.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 12: PROTOTYPES & INHERITANCE (ENGINE LEVEL) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 12: Prototypes & Inheritance (Advanced)</h1>
+
+<h2>12.1 Prototype Concept</h2>
+
+<p>
+Every JavaScript object has an internal prototype
+from which it can inherit properties and methods.
+</p>
+
+<h3>INPUT</h3>
+<pre>
+function Person(name) {
+  this.name = name;
+}
+
+Person.prototype.sayHello = function() {
+  return "Hello " + this.name;
+};
+
+const p1 = new Person("Raj");
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+p1.sayHello() → "Hello Raj"
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>JS looks for method on object</li>
+  <li>If not found → looks up prototype chain</li>
+</ul>
+
+<h2>12.2 Prototype Chain</h2>
+
+<pre>
+p1 → Person.prototype → Object.prototype → null
+</pre>
+
+<div class="note">
+This lookup system is called the prototype chain.
+</div>
+
+<h2>12.3 Inheritance using Constructor Functions</h2>
+
+<pre>
+function Student(name, grade) {
+  Person.call(this, name);
+  this.grade = grade;
+}
+
+Student.prototype = Object.create(Person.prototype);
+
+const s1 = new Student("Raj", "A");
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+s1 inherits methods from Person
+</div>
+
+<h2>12.4 Modern Alternative (Classes – Preview)</h2>
+
+<pre>
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  greet() {
+    return "Hello " + this.name;
+  }
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Cleaner syntax, same prototype behavior
+</div>
+
+<div class="warning">
+Classes are syntax sugar over prototypes.
+</div>
+
+<hr>
+
+<!-- END OF PART 4 (JS) -->
+<!-- ====================================================== -->
+<!-- PART 5 START -->
+<!-- MODULE 13: ES6+ FEATURES (MODERN JAVASCRIPT) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 13: ES6+ Features (Modern, Clean JS)</h1>
+
+<h2>13.1 Destructuring (OBJECT & ARRAY)</h2>
+
+<h3>INPUT</h3>
+<pre>
+const user = { name: "Raj", age: 21 };
+
+const { name, age } = user;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+name = "Raj"<br>
+age = 21
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Creates variables by matching keys</li>
+  <li>No mutation of original object</li>
+</ul>
+
+<h3>Array Destructuring</h3>
+<pre>
+const nums = [10, 20, 30];
+const [a, b] = nums;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+a = 10<br>
+b = 20
+</div>
+
+<h2>13.2 Spread Operator (<code>...</code>)</h2>
+
+<h3>INPUT</h3>
+<pre>
+const arr1 = [1, 2];
+const arr2 = [...arr1, 3, 4];
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+arr2 = [1, 2, 3, 4]
+</div>
+
+<div class="note">
+Spread creates shallow copies — objects inside are still referenced.
+</div>
+
+<h2>13.3 Rest Operator</h2>
+
+<pre>
+function sum(...numbers) {
+  return numbers.reduce((a, b) => a + b, 0);
+}
+
+sum(1, 2, 3);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+6
+</div>
+
+<h2>13.4 Template Literals</h2>
+
+<pre>
+const name = "Raj";
+const msg = `Hello ${name}`;
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+"Hello Raj"
+</div>
+
+<div class="warning">
+Template literals prevent messy string concatenation.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 14: ASYNCHRONOUS JAVASCRIPT (VERY DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 14: Asynchronous JavaScript (Critical Topic)</h1>
+
+<h2>14.1 Why Async JS Exists</h2>
+
+<p>
+JavaScript is single-threaded, but browsers must handle:
+</p>
+<ul>
+  <li>Network requests</li>
+  <li>Timers</li>
+  <li>User events</li>
+</ul>
+
+<h2>14.2 Callbacks (OLD STYLE)</h2>
+
+<h3>INPUT</h3>
+<pre>
+setTimeout(() => {
+  console.log("Hello");
+}, 1000);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+"Hello" (after 1 second)
+</div>
+
+<div class="warning">
+Nested callbacks cause callback hell.
+</div>
+
+<h2>14.3 Promises (MODERN)</h2>
+
+<pre>
+const fetchData = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("Data loaded"), 1000);
+});
+
+fetchData.then(data => console.log(data));
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+"Data loaded"
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Promise registered</li>
+  <li>Resolved later</li>
+  <li>Then-callback queued in microtask queue</li>
+</ul>
+
+<h2>14.4 async / await (BEST PRACTICE)</h2>
+
+<pre>
+async function loadData() {
+  const data = await fetchData;
+  console.log(data);
+}
+
+loadData();
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+"Data loaded"
+</div>
+
+<div class="note">
+async/await makes async code look synchronous.
+</div>
+
+<h2>14.5 Event Loop (ENGINE LEVEL)</h2>
+
+<pre>
+Call Stack
+↓
+Web APIs
+↓
+Callback Queue / Microtask Queue
+↓
+Event Loop
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Non-blocking execution without freezing UI
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 15: ERROR HANDLING & DEBUGGING -->
+<!-- ====================================================== -->
+
+<h1>MODULE 15: Error Handling & Debugging (Professional)</h1>
+
+<h2>15.1 try...catch</h2>
+
+<h3>INPUT</h3>
+<pre>
+try {
+  JSON.parse("{invalid}");
+} catch (error) {
+  console.log("Error occurred");
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+"Error occurred"
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Error thrown</li>
+  <li>Control jumps to catch block</li>
+</ul>
+
+<h2>15.2 finally Block</h2>
+
+<pre>
+try {
+  console.log("Try");
+} finally {
+  console.log("Always runs");
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Try<br>
+Always runs
+</div>
+
+<h2>15.3 Custom Errors</h2>
+
+<pre>
+throw new Error("Something went wrong");
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Stops execution and throws error
+</div>
+
+<h2>15.4 Debugging Techniques</h2>
+
+<ul>
+  <li>console.log()</li>
+  <li>breakpoints in DevTools</li>
+  <li>step over / into functions</li>
+</ul>
+
+<div class="note">
+Professional developers debug more than they code.
+</div>
+
+<hr>
+
+<!-- END OF PART 5 (JS) -->
+<!-- ====================================================== -->
+<!-- PART 6 START -->
+<!-- MODULE 16: DOM MANIPULATION (BROWSER-LEVEL DEEP) -->
+<!-- ====================================================== -->
+
+<h1>MODULE 16: DOM Manipulation (Deep & Practical)</h1>
+
+<h2>16.1 What is the DOM?</h2>
+
+<p>
+The DOM (Document Object Model) is a tree-like representation of HTML
+that JavaScript can read and modify.
+</p>
+
+<pre>
+HTML → DOM Tree → JavaScript Manipulates Nodes
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+JavaScript can change content, styles, and structure at runtime.
+</div>
+
+<h2>16.2 Selecting Elements</h2>
+
+<h3>INPUT</h3>
+<pre>
+document.getElementById("title");
+document.querySelector(".card");
+document.querySelectorAll("li");
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Returns element(s) from the DOM
+</div>
+
+<div class="note">
+Prefer <code>querySelector</code> / <code>querySelectorAll</code> for flexibility.
+</div>
+
+<h2>16.3 Changing Content</h2>
+
+<pre>
+const title = document.querySelector("h1");
+title.textContent = "New Title";
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Text inside the heading updates instantly.
+</div>
+
+<h2>16.4 Changing Styles</h2>
+
+<pre>
+title.style.color = "red";
+title.style.fontSize = "32px";
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Inline styles applied to element
+</div>
+
+<div class="warning">
+Avoid heavy inline styles — prefer CSS classes.
+</div>
+
+<h2>16.5 Adding / Removing Classes</h2>
+
+<pre>
+title.classList.add("active");
+title.classList.remove("active");
+title.classList.toggle("active");
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+CSS styles applied/removed dynamically
+</div>
+
+<h2>16.6 Creating Elements</h2>
+
+<pre>
+const li = document.createElement("li");
+li.textContent = "New Item";
+document.querySelector("ul").appendChild(li);
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+New list item appears on the page
+</div>
+
+<h2>16.7 Events (USER INTERACTION)</h2>
+
+<pre>
+button.addEventListener("click", () => {
+  alert("Button clicked");
+});
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Alert appears when button is clicked
+</div>
+
+<h3>Engine Thinking</h3>
+<ul>
+  <li>Browser listens for event</li>
+  <li>Callback queued</li>
+  <li>Executed on click</li>
+</ul>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 17: MODULES & TOOLING BASICS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 17: Modules & Tooling Basics</h1>
+
+<h2>17.1 JavaScript Modules</h2>
+
+<p>
+Modules allow splitting code into reusable files.
+</p>
+
+<h3>EXPORT</h3>
+<pre>
+export function add(a, b) {
+  return a + b;
+}
+</pre>
+
+<h3>IMPORT</h3>
+<pre>
+import { add } from "./math.js";
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Reusable, maintainable code structure
+</div>
+
+<div class="note">
+Modules require <code>type="module"</code> in HTML.
+</div>
+
+<h2>17.2 Tooling (High-Level Overview)</h2>
+
+<ul>
+  <li>Bundlers: Vite, Webpack</li>
+  <li>Linters: ESLint</li>
+  <li>Formatters: Prettier</li>
+</ul>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Cleaner code, fewer bugs, faster development
+</div>
+
+<div class="note">
+You don’t need tools on day one — learn JS first.
+</div>
+
+<hr>
+
+<!-- ====================================================== -->
+<!-- MODULE 18: PERFORMANCE, SECURITY & INTERVIEWS -->
+<!-- ====================================================== -->
+
+<h1>MODULE 18: Performance, Security & Interviews</h1>
+
+<h2>18.1 Performance Best Practices</h2>
+
+<ul>
+  <li>Minimize DOM manipulation</li>
+  <li>Debounce scroll & input events</li>
+  <li>Avoid blocking loops</li>
+</ul>
+
+<h3>Example: Debounce</h3>
+<pre>
+function debounce(fn, delay) {
+  let timer;
+  return function() {
+    clearTimeout(timer);
+    timer = setTimeout(fn, delay);
+  };
+}
+</pre>
+
+<div class="output">
+<strong>OUTPUT:</strong><br>
+Function runs only after user stops triggering events
+</div>
+
+<h2>18.2 Security Basics</h2>
+
+<ul>
+  <li>Never trust user input</li>
+  <li>Avoid <code>innerHTML</code> with user data</li>
+  <li>Sanitize inputs</li>
+</ul>
+
+<div class="warning">
+Most XSS attacks come from careless DOM insertion.
+</div>
+
+<h2>18.3 JavaScript Interview Questions</h2>
+
+<h3>Beginner</h3>
+<ul>
+  <li>Difference between let, var, const?</li>
+  <li>What is hoisting?</li>
+</ul>
+
+<h3>Intermediate</h3>
+<ul>
+  <li>Explain closures</li>
+  <li>Difference between map and forEach?</li>
+</ul>
+
+<h3>Advanced</h3>
+<ul>
+  <li>Explain event loop</li>
+  <li>How does prototype inheritance work?</li>
+</ul>
+
+<h2>18.4 Coding Challenges</h2>
+
+<ul>
+  <li>Build a counter using closures</li>
+  <li>Create a todo app using DOM</li>
+  <li>Fetch API data and render list</li>
+</ul>
+
+<hr>
+
+<h1>🎉 JAVASCRIPT COURSE COMPLETED</h1>
+
+<p>
+If you truly understand everything in this file,
+you now have <strong>strong professional JavaScript skills</strong>.
+</p>
+
+<ul>
+  <li>You understand how JS works internally</li>
+  <li>You can build real web apps</li>
+  <li>You are ready for frameworks (React, Node.js)</li>
+</ul>
+
+<p>
+<strong>JavaScript mastery is about thinking, not memorizing.</strong>
+</p>
+
+<!-- END OF PART 6 (JS) -->
+
+</body>
+</html>
