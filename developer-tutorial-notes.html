@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Developer Tutorial Notes | Full Stack</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO -->
+  <meta name="description" content="Developer tutorial notes covering HTML, CSS, JavaScript and Node.js from beginner to advanced with real-world examples." />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: radial-gradient(circle at top, #0d1117, #020409);
+      color: #e6edf3;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 60px 25px 100px;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      margin-bottom: 10px;
+      text-shadow: 0 0 15px rgba(255,255,255,0.25);
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #9ba7b4;
+    }
+
+    /* INFO BOX */
+    .info-box {
+      background: #0b1220;
+      border-radius: 14px;
+      padding: 30px;
+      margin-bottom: 60px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 25px rgba(0, 153, 255, 0.15);
+    }
+
+    .info-box ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .info-box li {
+      margin-bottom: 10px;
+      color: #c9d1d9;
+    }
+
+    /* COURSE GRID */
+    .course {
+      background: #0b1220;
+      border-radius: 16px;
+      padding: 30px;
+      margin-bottom: 35px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .course:hover {
+      transform: translateY(-6px);
+    }
+
+    .course h3 {
+      font-size: 28px;
+      margin-top: 0;
+    }
+
+    .course p {
+      color: #aab6c3;
+    }
+
+    .course ul {
+      padding-left: 20px;
+      margin-bottom: 25px;
+    }
+
+    .course ul li {
+      margin-bottom: 8px;
+    }
+
+    /* BUTTON */
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #fff;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* GLOW COLORS */
+    .html {
+      box-shadow: 0 0 30px rgba(0, 140, 255, 0.25);
+    }
+    .html .btn {
+      background: #008cff;
+      box-shadow: 0 0 25px rgba(0, 140, 255, 0.6);
+    }
+
+    .css {
+      box-shadow: 0 0 30px rgba(0, 200, 120, 0.25);
+    }
+    .css .btn {
+      background: #00c878;
+      box-shadow: 0 0 25px rgba(0, 200, 120, 0.6);
+    }
+
+    .js {
+      box-shadow: 0 0 30px rgba(255, 165, 0, 0.25);
+    }
+    .js .btn {
+      background: #ffa500;
+      box-shadow: 0 0 25px rgba(255, 165, 0, 0.6);
+    }
+
+    .node {
+      box-shadow: 0 0 30px rgba(180, 70, 255, 0.25);
+    }
+    .node .btn {
+      background: #b446ff;
+      box-shadow: 0 0 25px rgba(180, 70, 255, 0.6);
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      margin-top: 90px;
+      padding: 40px;
+      border-radius: 18px;
+      background: #0b1220;
+      box-shadow: 0 0 40px rgba(255,255,255,0.15);
+    }
+
+    .cta h2 {
+      font-size: 34px;
+      margin-bottom: 25px;
+    }
+
+    .cta .btn {
+      margin: 10px;
+      padding: 16px 36px;
+      font-size: 18px;
+    }
+
+    .telegram {
+      background: #229ED9;
+      box-shadow: 0 0 30px rgba(34,158,217,0.7);
+    }
+
+    .instagram {
+      background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af);
+      box-shadow: 0 0 30px rgba(221,42,123,0.7);
+    }
+
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      color: #7d8590;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Developer Tutorial Notes</h1>
+      <p>Full-Stack Learning Hub • Beginner → Advanced • Real-World Focus</p>
+    </div>
+
+    <!-- INFO -->
+    <div class="info-box">
+      <ul>
+        <li>Structured notes from basics to advanced</li>
+        <li>Input → Output based explanations</li>
+        <li>Real-world development patterns</li>
+        <li>Interview-ready concepts</li>
+      </ul>
+    </div>
+
+    <!-- HTML -->
+    <div class="course html">
+      <h3>📘 HTML Complete Guide</h3>
+      <p>Learn how the web is structured from scratch.</p>
+      <ul>
+        <li>How the Web Works</li>
+        <li>Tags, Elements & Attributes</li>
+        <li>Forms & Inputs</li>
+        <li>Semantic HTML, SEO & Performance</li>
+      </ul>
+      <a href="htmlcourse.html" class="btn">Open HTML Notes</a>
+    </div>
+
+    <!-- CSS -->
+    <div class="course css">
+      <h3>🎨 CSS Design & Layout Mastery</h3>
+      <p>Build professional, responsive user interfaces.</p>
+      <ul>
+        <li>Box Model & Positioning</li>
+        <li>Flexbox & Grid</li>
+        <li>Responsive Design</li>
+        <li>Animations & UI Patterns</li>
+      </ul>
+      <a href="csscourse.html" class="btn">Open CSS Notes</a>
+    </div>
+
+    <!-- JS -->
+    <div class="course js">
+      <h3>⚙️ JavaScript Core to Advanced</h3>
+      <p>Understand the logic and internals of JavaScript.</p>
+      <ul>
+        <li>JS Fundamentals & Internals</li>
+        <li>Closures & Scope</li>
+        <li>Async JavaScript</li>
+        <li>DOM Manipulation</li>
+      </ul>
+      <a href="jscourse.html" class="btn">Open JavaScript Notes</a>
+    </div>
+
+    <!-- NODE -->
+    <div class="course node">
+      <h3>🖥️ Node.js Backend Development</h3>
+      <p>Build real backend systems and APIs.</p>
+      <ul>
+        <li>Node Internals & Express</li>
+        <li>Databases</li>
+        <li>Authentication & Security</li>
+        <li>Deployment</li>
+      </ul>
+      <a href="nodecourse.html" class="btn">Open Node.js Notes</a>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <h2>Join the Developer Community</h2>
+      <a href="https://t.me/https://t.me/+HrG4l_J5mSkyODll" class="btn telegram" target="_blank">
+        Join Telegram
+      </a>
+      <a href="https://instagram.com/flowbyte_studio01" class="btn instagram" target="_blank">
+        Join Instagram
+      </a>
+    </div>
+
+    <footer>
+      © 2025 Developer Tutorial Notes • Learn • Build • Grow
+    </footer>
+
+  </div>
+
+</body>
+</html>
