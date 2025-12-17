@@ -1,0 +1,86 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 14px;
+}
+
+header { text-align: center; }
+
+.card {
+  background: #fff;
+  padding: 14px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.center {
+  max-width: 320px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+input, select, button {
+  width: 100%;
+  padding: 8px;
+  margin: 6px 0;
+}
+
+button {
+  background: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.tools button { margin-bottom: 6px; }
+
+.table-wrapper { overflow-x: auto; }
+
+table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+}
+
+th {
+  background: #e0e7ff;
+  padding: 8px;
+}
+
+td {
+  padding: 8px;
+  border-bottom: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+td:nth-child(5) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 150px;
+}
+
+.in { color: green; font-weight: bold; }
+.out { color: red; font-weight: bold; }
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.clear { background: #6b7280; }
+
+@media print {
+  body * { visibility: hidden; }
+  #invoice, #invoice * { visibility: visible; }
+  #invoice { position: absolute; top: 0; left: 0; width: 100%; }
+}
