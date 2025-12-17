@@ -61,6 +61,7 @@
 <div class="card scroll">
   <h2>Journal</h2>
   <table id="journal"></table>
+<p style="font-size:12px;color:#555">✏️ Click Edit to modify a transaction | 🗑 Delete to remove</p>
 </div>
 
 <!-- TABS -->
@@ -79,6 +80,8 @@
 <script>
 let data = JSON.parse(localStorage.getItem('accounts')) || [];
 let filtered = [...data];
+let editIndex = null;
+let filtered = [...data];
 
 function toggleFilter(){
   filterBox.style.display = filterBox.style.display==='none'?'block':'none';
@@ -86,7 +89,22 @@ function toggleFilter(){
 
 function addTransaction(){
   if(!date.value || !amount.value) return alert('Date & Amount required');
-  data.push({date:date.value,account:account.value,type:type.value,amount:+amount.value,note:note.value});
+
+  const tx = {
+    date: date.value,
+    account: account.value,
+    type: type.value,
+    amount: +amount.value,
+    note: note.value
+  };
+
+  if(editIndex !== null){
+    data[editIndex] = tx;
+    editIndex = null;
+  } else {
+    data.push(tx);
+  }
+
   localStorage.setItem('accounts',JSON.stringify(data));
   filtered=[...data];
   date.value=amount.value=note.value='';
@@ -108,9 +126,19 @@ function clearFilter(){ filtered=[...data]; render(); }
 function render(){ renderJournal(); renderLedger(); renderReports(); }
 
 function renderJournal(){
-  journal.innerHTML='<tr><th>Date</th><th>Account</th><th>In</th><th>Out</th><th>Note</th></tr>';
-  filtered.forEach(t=>{
-    journal.innerHTML+=`<tr><td>${t.date}</td><td>${t.account}</td><td style="color:green">${t.type==='credit'?t.amount:''}</td><td style="color:red">${t.type==='debit'?t.amount:''}</td><td>${t.note}</td></tr>`;
+  journal.innerHTML='<tr><th>Date</th><th>Account</th><th>In</th><th>Out</th><th>Note</th><th>Action</th></tr>';
+  filtered.forEach((t,i)=>{
+    journal.innerHTML+=`<tr>
+      <td>${t.date}</td>
+      <td>${t.account}</td>
+      <td style="color:green">${t.type==='credit'?t.amount:''}</td>
+      <td style="color:red">${t.type==='debit'?t.amount:''}</td>
+      <td>${t.note}</td>
+      <td>
+        <button onclick="editTx(${i})">✏️</button>
+        <button onclick="deleteTx(${i})" style="background:#dc2626">🗑</button>
+      </td>
+    </tr>`;
   });
 }
 
@@ -119,6 +147,27 @@ function renderLedger(){
   filtered.forEach(t=>{m[t.account]=(m[t.account]||0)+(t.type==='debit'?t.amount:-t.amount)});
   ledgerTable.innerHTML='<tr><th>Account</th><th>Balance</th></tr>';
   for(let a in m) ledgerTable.innerHTML+=`<tr><td>${a}</td><td>${m[a]}</td></tr>`;
+}
+
+function editTx(i){
+  const t = filtered[i];
+  const realIndex = data.indexOf(t);
+  editIndex = realIndex;
+  date.value = t.date;
+  account.value = t.account;
+  type.value = t.type;
+  amount.value = t.amount;
+  note.value = t.note;
+}
+
+function deleteTx(i){
+  if(!confirm('Delete this transaction?')) return;
+  const t = filtered[i];
+  const realIndex = data.indexOf(t);
+  data.splice(realIndex,1);
+  localStorage.setItem('accounts',JSON.stringify(data));
+  filtered=[...data];
+  render();
 }
 
 function renderReports(){
@@ -136,4 +185,3 @@ render();
 </script>
 </body>
 </html>
-
