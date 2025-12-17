@@ -24,6 +24,10 @@
 
 <div class="card">
   <h2>Add Transaction</h2>
+  <div style="display:flex;gap:10px;margin-bottom:10px">
+    <button onclick="exportExcel()" style="background:#16a34a">⬇ Export Excel</button>
+    <button onclick="exportPDF()" style="background:#dc2626">⬇ Export PDF</button>
+  </div>
   <label>Date</label>
   <input type="date" id="date" />
 
@@ -50,6 +54,7 @@
   <textarea id="note"></textarea>
 
   <button onclick="addTransaction()">Save Transaction</button>
+  <button onclick="resetForm()" style="background:#6b7280">Clear</button>
 </div>
 
 <div class="grid">
@@ -83,6 +88,7 @@
 
 <script>
 let data = JSON.parse(localStorage.getItem('accounts')) || [];
+let editIndex = null;
 
 function addTransaction(){
   const tx = {
@@ -92,9 +98,24 @@ function addTransaction(){
     amount: Number(amount.value),
     note: note.value
   };
-  data.push(tx);
+
+  if(editIndex !== null){
+    data[editIndex] = tx;
+    editIndex = null;
+  } else {
+    data.push(tx);
+  }
+
   localStorage.setItem('accounts', JSON.stringify(data));
+  resetForm();
   render();
+}
+
+function resetForm(){
+  date.value = '';
+  amount.value = '';
+  note.value = '';
+  editIndex = null;
 }
 
 function render(){
@@ -104,8 +125,8 @@ function render(){
 }
 
 function renderJournal(){
-  journal.innerHTML = '<tr><th>Date</th><th>Account</th><th>Money In (₹)</th><th>Money Out (₹)</th><th>Note</th></tr>';
-  data.forEach(t => {
+  journal.innerHTML = '<tr><th>Date</th><th>Account</th><th>Money In (₹)</th><th>Money Out (₹)</th><th>Note</th><th>Action</th></tr>';
+  data.forEach((t,i) => {
     const moneyIn = t.type === 'credit'
       ? `<span style="color:green;font-weight:bold;">₹${t.amount}</span>`
       : '';
@@ -118,8 +139,30 @@ function renderJournal(){
       <td style="text-align:right">${moneyIn}</td>
       <td style="text-align:right">${moneyOut}</td>
       <td>${t.note}</td>
+      <td>
+        <button onclick="editTransaction(${i})">✏️</button>
+        <button onclick="deleteTransaction(${i})" style="background:#dc2626">🗑</button>
+      </td>
     </tr>`;
   });
+}
+
+function editTransaction(i){
+  const t = data[i];
+  date.value = t.date;
+  account.value = t.account;
+  type.value = t.type;
+  amount.value = t.amount;
+  note.value = t.note;
+  editIndex = i;
+}
+
+function deleteTransaction(i){
+  if(confirm('Delete this transaction?')){
+    data.splice(i,1);
+    localStorage.setItem('accounts', JSON.stringify(data));
+    render();
+  }
 }
 
 function renderLedger(){
@@ -150,6 +193,27 @@ function renderReports(){
 }
 
 render();
+
+function exportExcel(){
+  let csv = 'Date,Account,Type,Amount,Note
+';
+  data.forEach(t=>{
+    csv += `${t.date},${t.account},${t.type},${t.amount},"${t.note}"
+`;
+  });
+  const blob = new Blob([csv],{type:'text/csv'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'transactions.csv';
+  a.click();
+}
+
+function exportPDF(){
+  const w = window.open('');
+  w.document.write('<h2>Accounting Records</h2>');
+  w.document.write(journal.outerHTML);
+  w.print();
+}
 </script>
 
 </body>
