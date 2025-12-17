@@ -24,10 +24,7 @@
 
 <div class="card">
   <h2>Add Transaction</h2>
-  <div style="display:flex;gap:10px;margin-bottom:10px">
-    <button onclick="exportExcel()" style="background:#16a34a">⬇ Export Excel</button>
-    <button onclick="exportPDF()" style="background:#dc2626">⬇ Export PDF</button>
-  </div>
+  
   <label>Date</label>
   <input type="date" id="date" />
 
@@ -194,26 +191,6 @@ function renderReports(){
 
 render();
 
-function exportExcel(){
-  let csv = 'Date,Account,Type,Amount,Note
-';
-  data.forEach(t=>{
-    csv += `${t.date},${t.account},${t.type},${t.amount},"${t.note}"
-`;
-  });
-  const blob = new Blob([csv],{type:'text/csv'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = 'transactions.csv';
-  a.click();
-}
-
-function exportPDF(){
-  const w = window.open('');
-  w.document.write('<h2>Accounting Records</h2>');
-  w.document.write(journal.outerHTML);
-  w.print();
-}
 </script>
 
 </body>
