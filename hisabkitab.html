@@ -2,130 +2,144 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Simple Money Journal</title>
+  <title>Secure Money Journal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
-    body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:20px; }
-    h1,h2 { color:#222; }
-    .card { background:#fff; padding:16px; border-radius:8px; margin-bottom:20px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+    body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:16px; }
+    h1,h2,h3 { margin:8px 0; }
+    .card { background:#fff; padding:12px; border-radius:8px; margin-bottom:16px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
     input, select, textarea, button { width:100%; padding:8px; margin:6px 0; }
     button { background:#2563eb; color:#fff; border:none; border-radius:6px; cursor:pointer; }
     table { width:100%; border-collapse:collapse; }
-    th, td { border:1px solid #ddd; padding:8px; }
-    th { background:#f0f0f0; }
-    .actions button { width:auto; margin-right:5px }
-    .calculator button { width:23%; margin:1% }
+    td { padding:6px 4px; border-bottom:1px solid #eee; }
+    .date-header { background:#f0f0f0; padding:6px; font-weight:bold; }
+    .day-total { font-weight:bold; text-align:right; padding:6px; }
+    .in { color:green; }
+    .out { color:red; }
+    .actions button { width:auto; margin-left:4px; font-size:12px; }
+    .note { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:120px; display:inline-block; }
   </style>
 </head>
 <body>
 
-<h1>📘 Simple Money Journal</h1>
-<p>Only one system: Money In (💚 Green) & Money Out (❤️ Red)</p>
+<!-- PASSWORD SCREEN -->
+<div id="lock" class="card">
+  <h2>🔒 Enter Password</h2>
+  <input type="password" id="pwd" placeholder="Password" />
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+
+<h1>📘 Money Journal</h1>
 
 <!-- ADD TRANSACTION -->
 <div class="card">
-  <h2>Add Transaction</h2>
+  <h3>Add Transaction</h3>
   <input type="date" id="date" />
   <select id="type">
-    <option value="in">Money In (Green)</option>
-    <option value="out">Money Out (Red)</option>
+    <option value="in">Money In</option>
+    <option value="out">Money Out</option>
   </select>
   <input type="number" id="amount" placeholder="Amount" />
   <textarea id="note" placeholder="Note"></textarea>
-  <button onclick="saveTransaction()">Save Transaction</button>
+  <button onclick="saveTx()">Save</button>
 </div>
 
 <!-- JOURNAL -->
 <div class="card">
-  <h2>Journal</h2>
-  <table id="journal"></table>
+  <h3>Journal</h3>
+  <div id="journal"></div>
 </div>
 
-<!-- CALCULATOR TOGGLE -->
+<!-- TOTAL SUMMARY -->
+<div class="card" id="summary"></div>
+
+<!-- CALCULATOR -->
 <div class="card">
   <button onclick="toggleCalc()">🧮 Calculator</button>
-</div>
-
-<div class="card calculator" id="calculatorBox" style="display:none">
-  <h2>Calculator</h2>
-  <input type="text" id="calc" readonly />
-  <div>
-    <button onclick="press('7')">7</button><button onclick="press('8')">8</button><button onclick="press('9')">9</button><button onclick="press('/')">÷</button>
-    <button onclick="press('4')">4</button><button onclick="press('5')">5</button><button onclick="press('6')">6</button><button onclick="press('*')">×</button>
-    <button onclick="press('1')">1</button><button onclick="press('2')">2</button><button onclick="press('3')">3</button><button onclick="press('-')">−</button>
-    <button onclick="press('0')">0</button><button onclick="press('.')">.</button><button onclick="calculate()">=</button><button onclick="press('+')">+</button>
-    <button onclick="clearCalc()" style="background:#6b7280;width:100%">Clear</button>
+  <div id="calcBox" style="display:none">
+    <input type="text" id="calc" readonly />
+    <div>
+      <button onclick="press('7')">7</button><button onclick="press('8')">8</button><button onclick="press('9')">9</button><button onclick="press('/')">÷</button>
+      <button onclick="press('4')">4</button><button onclick="press('5')">5</button><button onclick="press('6')">6</button><button onclick="press('*')">×</button>
+      <button onclick="press('1')">1</button><button onclick="press('2')">2</button><button onclick="press('3')">3</button><button onclick="press('-')">−</button>
+      <button onclick="press('0')">0</button><button onclick="press('.')">.</button><button onclick="calcEq()">=</button><button onclick="press('+')">+</button>
+      <button onclick="clearCalc()" style="background:#6b7280">Clear</button>
+    </div>
   </div>
 </div>
 
+</div>
+
 <script>
+/* ===== PASSWORD ===== */
+const FIXED_PASSWORD = '1234';
+function unlock(){
+  if(pwd.value === FIXED_PASSWORD){
+    lock.style.display='none';
+    app.style.display='block';
+  } else alert('Wrong password');
+}
+
+/* ===== DATA ===== */
 let data = JSON.parse(localStorage.getItem('journal')) || [];
 let editIndex = null;
 
-function saveTransaction(){
-  if(!date.value || !amount.value) return alert('Date & Amount required');
-
-  const tx = {
-    date: date.value,
-    type: type.value,
-    amount: Number(amount.value),
-    note: note.value
-  };
-
-  if(editIndex !== null){
-    data[editIndex] = tx;
-    editIndex = null;
-  } else {
-    data.push(tx);
-  }
-
-  localStorage.setItem('journal', JSON.stringify(data));
-  date.value = amount.value = note.value = '';
+function saveTx(){
+  if(!date.value || !amount.value) return alert('Date & amount required');
+  const tx = {date:date.value,type:type.value,amount:+amount.value,note:note.value};
+  if(editIndex!==null){ data[editIndex]=tx; editIndex=null; }
+  else data.push(tx);
+  localStorage.setItem('journal',JSON.stringify(data));
+  date.value=amount.value=note.value='';
   render();
 }
 
 function render(){
-  journal.innerHTML = '<tr><th>Date</th><th>Money In</th><th>Money Out</th><th>Note</th><th>Action</th></tr>';
-  data.forEach((t,i)=>{
-    journal.innerHTML += `<tr>
-      <td>${t.date}</td>
-      <td style="color:green">${t.type==='in' ? '₹'+t.amount : ''}</td>
-      <td style="color:red">${t.type==='out' ? '₹'+t.amount : ''}</td>
-      <td>${t.note}</td>
-      <td class="actions">
-        <button onclick="editTx(${i})">✏️ Edit</button>
-        <button onclick="deleteTx(${i})" style="background:#dc2626">🗑 Delete</button>
-      </td>
-    </tr>`;
+  journal.innerHTML='';
+  let totalIn=0,totalOut=0;
+  const grouped={};
+  data.forEach(t=>{ grouped[t.date]=grouped[t.date]||[]; grouped[t.date].push(t); });
+
+  Object.keys(grouped).sort().forEach(d=>{
+    let dayIn=0,dayOut=0;
+    journal.innerHTML+=`<div class='date-header'>📅 ${d}</div>`;
+    grouped[d].forEach((t,i)=>{
+      if(t.type==='in'){dayIn+=t.amount; totalIn+=t.amount;}
+      else{dayOut+=t.amount; totalOut+=t.amount;}
+      journal.innerHTML+=`
+        <table><tr>
+          <td class='${t.type}'>${t.type==='in'?'+₹'+t.amount:'-₹'+t.amount}</td>
+          <td><span class='note' title='${t.note}'>${t.note}</span></td>
+          <td class='actions'>
+            <button onclick='editTx(${data.indexOf(t)})'>✏️ Edit</button>
+            <button onclick='delTx(${data.indexOf(t)})' style='background:#dc2626'>🗑 Delete</button>
+          </td>
+        </tr></table>`;
+    });
+    const dayNet = dayIn-dayOut;
+    journal.innerHTML+=`<div class='day-total ${dayNet>=0?'in':'out'}'>Day Total: ₹${dayNet}</div>`;
   });
+
+  summary.innerHTML=`
+    <h3>Total Summary</h3>
+    <div class='in'>Money In: ₹${totalIn}</div>
+    <div class='out'>Money Out: ₹${totalOut}</div>
+    <b>Net: ₹${totalIn-totalOut}</b>`;
 }
 
-function editTx(i){
-  const t = data[i];
-  editIndex = i;
-  date.value = t.date;
-  type.value = t.type;
-  amount.value = t.amount;
-  note.value = t.note;
-}
+function editTx(i){ const t=data[i]; editIndex=i; date.value=t.date; type.value=t.type; amount.value=t.amount; note.value=t.note; }
+function delTx(i){ if(confirm('Delete?')){ data.splice(i,1); localStorage.setItem('journal',JSON.stringify(data)); render(); }}
 
-function deleteTx(i){
-  if(!confirm('Delete this transaction?')) return;
-  data.splice(i,1);
-  localStorage.setItem('journal', JSON.stringify(data));
-  render();
-}
-
-// Calculator
-function toggleCalc(){
-  calculatorBox.style.display = calculatorBox.style.display==='none'?'block':'none';
-}
-function press(v){ calc.value += v; }
-function calculate(){ try{ calc.value = eval(calc.value); }catch{ calc.value='Error'; } }
+/* ===== CALCULATOR ===== */
+function toggleCalc(){ calcBox.style.display=calcBox.style.display==='none'?'block':'none'; }
+function press(v){ calc.value+=v; }
+function calcEq(){ try{calc.value=eval(calc.value);}catch{calc.value='Error';} }
 function clearCalc(){ calc.value=''; }
 
 render();
 </script>
 </body>
 </html>
-
