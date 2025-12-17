@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Personal Accounting System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:20px; }
+    h1,h2 { color:#222; }
+    .card { background:#fff; padding:16px; border-radius:8px; margin-bottom:20px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+    input, select, textarea, button { width:100%; padding:8px; margin:6px 0; }
+    button { background:#2563eb; color:#fff; border:none; border-radius:6px; cursor:pointer; }
+    table { width:100%; border-collapse:collapse; }
+    th, td { border:1px solid #ddd; padding:8px; text-align:left; }
+    th { background:#f0f0f0; }
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media(max-width:768px){ .grid{grid-template-columns:1fr;} }
+  </style>
+</head>
+<body>
+
+<h1>📘 Personal Accounting Web App</h1>
+<p>All data is saved locally in your browser (no internet, no tracking).</p>
+
+<div class="card">
+  <h2>Add Transaction</h2>
+  <label>Date</label>
+  <input type="date" id="date" />
+
+  <label>Account</label>
+  <select id="account">
+    <option>Cash</option>
+    <option>Bank</option>
+    <option>Capital</option>
+    <option>Sales</option>
+    <option>Purchase</option>
+    <option>Expense</option>
+  </select>
+
+  <label>Type</label>
+  <select id="type">
+    <option value="debit">Debit</option>
+    <option value="credit">Credit</option>
+  </select>
+
+  <label>Amount</label>
+  <input type="number" id="amount" />
+
+  <label>Note</label>
+  <textarea id="note"></textarea>
+
+  <button onclick="addTransaction()">Save Transaction</button>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Journal</h2>
+    <table id="journal"></table>
+  </div>
+
+  <div class="card">
+    <h2>Ledger Summary</h2>
+    <table id="ledger"></table>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <h2>Trading Account</h2>
+    <div id="trading"></div>
+  </div>
+
+  <div class="card">
+    <h2>Profit & Loss</h2>
+    <div id="pl"></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Balance Sheet</h2>
+  <div id="bs"></div>
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem('accounts')) || [];
+
+function addTransaction(){
+  const tx = {
+    date: date.value,
+    account: account.value,
+    type: type.value,
+    amount: Number(amount.value),
+    note: note.value
+  };
+  data.push(tx);
+  localStorage.setItem('accounts', JSON.stringify(data));
+  render();
+}
+
+function render(){
+  renderJournal();
+  renderLedger();
+  renderReports();
+}
+
+function renderJournal(){
+  journal.innerHTML = '<tr><th>Date</th><th>Account</th><th>Money In (₹)</th><th>Money Out (₹)</th><th>Note</th></tr>';
+  data.forEach(t => {
+    const moneyIn = t.type === 'credit'
+      ? `<span style="color:green;font-weight:bold;">₹${t.amount}</span>`
+      : '';
+    const moneyOut = t.type === 'debit'
+      ? `<span style="color:red;font-weight:bold;">₹${t.amount}</span>`
+      : '';
+    journal.innerHTML += `<tr>
+      <td>${t.date}</td>
+      <td>${t.account}</td>
+      <td style="text-align:right">${moneyIn}</td>
+      <td style="text-align:right">${moneyOut}</td>
+      <td>${t.note}</td>
+    </tr>`;
+  });
+}
+
+function renderLedger(){
+  const map = {};
+  data.forEach(t => {
+    if(!map[t.account]) map[t.account] = 0;
+    map[t.account] += t.type === 'debit' ? t.amount : -t.amount;
+  });
+  ledger.innerHTML = '<tr><th>Account</th><th>Balance</th></tr>';
+  Object.keys(map).forEach(a => {
+    ledger.innerHTML += `<tr><td>${a}</td><td>${map[a]}</td></tr>`;
+  });
+}
+
+function renderReports(){
+  let sales = 0, purchase = 0, expense = 0;
+  data.forEach(t => {
+    if(t.account === 'Sales') sales += t.amount;
+    if(t.account === 'Purchase') purchase += t.amount;
+    if(t.account === 'Expense') expense += t.amount;
+  });
+
+  trading.innerHTML = `Sales: ₹${sales}<br>Purchase: ₹${purchase}`;
+  const profit = sales - purchase - expense;
+  pl.innerHTML = `Expenses: ₹${expense}<br><b>Net Profit: ₹${profit}</b>`;
+
+  bs.innerHTML = `Capital + Profit = ₹${profit}`;
+}
+
+render();
+</script>
+
+</body>
+</html>
