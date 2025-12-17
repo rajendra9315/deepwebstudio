@@ -8,6 +8,12 @@
     body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:20px; }
     h1,h2 { color:#222; }
     .card { background:#fff; padding:16px; border-radius:8px; margin-bottom:20px; box-shadow:0 2px 6px rgba(0,0,0,0.08); }
+
+/* Scrollable report cards */
+.card.scroll {
+  max-height: 320px; /* ~5 rows visible */
+  overflow-y: auto;
+}
     input, select, textarea, button { width:100%; padding:8px; margin:6px 0; }
     button { background:#2563eb; color:#fff; border:none; border-radius:6px; cursor:pointer; }
     table { width:100%; border-collapse:collapse; }
@@ -21,6 +27,40 @@
 
 <h1>📘 Personal Accounting Web App</h1>
 <p>All data is saved locally in your browser (no internet, no tracking).</p>
+
+<div class="card">
+  <h2>📅 Date Filter</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+    <div>
+      <label>From Date</label>
+      <input type="date" id="fromDate" />
+    </div>
+    <div>
+      <label>To Date</label>
+      <input type="date" id="toDate" />
+    </div>
+    <div>
+      <label>Month</label>
+      <select id="month">
+        <option value="">All</option>
+        <option value="0">January</option>
+        <option value="1">February</option>
+        <option value="2">March</option>
+        <option value="3">April</option>
+        <option value="4">May</option>
+        <option value="5">June</option>
+        <option value="6">July</option>
+        <option value="7">August</option>
+        <option value="8">September</option>
+        <option value="9">October</option>
+        <option value="10">November</option>
+        <option value="11">December</option>
+      </select>
+    </div>
+  </div>
+  <button onclick="applyFilter()" style="margin-top:10px">Apply Filter</button>
+  <button onclick="clearFilter()" style="background:#6b7280;margin-top:10px">Clear Filter</button>
+</div>
 
 <div class="card">
   <h2>Add Transaction</h2>
@@ -55,36 +95,38 @@
 </div>
 
 <div class="grid">
-  <div class="card">
+  <div class="card scroll">
     <h2>Journal</h2>
     <table id="journal"></table>
   </div>
 
-  <div class="card">
+  <div class="card scroll">
     <h2>Ledger Summary</h2>
     <table id="ledger"></table>
   </div>
 </div>
 
 <div class="grid">
-  <div class="card">
+  <div class="card scroll">
     <h2>Trading Account</h2>
     <div id="trading"></div>
   </div>
 
-  <div class="card">
+  <div class="card scroll">
     <h2>Profit & Loss</h2>
     <div id="pl"></div>
   </div>
 </div>
 
-<div class="card">
+<div class="card scroll">
   <h2>Balance Sheet</h2>
   <div id="bs"></div>
 </div>
 
 <script>
 let data = JSON.parse(localStorage.getItem('accounts')) || [];
+let filteredData = [...data];
+let editIndex = null;
 let editIndex = null;
 
 function addTransaction(){
@@ -121,9 +163,35 @@ function render(){
   renderReports();
 }
 
+function applyFilter(){
+  const from = fromDate.value;
+  const to = toDate.value;
+  const m = month.value;
+
+  filteredData = data.filter(t => {
+    let ok = true;
+    if(from && t.date < from) ok = false;
+    if(to && t.date > to) ok = false;
+    if(m !== ''){
+      const txMonth = new Date(t.date).getMonth().toString();
+      if(txMonth !== m) ok = false;
+    }
+    return ok;
+  });
+  render();
+}
+
+function clearFilter(){
+  fromDate.value = '';
+  toDate.value = '';
+  month.value = '';
+  filteredData = [...data];
+  render();
+}
+
 function renderJournal(){
   journal.innerHTML = '<tr><th>Date</th><th>Account</th><th>Money In (₹)</th><th>Money Out (₹)</th><th>Note</th><th>Action</th></tr>';
-  data.forEach((t,i) => {
+  filteredData.forEach((t,i) => {
     const moneyIn = t.type === 'credit'
       ? `<span style="color:green;font-weight:bold;">₹${t.amount}</span>`
       : '';
@@ -164,7 +232,7 @@ function deleteTransaction(i){
 
 function renderLedger(){
   const map = {};
-  data.forEach(t => {
+  filteredData.forEach(t => {
     if(!map[t.account]) map[t.account] = 0;
     map[t.account] += t.type === 'debit' ? t.amount : -t.amount;
   });
@@ -176,7 +244,7 @@ function renderLedger(){
 
 function renderReports(){
   let sales = 0, purchase = 0, expense = 0;
-  data.forEach(t => {
+  filteredData.forEach(t => {
     if(t.account === 'Sales') sales += t.amount;
     if(t.account === 'Purchase') purchase += t.amount;
     if(t.account === 'Expense') expense += t.amount;
@@ -195,3 +263,4 @@ render();
 
 </body>
 </html>
+
