@@ -8,62 +8,63 @@
 </head>
 <body>
 
-<!-- LOCK SCREEN -->
-<div id="lockScreen" class="card center">
-  <h2>🔒 Enter Password</h2>
-  <input type="password" id="passwordInput" placeholder="Password" />
-  <button onclick="unlock()">Unlock</button>
+<!-- LOCK -->
+<div id="lockScreen" class="glass-card center">
+  <h2>🔒 Secure Access</h2>
+  <input type="password" id="passwordInput" placeholder="Enter Password" />
+  <button class="btn primary" onclick="unlock()">Unlock</button>
 </div>
 
 <!-- APP -->
 <div id="app" style="display:none">
 
-<header>
-  <h1>📘 Money Journal</h1>
+<header class="app-header">
+  <h1>💸 Money Journal</h1>
 </header>
 
 <!-- ADD TRANSACTION -->
-<div class="card">
+<div class="glass-card">
   <h3>Add Transaction</h3>
+
   <input type="date" id="date" />
+
   <select id="type">
     <option value="in">Money In</option>
     <option value="out">Money Out</option>
   </select>
-  <select id="category">
-    <option>Food</option>
-    <option>Travel</option>
-    <option>Bills</option>
-    <option>Rent</option>
+
+  <select id="way">
+    <option>Bank</option>
+    <option>Cash</option>
+    <option>Expense</option>
+    <option>Sale</option>
     <option>Income</option>
+    <option>Transfer</option>
     <option>Other</option>
   </select>
+
   <input type="number" id="amount" placeholder="Amount" />
   <input type="text" id="note" placeholder="Narration / Note" />
-  <button onclick="saveTransaction()">Save Transaction</button>
+
+  <button class="btn gradient-green" onclick="saveTransaction()">Save Transaction</button>
 </div>
 
-<!-- TOOLS -->
-<div class="card tools">
-  <input type="text" id="search" placeholder="🔍 Search (note, category, amount)" onkeyup="render()" />
-  <button onclick="toggleCalc()">🧮 Calculator</button>
-  <button onclick="exportMonth()">📅 Monthly Export</button>
-  <button onclick="exportExcel()">📤 Export All</button>
-  <button onclick="openInvoice()">🧾 Invoice PDF</button>
-  <button onclick="changePassword()">🔑 Change Password</button>
-  <button onclick="backupData()">💾 Backup</button>
-  <button onclick="restoreData()">♻ Restore</button>
+<!-- SEARCH -->
+<div class="glass-card">
+  <input type="text" id="searchInput"
+         placeholder="🔍 Search note / way / amount"
+         onkeyup="render()" />
 </div>
 
 <!-- JOURNAL -->
-<div class="card table-wrapper">
+<div class="glass-card table-wrapper">
   <table>
     <thead>
       <tr>
         <th>Date</th>
         <th>In</th>
         <th>Out</th>
-        <th>Category</th>
+        <th>Way</th>
         <th>Narration</th>
         <th>Action</th>
       </tr>
@@ -73,14 +74,25 @@
 </div>
 
 <!-- SUMMARY -->
-<div class="card summary">
-  <span class="in">Total In: ₹<b id="totalIn">0</b></span>
-  <span class="out">Total Out: ₹<b id="totalOut">0</b></span>
-  <span>Net: ₹<b id="netTotal">0</b></span>
+<div class="glass-card summary">
+  <div class="summary-box green">IN ₹<span id="totalIn">0</span></div>
+  <div class="summary-box red">OUT ₹<span id="totalOut">0</span></div>
+  <div class="summary-box purple">NET ₹<span id="netTotal">0</span></div>
+</div>
+
+<!-- TOOLS -->
+<div class="glass-card tools">
+  <button class="btn gradient-purple" onclick="toggleCalc()">🧮 Calculator</button>
+  <button class="btn gradient-pink" onclick="exportMonthly()">📅 Monthly Export</button>
+  <button class="btn gradient-blue" onclick="exportExcel()">📤 Export Excel</button>
+  <button class="btn gradient-orange" onclick="openInvoice()">🧾 Invoice PDF</button>
+  <button class="btn gradient-green" onclick="backupData()">💾 Backup</button>
+  <button class="btn gradient-red" onclick="restoreData()">♻ Restore</button>
+  <button class="btn gradient-dark" onclick="changePassword()">🔑 Change Password</button>
 </div>
 
 <!-- CALCULATOR -->
-<div id="calculator" class="card" style="display:none">
+<div id="calculator" class="glass-card" style="display:none">
   <input type="text" id="calc" readonly />
   <div class="calc-grid">
     <button onclick="press('7')">7</button><button onclick="press('8')">8</button>
@@ -92,19 +104,6 @@
     <button onclick="press('0')">0</button><button onclick="press('.')">.</button>
     <button onclick="calculate()">=</button><button onclick="press('+')">+</button>
   </div>
-  <button class="clear" onclick="clearCalc()">Clear</button>
-</div>
-
-<!-- INVOICE (PRINT AREA) -->
-<div id="invoice" style="display:none">
-  <h2>INVOICE</h2>
-  <p><b>Client:</b> <span id="invClient"></span></p>
-  <p><b>Date:</b> <span id="invDate"></span></p>
-  <table>
-    <tr><th>Description</th><th>Amount</th></tr>
-    <tbody id="invBody"></tbody>
-  </table>
-  <h3>Total: ₹<span id="invTotal"></span></h3>
 </div>
 
 </div>
