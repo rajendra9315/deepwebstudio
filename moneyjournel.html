@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hisab Kitab</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  padding: 15px;
+}
+h2 { text-align: center; }
+input, select, button {
+  width: 100%;
+  padding: 10px;
+  margin: 6px 0;
+}
+button {
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.list, .journal {
+  background: white;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+.in { color: green; }
+.out { color: red; }
+img {
+  max-width: 100%;
+  margin-top: 5px;
+  border-radius: 5px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>📒 Hisab Kitab</h2>
+
+<input type="date" id="date">
+<select id="type">
+  <option value="IN">Money In</option>
+  <option value="OUT">Money Out</option>
+</select>
+<input type="number" id="amount" placeholder="Amount">
+<input type="text" id="desc" placeholder="Description">
+<input type="file" id="proof" accept="image/*">
+
+<button onclick="addEntry()">Save Entry</button>
+
+<div class="list">
+  <h3>Transactions</h3>
+  <ul id="transactions"></ul>
+</div>
+
+<div class="journal">
+  <h3>Journal</h3>
+  <ul id="journal"></ul>
+</div>
+
+<script>
+let data = JSON.parse(localStorage.getItem("hisab")) || [];
+
+function addEntry() {
+  const reader = new FileReader();
+  const file = proof.files[0];
+
+  reader.onload = function () {
+    const entry = {
+      date: date.value,
+      type: type.value,
+      amount: amount.value,
+      desc: desc.value,
+      proof: reader.result || ""
+    };
+    data.push(entry);
+    localStorage.setItem("hisab", JSON.stringify(data));
+    render();
+  };
+
+  if (file) reader.readAsDataURL(file);
+  else reader.onload();
+}
+
+function render() {
+  transactions.innerHTML = "";
+  journal.innerHTML = "";
+
+  data.forEach(d => {
+    // Transaction view
+    transactions.innerHTML += `
+      <li class="${d.type === "IN" ? "in" : "out"}">
+        ${d.type === "IN" ? "+" : "-"}₹${d.amount} - ${d.desc}
+        ${d.proof ? `<img src="${d.proof}">` : ""}
+      </li>
+    `;
+
+    // Journal view
+    let j = d.type === "IN"
+      ? `Cash A/c Dr ₹${d.amount}<br>To Income A/c ₹${d.amount}`
+      : `Expense A/c Dr ₹${d.amount}<br>To Cash A/c ₹${d.amount}`;
+
+    journal.innerHTML += `<li>${j}</li>`;
+  });
+}
+
+render();
+</script>
+
+</body>
+</html>
