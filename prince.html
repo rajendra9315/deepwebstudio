@@ -15,10 +15,9 @@
   --label-red:#ff2f5a;
 }
 
-/* ✅ BODY FIX */
 body{
   margin:0;
-  padding:40px 0; /* IMPORTANT FOR MOBILE GLOW */
+  padding:40px 0;
   font-family:'Poppins',sans-serif;
   background:linear-gradient(180deg,#061214,#081617,#071013);
   color:#fff;
@@ -29,7 +28,7 @@ body{
   overflow-x:hidden;
 }
 
-/* 🔥 GLOW CARD */
+/* ✅ CARD WITH 4-SIDE EDGE GLOW */
 .wrap{
   max-width:480px;
   width:90%;
@@ -38,32 +37,32 @@ body{
   padding:22px 20px 30px;
   text-align:center;
   position:relative;
-  z-index:1;
+
+  /* 🔥 EDGE GLOW (NOT MID-PAGE) */
+  box-shadow:
+    0 0 0 1px rgba(14,242,213,0.35),     /* thin neon edge */
+    0 0 20px rgba(14,242,213,0.25),      /* soft glow */
+    0 0 40px rgba(19,242,255,0.15),      /* outer glow */
+    0 25px 45px rgba(0,0,0,0.7);         /* depth */
+
+  animation: edgeGlow 3s ease-in-out infinite alternate;
 }
 
-/* ✅ MOBILE-SAFE GLOW LAYER */
-.wrap::before{
-  content:"";
-  position:absolute;
-  inset:-18px;
-  border-radius:28px;
-  z-index:-1;
-
-  background:linear-gradient(
-    135deg,
-    rgba(14,242,213,0.45),
-    rgba(19,242,255,0.35),
-    rgba(14,242,213,0.45)
-  );
-
-  filter:blur(28px);
-  opacity:0.85;
-  animation: glowPulse 3s ease-in-out infinite alternate;
-}
-
-@keyframes glowPulse{
-  from{ opacity:0.6; }
-  to{ opacity:1; }
+@keyframes edgeGlow{
+  from{
+    box-shadow:
+      0 0 0 1px rgba(14,242,213,0.25),
+      0 0 16px rgba(14,242,213,0.18),
+      0 0 32px rgba(19,242,255,0.1),
+      0 25px 45px rgba(0,0,0,0.7);
+  }
+  to{
+    box-shadow:
+      0 0 0 1px rgba(14,242,213,0.45),
+      0 0 28px rgba(14,242,213,0.35),
+      0 0 55px rgba(19,242,255,0.22),
+      0 25px 45px rgba(0,0,0,0.7);
+  }
 }
 
 /* MARQUEE */
