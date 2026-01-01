@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raja Style Landing</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Candara,Cambria,Arial}
+html{scroll-behavior:smooth}
+body{background:#120000;color:#fff;padding-bottom:80px}
+
+/* HEADER */
+.top-header{
+  position:sticky;top:0;z-index:999;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 12px;
+  background:linear-gradient(90deg,#6b0000,#ff0000,#6b0000)
+}
+.header-text{font-size:14px;font-weight:bold}
+.header-text span{color:#ffd700;font-size:18px}
+.header-btn{
+  background:linear-gradient(#ffdd88,#ff9900);
+  padding:6px 14px;border-radius:6px;
+  font-weight:bold;color:#000;text-decoration:none
+}
+
+/* LIVE USERS */
+.live-users{
+  text-align:center;
+  margin:10px;
+  font-size:14px;
+  color:#ffd700;
+}
+
+/* FLOATING BONUS */
+.floating-bonus{
+  position:fixed;right:12px;bottom:150px;
+  background:linear-gradient(#ffd700,#ff9900);
+  color:#000;font-weight:bold;
+  padding:10px 14px;border-radius:50px;
+  z-index:999
+}
+
+/* SOUND */
+.sound-toggle{
+  position:fixed;right:12px;bottom:100px;
+  width:42px;height:42px;border-radius:50%;
+  background:#1b0000;border:2px solid #ffd700;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:999
+}
+
+/* SLIDER */
+.slider{overflow:hidden;margin:12px;border-radius:12px}
+.slides{display:flex;transition:.4s ease}
+.slide{min-width:100%}
+.slide img{width:100%;height:200px;object-fit:cover}
+
+/* DOTS */
+.dots{text-align:center;margin:6px}
+.dot{width:7px;height:7px;background:#444;border-radius:50%;display:inline-block;margin:0 3px}
+.dot.active{background:#ffd700}
+
+/* BANNER */
+.game-banner{
+  background:linear-gradient(90deg,#8a0000,#c00000,#8a0000);
+  color:#ffd700;
+  text-align:center;
+  padding:10px;
+  margin:15px;
+  border-radius:20px;
+  font-size:15px;
+}
+
+/* GAME GRID */
+.game-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  padding:12px;
+}
+.game-card{
+  position:relative;
+  border:2px solid rgba(255,215,0,.35);
+  border-radius:14px;
+  overflow:hidden;
+  background:#1b0000;
+}
+.game-card img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+}
+
+/* BADGES */
+.hot, .vip{
+  position:absolute;
+  top:6px;left:6px;
+  padding:3px 6px;
+  font-size:11px;
+  font-weight:bold;
+  border-radius:6px;
+}
+.hot{background:#ff0000}
+.vip{
+  background:linear-gradient(#ffd700,#ff9900);
+  color:#000;
+}
+
+/* REGISTER */
+#main-register{
+  padding:40px 12px;
+  text-align:center;
+  background:#1a0000;
+}
+.btn{
+  display:block;width:92%;
+  margin:auto;
+  padding:16px;
+  background:linear-gradient(#ff0000,#b30000);
+  color:#fff;font-size:20px;
+  font-weight:bold;border-radius:10px;
+  text-decoration:none
+}
+
+/* BOTTOM BAR */
+.bottom-bar{
+  position:fixed;bottom:0;left:0;width:100%;
+  background:linear-gradient(90deg,#ff0000,#b30000);
+  padding:12px;z-index:999;
+  text-align:center;
+}
+.bottom-bar a{
+  color:#fff;font-size:18px;
+  font-weight:bold;text-decoration:none
+}
+
+/* WITHDRAW POPUP */
+.withdraw{
+  position:fixed;left:10px;bottom:110px;
+  background:#1b0000;border:1px solid #ffd700;
+  padding:8px 12px;border-radius:8px;
+  font-size:13px;opacity:0;
+  transition:.4s;z-index:999
+}
+.withdraw.show{opacity:1}
+
+/* MODAL */
+.modal{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,.7);
+  display:none;align-items:center;justify-content:center;
+  z-index:1000;
+}
+.modal-content{
+  background:#1b0000;
+  border:2px solid #ffd700;
+  border-radius:12px;
+  padding:20px;
+  width:90%;max-width:320px;
+}
+.modal-content h3{
+  text-align:center;margin-bottom:10px;color:#ffd700
+}
+.modal-content ul{list-style:none;font-size:14px}
+.modal-content li{margin:6px 0}
+
+</style>
+</head>
+
+<body>
+
+<div class="top-header">
+  <div class="header-text">Register to receive <span>500</span> Bonus</div>
+  <a href="#main-register" class="header-btn">REGISTER NOW</a>
+</div>
+
+<div class="live-users" id="users">👥 1,284 users playing now</div>
+
+<div class="floating-bonus">₹500 Bonus</div>
+<div class="sound-toggle" id="soundBtn">🔊</div>
+
+<!-- SLIDER -->
+<div class="slider">
+  <div class="slides" id="slides">
+    <div class="slide"><img src="slide1.jpg" loading="lazy"></div>
+    <div class="slide"><img src="slide2.jpg" loading="lazy"></div>
+    <div class="slide"><img src="slide3.jpg" loading="lazy"></div>
+    <div class="slide"><img src="slide4.jpg" loading="lazy"></div>
+    <div class="slide"><img src="slide5.jpg" loading="lazy"></div>
+    <div class="slide"><img src="slide6.jpg" loading="lazy"></div>
+  </div>
+</div>
+<div class="dots" id="dots"></div>
+
+<div class="game-banner" id="bannerText">Fast Withdrawals • 24x7 Support</div>
+
+<div class="game-grid">
+  <div class="game-card" onclick="openModal()"><span class="vip">VIP 👑</span><img src="aviator.jpg"></div>
+  <div class="game-card" onclick="openModal()"><span class="hot">HOT</span><img src="crazy.jpg"></div>
+  <div class="game-card" onclick="openModal()"><span class="vip">VIP 👑</span><img src="dragon.jpg"></div>
+
+  <div class="game-card" onclick="openModal()"><img src="rummy.jpg"></div>
+  <div class="game-card" onclick="openModal()"><span class="hot">HOT</span><img src="777.jpg"></div>
+  <div class="game-card" onclick="openModal()"><img src="andar.jpg"></div>
+
+  <div class="game-card" onclick="openModal()"><img src="money.jpg"></div>
+  <div class="game-card" onclick="openModal()"><img src="7up.jpg"></div>
+  <div class="game-card" onclick="openModal()"><img src="gorush.jpg"></div>
+</div>
+
+<div id="main-register">
+  <h2>Complete Registration</h2>
+  <a href="YOUR_REGISTER_LINK" class="btn">REGISTER NOW</a>
+</div>
+
+<div class="bottom-bar">
+  <a href="#main-register">REGISTER & GET ₹500 BONUS</a>
+</div>
+
+<div class="withdraw" id="withdraw">₹2,450 withdrawn</div>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Recent Withdrawals</h3>
+    <ul>
+      <li>₹2,450 – 2 min ago</li>
+      <li>₹1,980 – 5 min ago</li>
+      <li>₹3,200 – 9 min ago</li>
+      <li>₹4,100 – 14 min ago</li>
+    </ul>
+  </div>
+</div>
+
+<audio id="sound" src="https://assets.mixkit.co/sfx/preview/mixkit-positive-notification-951.mp3"></audio>
+
+<script>
+/* SLIDER */
+let i=0;
+const slides=document.getElementById("slides");
+const dots=document.getElementById("dots");
+for(let j=0;j<slides.children.length;j++){
+  let d=document.createElement("span");
+  d.className="dot"+(j===0?" active":"");
+  dots.appendChild(d);
+}
+setInterval(()=>{
+  i=(i+1)%slides.children.length;
+  slides.style.transform=`translateX(-${i*100}%)`;
+  document.querySelectorAll(".dot").forEach((d,k)=>d.classList.toggle("active",k===i));
+},3000);
+
+/* LIVE USERS */
+setInterval(()=>{
+  document.getElementById("users").innerText=
+   `👥 ${1200+Math.floor(Math.random()*400)} users playing now`;
+},2500);
+
+/* SOUND */
+let soundOn=true;
+const audio=document.getElementById("sound");
+document.getElementById("soundBtn").onclick=()=>{
+  soundOn=!soundOn;
+  soundBtn.textContent=soundOn?"🔊":"🔇";
+};
+
+/* WITHDRAW */
+const withdraw=document.getElementById("withdraw");
+setInterval(()=>{
+  withdraw.textContent=`₹${1000+Math.floor(Math.random()*4000)} withdrawn`;
+  withdraw.classList.add("show");
+  if(soundOn) audio.play();
+  setTimeout(()=>withdraw.classList.remove("show"),2200);
+},6000);
+
+/* MODAL */
+function openModal(){
+  document.getElementById("modal").style.display="flex";
+}
+document.getElementById("modal").onclick=()=>modal.style.display="none";
+</script>
+
+</body>
+</html>
