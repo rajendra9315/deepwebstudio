@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raja Games</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Candara,Arial}
+body{background:#120000;color:#fff;padding-bottom:100px}
+
+/* HEADER */
+.top-header{
+  position:sticky;top:0;z-index:999;
+  background:linear-gradient(90deg,#6b0000,#ff0000,#6b0000);
+  padding:10px;
+  display:flex;justify-content:space-between;align-items:center
+}
+.top-header span{color:#ffd700;font-size:18px;font-weight:bold}
+.top-header a{
+  background:linear-gradient(#ffd700,#ff9900);
+  padding:6px 14px;border-radius:6px;
+  color:#000;font-weight:bold;text-decoration:none
+}
+
+/* LIVE USERS */
+.live{text-align:center;color:#ffd700;font-size:14px;margin:8px}
+
+/* FLOAT BONUS */
+.bonus{
+  position:fixed;right:12px;bottom:160px;
+  background:linear-gradient(#ffd700,#ff9900);
+  color:#000;font-weight:bold;
+  padding:10px 14px;border-radius:50px;
+  animation:float 2.5s infinite;
+  z-index:999
+}
+@keyframes float{50%{transform:translateY(-6px)}}
+
+/* SLIDER */
+.slider{margin:12px;overflow:hidden;border-radius:14px}
+.slides{display:flex;transition:.4s}
+.slide{min-width:100%}
+.slide img{width:100%;height:200px;object-fit:cover}
+
+/* GAME BOX */
+.games-box{
+  margin:12px;padding:16px;
+  background:#1a0000;
+  border:2px solid rgba(255,215,0,.35);
+  border-radius:18px
+}
+.game-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.game{border-radius:12px;overflow:hidden;position:relative}
+.game img{width:100%;height:175px;object-fit:cover}
+.badge{
+  position:absolute;top:6px;left:6px;
+  padding:3px 6px;font-size:11px;
+  border-radius:6px;font-weight:bold
+}
+.hot{background:red}
+.vip{background:linear-gradient(#ffd700,#ff9900);color:#000}
+
+/* REGISTER SECTION */
+.register{
+  padding:45px 14px;
+  text-align:center;
+  background:#160000
+}
+
+.register h2{
+  font-size:22px;
+  margin-bottom:14px;
+  color:#ffd700
+}
+
+/* REGISTER BUTTON – PREMIUM */
+.btn{
+  display:block;
+  width:92%;
+  margin:16px auto 10px;
+  padding:17px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#ff2a2a,#b30000);
+  color:#fff;
+  font-size:21px;
+  font-weight:bold;
+  text-decoration:none;
+  box-shadow:
+    0 0 10px rgba(255,0,0,.6),
+    0 0 22px rgba(255,0,0,.4);
+  animation:pulse 2.5s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 10px rgba(255,0,0,.6)}
+  50%{box-shadow:0 0 22px rgba(255,60,60,.9)}
+  100%{box-shadow:0 0 10px rgba(255,0,0,.6)}
+}
+
+/* PRIVACY TEXT */
+.policy{
+  font-size:12px;
+  color:#bbb;
+  margin-top:10px;
+  line-height:1.5
+}
+.policy a{
+  color:#ffd700;
+  text-decoration:none
+}
+.policy a:hover{text-decoration:underline}
+
+/* BOTTOM BAR */
+.bottom{
+  position:fixed;bottom:0;width:100%;
+  background:linear-gradient(90deg,#ff0000,#b30000);
+  padding:12px;text-align:center;z-index:999
+}
+.bottom a{
+  color:#fff;
+  font-size:18px;
+  font-weight:bold;
+  text-decoration:none
+}
+
+/* WITHDRAW */
+.withdraw{
+  position:fixed;left:10px;bottom:125px;
+  background:#1b0000;
+  border:1px solid #ffd700;
+  padding:8px 12px;border-radius:8px;
+  font-size:13px;z-index:999;
+  animation:fade 3s ease
+}
+@keyframes fade{
+  0%{opacity:0;transform:translateY(6px)}
+  20%{opacity:1}
+  80%{opacity:1}
+  100%{opacity:0}
+}
+
+/* LOCK */
+.lock{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  background:rgba(0,0,0,.7);
+  display:none;align-items:center;justify-content:center;
+  z-index:1000
+}
+.lock-box{
+  background:#1b0000;
+  border:2px solid #ffd700;
+  border-radius:14px;
+  padding:20px;width:90%;max-width:320px;
+  text-align:center
+}
+.lock-box h3{color:#ffd700;margin-bottom:8px}
+.lock-box p{font-size:14px;margin-bottom:14px}
+</style>
+</head>
+
+<body>
+
+<div class="top-header">
+  <div>Get <span>₹500</span> Bonus</div>
+  <a href="#register">REGISTER</a>
+</div>
+
+<div class="live" id="live">👥 1,320 users playing now</div>
+<div class="bonus">₹500 Bonus</div>
+
+<!-- SLIDER -->
+<div class="slider">
+  <div class="slides" id="slides">
+    <div class="slide"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/slide1.jpg"></div>
+    <div class="slide"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/slide2.jpg"></div>
+    <div class="slide"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/slide3.jpg"></div>
+    <div class="slide"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/slide4.jpg"></div>
+    <div class="slide"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/slide5.jpg"></div>
+    <div class="slide"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/slide6.jpg"></div>
+  </div>
+</div>
+
+<!-- GAMES -->
+<div class="games-box">
+  <div class="game-grid">
+    <div class="game" onclick="openLock()"><span class="badge vip">VIP 👑</span><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game1.jpg"></div>
+    <div class="game" onclick="openLock()"><span class="badge hot">HOT</span><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game2.jpg"></div>
+    <div class="game" onclick="openLock()"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game3.jpg"></div>
+    <div class="game" onclick="openLock()"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game4.jpg"></div>
+    <div class="game" onclick="openLock()"><span class="badge hot">HOT</span><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game5.jpg"></div>
+    <div class="game" onclick="openLock()"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game6.jpg"></div>
+    <div class="game" onclick="openLock()"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game7.jpg"></div>
+    <div class="game" onclick="openLock()"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game8.jpg"></div>
+    <div class="game" onclick="openLock()"><img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/game9.jpg"></div>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div id="register" class="register">
+  <h2>Register & Start Playing</h2>
+
+  <a href="YOUR_LINK_HERE" class="btn">REGISTER NOW</a>
+
+  <div class="policy">
+    By registering, you agree to our  
+    <a href="privacy.html">Privacy Policy</a> and  
+    <a href="terms.html">Terms & Conditions</a>.
+  </div>
+</div>
+
+<div class="bottom">
+  <a href="#register">REGISTER & GET ₹500</a>
+</div>
+
+<div id="withdraw" class="withdraw"></div>
+
+<div class="lock" id="lock">
+  <div class="lock-box">
+    <h3>Register First</h3>
+    <p>Please complete registration to play games</p>
+    <a href="#register" class="btn">REGISTER NOW</a>
+  </div>
+</div>
+
+<script>
+let index=0;
+const slides=document.getElementById("slides");
+setInterval(()=>{
+  index=(index+1)%6;
+  slides.style.transform=`translateX(-${index*100}%)`;
+},3000);
+
+setInterval(()=>{
+  live.innerText=`👥 ${1200+Math.floor(Math.random()*400)} users playing now`;
+},2500);
+
+const withdraws=[
+"Amit K. ₹2,450","Rohit S. ₹1,980","Ankit R. ₹3,200","Vikas M. ₹4,100",
+"Sunil P. ₹1,750","Rahul T. ₹2,900","Manoj K. ₹3,500","Deepak J. ₹2,150",
+"Neeraj S. ₹4,300","Arjun P. ₹2,800","Kunal D. ₹1,650","Pankaj S. ₹3,900",
+"Suresh Y. ₹2,200","Vijay M. ₹4,750","Ajay R. ₹3,100",
+"Nitin K. ₹2,600","Sanjay P. ₹1,850","Aakash J. ₹3,700",
+"Ravi T. ₹2,950","Mohit S. ₹4,400",
+"Ramesh L. ₹1,990","Ashish P. ₹3,350","Dinesh K. ₹2,720",
+"Harsh V. ₹4,800","Yogesh S. ₹2,180",
+"Abhishek R. ₹3,950","Kapil J. ₹2,540","Pradeep M. ₹4,150",
+"Sachin T. ₹2,860","Lokesh P. ₹1,780",
+"Vivek S. ₹3,600","Tarun K. ₹2,330","Hemant R. ₹4,500",
+"Imran A. ₹2,910","Faizan K. ₹3,480",
+"Salman S. ₹4,050","Nadeem R. ₹2,670",
+"Arif M. ₹3,250","Zeeshan K. ₹4,600",
+"Irfan P. ₹2,100","Sameer A. ₹3,880",
+"Wasim K. ₹2,450","Shahid R. ₹4,200",
+"Javed M. ₹3,150","Bilal S. ₹2,980",
+"Adnan K. ₹4,350","Sohail P. ₹1,920",
+"Nasir R. ₹3,720","Faisal M. ₹2,560"
+];
+let w=0;
+setInterval(()=>{
+  withdraw.innerText = withdraws[w]+" withdrawn";
+  w=(w+1)%withdraws.length;
+},3500);
+
+function openLock(){lock.style.display="flex"}
+lock.onclick=()=>lock.style.display="none";
+</script>
+
+</body>
+</html>
