@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>tiger bhai all wallet </title>
+<title> All Wallet Sureshot  </title>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -21,223 +21,176 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=711007325206944&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
 <style>
-    * {margin:0; padding:0; box-sizing:border-box;}
-    body {
-      background:#111;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:100vh;
-      padding:20px;
-      font-family:'Roboto', sans-serif;
-    }
+:root{
+  --bg:#031616;
+  --card:#062626;
+  --primary:#18f3da;
+  --text:#ffffff;
+  --muted:#9fded7;
+}
 
-    /* MAIN CARD */
-    .main-card {
-      background: linear-gradient(160deg, #1a1a1a, #281b35, #1a1a1a);
-      border-radius:25px;
-      padding:40px 30px;
-      max-width:600px;
-      width:100%;
-      box-shadow:0 0 40px rgba(120,0,200,0.3);
-      text-align:center;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
 
-    /* MARQUEE */
-    .marquee {
-      background:#222;
-      color:#6bd1ff;
-      padding:10px 0;
-      font-weight:600;
-      font-size:1.2rem;
-      border-radius:10px;
-      margin-bottom:20px;
-      overflow:hidden;
-    }
- .marquee span {
+body{
+  background: radial-gradient(circle at top, #053030, var(--bg));
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--text);
+}
+
+.container{
+  width:100%;
+  max-width:380px;
+  padding:18px;
+}
+
+.card{
+  background:var(--card);
+  border-radius:20px;
+  padding:24px 20px 28px;
+  box-shadow:0 0 40px rgba(24,243,218,.25);
+  text-align:center;
+}
+
+/* badge */
+.badge{
+  background:var(--primary);
+  color:#012;
+  font-weight:700;
+  padding:8px 14px;
+  border-radius:999px;
+  font-size:13px;
+  margin-bottom:18px;
   display:inline-block;
-  white-space:nowrap;
-  animation: marquee 12s linear infinite;
-  transform: translateX(0); /* visible from first second */
 }
 
-  @keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+/* profile */
+.profile{
+  width:120px;
+  height:120px;
+  margin:0 auto 14px;
+  border-radius:18px;
+  overflow:hidden;
+  border:3px solid var(--primary);
+}
+.profile img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
+/* title */
+h1{
+  font-size:26px;
+  margin-bottom:6px;
+  letter-spacing:.5px;
+}
+.sub{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:18px;
+}
 
-    /* REDUCED SPACING — UPDATED */
-    .profile-img {
-      width:90%;
-      height:220px;
-      border-radius:25px;
-      margin:0 auto 12px;
-      display:block;
-      object-fit:contain;
-      background:#000;
-      border:3px solid #ffa500;
-      position:relative;
-      box-shadow:
-          0 0 0 5px rgba(255,165,0,0.3),
-          0 0 20px rgba(255,165,0,0.4),
-          0 0 35px rgba(255,165,0,0.2);
-    }
+/* button */
+.btn{
+  display:block;
+  width:100%;
+  background:var(--primary);
+  color:#012;
+  font-weight:800;
+  text-decoration:none;
+  padding:16px 0;
+  border-radius:999px;
+  font-size:16px;
+  margin:14px 0 10px;
+  transition:.2s;
+}
+.btn:active{
+  transform:scale(.97);
+}
 
-    h1 {
-      font-family:'Playfair Display', serif;
-      font-size:2rem;
-      color:#ff7e00;
-      margin-bottom:8px;
-    }
+/* urgency */
+.urgent{
+  font-size:14px;
+  color:#00ffe0;
+  margin-bottom:16px;
+  font-weight:600;
+}
 
-    .subheading {
-      background:#000;
-      color:#ff3b3b;
-      font-weight:700;
-      padding:6px 10px;
-      margin:10px 0 10px;
-      font-size:1rem;
-      border-radius:8px;
-      display:inline-block;
-      letter-spacing:1px;
-    }
+/* features */
+.features{
+  text-align:left;
+  margin:16px 0;
+}
+.features li{
+  list-style:none;
+  font-size:14px;
+  margin:8px 0;
+  color:#e6fffc;
+}
+.features li::before{
+  content:"★";
+  color:#ffd54a;
+  margin-right:8px;
+}
 
-    .details {
-      text-align:center;
-      margin:12px 0;
-      color:#ddd;
-      font-size:0.95rem;
-      list-style:none;
-      line-height:1.5;
-    }
-    .details li {margin-bottom:6px;}
-
-    .big-points {
-      margin:15px 0;
-      color:#ffcc00;
-      font-size:1.05rem;
-      font-weight:600;
-      line-height:1.5;
-    }
-
-    .btn {
-      display:flex; 
-      align-items:center; 
-      justify-content:center;
-      background:#0088cc; 
-      color:#fff;
-      padding:15px 0;
-      border-radius:50px;
-      font-weight:600; 
-      text-decoration:none;
-      transition:0.3s; 
-      font-size:1.1rem;
-      width:auto;
-      padding-left:28px;
-      padding-right:28px;
-      margin:10px auto;
-      box-shadow:0 0 15px rgba(0,136,204,0.5);
-    }
-
-    .timer-box {
-      background:#1e1e1e;
-      border:2px solid #ff3b3b;
-      padding:20px;
-      border-radius:15px;
-      margin-top:12px;
-      color:#fff;
-      box-shadow:0 0 20px rgba(255,0,0,0.3);
-    }
-    .timer-title {
-      font-size:1.2rem;
-      font-weight:700;
-      margin-bottom:10px;
-      color:#ff6b6b;
-    }
-    .timer {
-      font-size:2rem;
-      font-weight:700;
-      letter-spacing:3px;
-      margin-bottom:8px;
-    }
-    .timer-labels {
-      font-size:0.9rem;
-      color:#ccc;
-      letter-spacing:1px;
-    }
-
-    .footer {font-size:0.8rem;color:#888;margin-top:20px;}
-    .footer a {color:#ffa500;text-decoration:none;}
+/* footer */
+.footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  margin-top:18px;
+  padding-top:14px;
+  font-size:13px;
+  color:#9fded7;
+}
+.highlight{
+  color:var(--primary);
+  font-weight:700;
+}
 </style>
-
 </head>
+
 <body>
+  <div class="container">
+    <div class="card">
 
-<div class="main-card">
+      <div class="badge">🔥 FREE VIP SURESHOT • LIMITED TIME</div>
 
-  <div class="marquee"><span>🔥 DAILY BIG & SMALL NUMBER PREDICTIONS – JOIN TELEGRAM NOW! 🔥</span></div>
+      <div class="profile">
+        <!-- ADD YOUR PROFILE PHOTO -->
+        <img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/tiger.jpg" alt="Profile">
+      </div>
 
-  <img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/tiger.jpg" class="profile-img">
+      <h1> ALL WALLET  𝗢𝗙𝗙𝗜𝗖𝗜𝗔𝗟 𝗦𝗨𝗥𝗘𝗦𝗛𝗢𝗧</h1>
+      <div class="sub">Join fast for free VIP updates</div>
 
-  <h1>ALL WALLET SURESHOT </h1>
-   
-  <ul class="details">
-    <li>⚡ Fast & accurate predictions updated every few minutes</li>
-    <li>🔐 Safe & trusted community with expert guidance</li>   
-    <li>🛡️ Highly reliable system used by thousands of players</li>
-  </ul>
-
-  <a href="https://t.me/+7FxvHTZOG1w3MGQ1" class="btn" target="_blank">JOIN TELEGRAM NOW</a>
-
-  <div class="big-points">
-    ⭐ Premium-level accuracy with powerful number study<br>
-    ⭐ Designed to help newcomers & pros achieve better outcomes
-  </div>
-
-  <div class="timer-box">
-    <div class="timer-title">⏳ LIMITED TIME — JOIN NOW</div>
-    <div class="timer" id="countdown">15:00</div>
-    <div class="timer-labels">Days : Hours : Minutes : Seconds</div>
-  </div>
-
-  <div style="margin-top:30px; text-align:center; font-size:0.9rem; color:#ddd;">
-      <div style="color:#ff6b6b; font-weight:700;">Mannat Ads Service</div>
-      <a href="https://t.me/Wishmaster070" style="color:#ffcc00; text-decoration:none; font-size:0.85rem;">
-          Click here for Telegram & Meta Ads
+      <!-- TELEGRAM LINK -->
+      <a class="btn" href="https://t.me/+y-4xWxn2ZYc5OTE1" target="_blank">
+        JOIN TELEGRAM NOW
       </a>
+
+      <div class="urgent">⚡ Hurry up • Limited seats</div>
+
+      <ul class="features">
+        <li>High accuracy prediction system</li>
+        <li>Smart risk management method</li>
+        <li>Daily free VIP updates</li>
+      </ul>
+
+      <div class="footer">
+        <div>5+ Years Experience</div>
+        <div class="highlight">10 Lakh+ Winning Community</div>
+      </div>
+
+    </div>
   </div>
-
-  <div class="footer">
-    Made by Rajendra Singh |
-    <a href="https://rajendra9315.github.io/deepwebstudio/privacypolicy.html">Privacy Policy</a>
-  </div>
-
-</div>
-
-<script>
-  let time = 15 * 60;
-
-  const countdownEl = document.getElementById("countdown");
-
-  function updateTimer() {
-    let minutes = Math.floor(time / 60);
-    let seconds = time % 60;
-
-    countdownEl.innerHTML =
-      "00:00:" +
-      String(minutes).padStart(2, '0') + ":" +
-      String(seconds).padStart(2, '0');
-
-    time--;
-    if (time < 0) time = 0;
-  }
-
-  setInterval(updateTimer, 1000);
-</script>
-
 </body>
 </html>
