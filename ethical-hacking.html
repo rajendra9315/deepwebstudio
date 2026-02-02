@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ethical Hacking Roadmap</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+body{
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    color:#fff;
+}
+header{
+    padding:40px;
+    text-align:center;
+}
+header h1{
+    font-size:2.8rem;
+    color:#00ffcc;
+}
+header p{
+    margin-top:10px;
+    opacity:0.9;
+}
+
+section{
+    padding:50px 10%;
+}
+
+.card{
+    background:rgba(255,255,255,0.1);
+    border-radius:16px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+.card h2{
+    color:#00ffcc;
+    margin-bottom:15px;
+}
+
+ul{
+    margin-left:20px;
+}
+ul li{
+    margin:8px 0;
+}
+
+.roadmap{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.step{
+    background:rgba(0,0,0,0.4);
+    padding:20px;
+    border-radius:14px;
+    border-left:5px solid #00ffcc;
+}
+
+.step h3{
+    color:#ffd166;
+}
+
+.chart-box{
+    background:#fff;
+    border-radius:15px;
+    padding:20px;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+    opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Ethical Hacking Learning Roadmap</h1>
+    <p>Legal • Professional • Career-Focused Cybersecurity Path</p>
+</header>
+
+<section>
+    <div class="card">
+        <h2>⚠️ Important Note</h2>
+        <p>This roadmap is for <b>Ethical Hacking & Cybersecurity only</b>.  
+        Never hack real systems without permission.</p>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>🧠 Skills You Must Learn</h2>
+        <ul>
+            <li>Computer Fundamentals</li>
+            <li>Networking (TCP/IP, DNS, Ports)</li>
+            <li>Linux & Command Line</li>
+            <li>Programming (Python, HTML, JavaScript)</li>
+            <li>Cybersecurity Concepts</li>
+            <li>Ethical Hacking Tools</li>
+            <li>Legal Practice Platforms</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>🗺️ Step-by-Step Roadmap</h2>
+
+        <div class="roadmap">
+            <div class="step">
+                <h3>Step 1: Computer Basics</h3>
+                <p>OS, files, memory, processes</p>
+            </div>
+
+            <div class="step">
+                <h3>Step 2: Networking</h3>
+                <p>IP, TCP/IP, HTTP, DNS, Firewalls</p>
+            </div>
+
+            <div class="step">
+                <h3>Step 3: Programming</h3>
+                <p>Python, HTML, CSS, JS basics</p>
+            </div>
+
+            <div class="step">
+                <h3>Step 4: Linux</h3>
+                <p>Kali Linux, terminal commands</p>
+            </div>
+
+            <div class="step">
+                <h3>Step 5: Cybersecurity</h3>
+                <p>Malware, phishing, encryption</p>
+            </div>
+
+            <div class="step">
+                <h3>Step 6: Practice</h3>
+                <p>TryHackMe, Hack The Box (legal)</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>📈 Learning Progress Timeline</h2>
+        <div class="chart-box">
+            <canvas id="lineChart"></canvas>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>🌳 Skill Distribution (Tree-Style View)</h2>
+        <ul>
+            <li>Foundations
+                <ul>
+                    <li>Computer Basics</li>
+                    <li>Networking</li>
+                </ul>
+            </li>
+            <li>Core Skills
+                <ul>
+                    <li>Linux</li>
+                    <li>Programming</li>
+                </ul>
+            </li>
+            <li>Advanced
+                <ul>
+                    <li>Ethical Hacking</li>
+                    <li>Cyber Defense</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <div class="card">
+        <h2>🖼️ Insert Images Here</h2>
+        <p>You can add images like this:</p>
+        <code>&lt;img src="images/linux.png" width="200"&gt;</code>
+    </div>
+</section>
+
+<footer>
+    <p>Built for Learning • Cybersecurity Roadmap</p>
+</footer>
+
+<script>
+const ctx = document.getElementById('lineChart').getContext('2d');
+new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['Week 1','Week 2','Week 3','Week 4','Week 5','Week 6'],
+        datasets: [{
+            label: 'Skill Growth',
+            data: [10,25,40,60,80,100],
+            borderColor: '#00ffcc',
+            backgroundColor: 'rgba(0,255,204,0.2)',
+            fill: true,
+            tension:0.4
+        }]
+    },
+    options:{
+        responsive:true,
+        plugins:{
+            legend:{display:true}
+        }
+    }
+});
+</script>
+
+</body>
+</html>
