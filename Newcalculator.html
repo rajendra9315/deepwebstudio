@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate 30-in-1 Calculator Hub</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:#eef2f7;
+}
+header{
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+color:white;
+padding:20px;
+text-align:center;
+font-size:26px;
+font-weight:bold;
+}
+.container{padding:25px;}
+.section-title{
+font-size:20px;
+margin:25px 0 10px;
+color:#2c5364;
+border-bottom:2px solid #2c5364;
+padding-bottom:5px;
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+.card{
+background:white;
+padding:15px;
+border-radius:8px;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+cursor:pointer;
+transition:.3s;
+text-align:center;
+}
+.card:hover{
+background:#2c5364;
+color:white;
+transform:translateY(-4px);
+}
+.hidden{display:none;}
+.calc-box{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+max-width:500px;
+margin:auto;
+}
+input,select{
+width:100%;
+padding:8px;
+margin:8px 0;
+border-radius:5px;
+border:1px solid #ccc;
+}
+button{
+background:#2c5364;
+color:white;
+padding:8px 12px;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+button:hover{background:#203a43;}
+.result{
+margin-top:10px;
+font-weight:bold;
+color:#2c5364;
+}
+.back-btn{
+background:#444;
+margin-bottom:10px;
+}
+</style>
+</head>
+<body>
+
+<header>🚀 Ultimate 30-in-1 Smart Calculator Hub</header>
+<div class="container">
+
+<div id="categories">
+
+<!-- STUDENT -->
+<div class="section-title">📚 Student Calculators</div>
+<div class="grid">
+<div class="card" onclick="openCalc('cgpa')">CGPA</div>
+<div class="card" onclick="openCalc('percentage')">Percentage</div>
+<div class="card" onclick="openCalc('grade')">Grade</div>
+<div class="card" onclick="openCalc('attendance')">Attendance</div>
+<div class="card" onclick="openCalc('studytime')">Study Time</div>
+</div>
+
+<!-- FINANCE -->
+<div class="section-title">💰 Finance Calculators</div>
+<div class="grid">
+<div class="card" onclick="openCalc('tax')">Income Tax</div>
+<div class="card" onclick="openCalc('discount')">Discount</div>
+<div class="card" onclick="openCalc('profit')">Profit/Loss</div>
+<div class="card" onclick="openCalc('si')">Simple Interest</div>
+<div class="card" onclick="openCalc('ci')">Compound Interest</div>
+<div class="card" onclick="openCalc('breakeven')">Break Even</div>
+<div class="card" onclick="openCalc('currency')">Currency</div>
+</div>
+
+<!-- DAILY -->
+<div class="section-title">🧮 Daily Life Calculators</div>
+<div class="grid">
+<div class="card" onclick="openCalc('timeduration')">Time Duration</div>
+<div class="card" onclick="openCalc('datediff')">Date Difference</div>
+<div class="card" onclick="openCalc('loan')">Loan Eligibility</div>
+<div class="card" onclick="openCalc('tip')">Tip</div>
+<div class="card" onclick="openCalc('unit')">Unit Converter</div>
+<div class="card" onclick="openCalc('fuel')">Fuel Cost</div>
+<div class="card" onclick="openCalc('electricity')">Electric Bill</div>
+</div>
+
+<!-- HEALTH -->
+<div class="section-title">💪 Health Calculators</div>
+<div class="grid">
+<div class="card" onclick="openCalc('bmi')">Ideal Weight</div>
+<div class="card" onclick="openCalc('calorie')">Calories</div>
+<div class="card" onclick="openCalc('water')">Water Intake</div>
+</div>
+
+</div>
+
+<div id="calculatorSection" class="hidden">
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+<div id="calculatorContent"></div>
+</div>
+
+</div>
+
+<script>
+function openCalc(type){
+document.getElementById("categories").classList.add("hidden");
+document.getElementById("calculatorSection").classList.remove("hidden");
+
+let html=`<div class="calc-box"><h2>${type.toUpperCase()} Calculator</h2>`;
+
+switch(type){
+
+// STUDENT
+case "cgpa":
+html+=`<input id="a"><input id="b"><button onclick="res(a.value/b.value)">Calculate</button>`;break;
+case "percentage":
+html+=`<input id="a"><input id="b"><button onclick="res((a.value/b.value)*100+' %')">Calculate</button>`;break;
+case "grade":
+html+=`<input id="a" placeholder="Marks"><button onclick="gradeCalc()">Calculate</button>`;break;
+case "attendance":
+html+=`<input id="a"><input id="b"><button onclick="res((a.value/b.value)*100+' %')">Calculate</button>`;break;
+case "studytime":
+html+=`<input id="a" placeholder="Hours per day"><input id="b" placeholder="Days"><button onclick="res(a.value*b.value+' hrs')">Calculate</button>`;break;
+
+// FINANCE
+case "tax":
+html+=`<input id="a" placeholder="Income"><button onclick="res(a.value*0.1)">Calculate (10%)</button>`;break;
+case "discount":
+html+=`<input id="a"><input id="b"><button onclick="res(a.value-(a.value*b.value/100))">Calculate</button>`;break;
+case "profit":
+html+=`<input id="a" placeholder="Cost"><input id="b" placeholder="Selling"><button onclick="res(b.value-a.value)">Calculate</button>`;break;
+case "si":
+html+=`<input id="p"><input id="r"><input id="t"><button onclick="res((p.value*r.value*t.value)/100)">Calculate</button>`;break;
+case "ci":
+html+=`<input id="p"><input id="r"><input id="t"><button onclick="res(p.value*Math.pow((1+r.value/100),t.value))">Calculate</button>`;break;
+case "breakeven":
+html+=`<input id="fixed"><input id="price"><input id="var"><button onclick="res(fixed.value/(price.value-var.value))">Calculate</button>`;break;
+case "currency":
+html+=`<input id="amount"><input id="rate"><button onclick="res(amount.value*rate.value)">Convert</button>`;break;
+
+// DAILY
+case "timeduration":
+html+=`<input id="a"><input id="b"><button onclick="res(b.value-a.value+' hrs')">Calculate</button>`;break;
+case "datediff":
+html+=`<input type="date" id="d1"><input type="date" id="d2"><button onclick="dateDiff()">Calculate</button>`;break;
+case "loan":
+html+=`<input id="income"><button onclick="res(income.value*20)">Eligible Loan</button>`;break;
+case "tip":
+html+=`<input id="bill"><input id="tip"><button onclick="res(bill.value*tip.value/100)">Calculate</button>`;break;
+case "unit":
+html+=`<input id="cm"><button onclick="res(cm.value/100+' m')">Convert to meters</button>`;break;
+case "fuel":
+html+=`<input id="dist"><input id="avg"><input id="price"><button onclick="res((dist.value/avg.value)*price.value)">Calculate</button>`;break;
+case "electricity":
+html+=`<input id="units"><input id="rate"><button onclick="res(units.value*rate.value)">Calculate</button>`;break;
+
+// HEALTH
+case "bmi":
+html+=`<input id="h"><input id="w"><button onclick="res(w.value/(h.value*h.value))">Calculate</button>`;break;
+case "calorie":
+html+=`<input id="w"><button onclick="res(w.value*24)">Estimate</button>`;break;
+case "water":
+html+=`<input id="w"><button onclick="res(w.value*0.033+' Liters')">Calculate</button>`;break;
+}
+
+html+=`<div class="result" id="result"></div></div>`;
+document.getElementById("calculatorContent").innerHTML=html;
+}
+
+function res(val){document.getElementById("result").innerText="Result: "+val;}
+
+function gradeCalc(){
+let m=document.getElementById("a").value;
+let g="F";
+if(m>=90)g="A+";
+else if(m>=80)g="A";
+else if(m>=70)g="B";
+else if(m>=60)g="C";
+else if(m>=50)g="D";
+res(g);
+}
+
+function dateDiff(){
+let d1=new Date(document.getElementById("d1").value);
+let d2=new Date(document.getElementById("d2").value);
+let diff=(d2-d1)/(1000*60*60*24);
+res(diff+" days");
+}
+
+function goBack(){
+document.getElementById("categories").classList.remove("hidden");
+document.getElementById("calculatorSection").classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
