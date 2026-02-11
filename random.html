@@ -1,143 +1,220 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Smart Quiz App</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            text-align: center;
-            padding: 20px;
-        }
-        .container {
-            background: rgba(0,0,0,0.5);
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 500px;
-            margin: auto;
-        }
-        button {
-            padding: 10px 20px;
-            margin: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            background: orange;
-            font-weight: bold;
-        }
-        .option {
-            display: block;
-            background: white;
-            color: black;
-            margin: 5px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        #result {
-            font-size: 18px;
-            margin-top: 15px;
-        }
-    </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro Quiz App</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#1f4037,#99f2c8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+}
+.container{
+    background:white;
+    width:95%;
+    max-width:500px;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    text-align:center;
+}
+h1{margin-top:0;}
+button{
+    width:100%;
+    padding:10px;
+    margin:5px 0;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    background:#1f4037;
+    color:white;
+    font-weight:bold;
+}
+button:hover{opacity:0.8;}
+.option{
+    background:#eee;
+    color:black;
+}
+#leaderboard{
+    font-size:14px;
+    text-align:left;
+    margin-top:10px;
+}
+</style>
 </head>
+
 <body>
-
-<h1>🔥 Smart Quiz Website 🔥</h1>
-
 <div class="container">
 
-    <div id="categorySection">
-        <h3>Select Category</h3>
-        <button onclick="startQuiz('tech')">Technology</button>
-        <button onclick="startQuiz('finance')">Finance</button>
-    </div>
+<h1>🔥 Pro Quiz App 🔥</h1>
 
-    <div id="quizSection" style="display:none;">
-        <h3 id="question"></h3>
-        <div id="options"></div>
-    </div>
+<div id="startScreen">
+<input type="text" id="username" placeholder="Enter Your Name" style="width:100%;padding:8px;">
+<h3>Select Category</h3>
+<button onclick="startQuiz('tech')">Technology</button>
+<button onclick="startQuiz('finance')">Finance</button>
+<button onclick="startQuiz('math')">Math</button>
+<button onclick="startQuiz('gk')">General Knowledge</button>
+<button onclick="startQuiz('web')">Web Development</button>
+</div>
 
-    <div id="result"></div>
+<div id="quizScreen" style="display:none;">
+<h3 id="question"></h3>
+<div id="options"></div>
+<p>Question <span id="qNum"></span>/10</p>
+</div>
+
+<div id="resultScreen" style="display:none;"></div>
+
+<div id="leaderboard"></div>
 
 </div>
 
 <script>
+
 const quizData = {
-    tech: [
-        { q: "What does HTML stand for?", 
-          options: ["Hyper Text Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "None"],
-          answer: 0 },
-        { q: "Which language is used for styling?", 
-          options: ["Python", "HTML", "CSS", "SQL"],
-          answer: 2 }
-    ],
-    finance: [
-        { q: "Full form of GST?", 
-          options: ["Goods and Sales Tax", "General Sales Tax", "Goods and Services Tax", "None"],
-          answer: 2 },
-        { q: "Balance Sheet shows?", 
-          options: ["Profit only", "Assets & Liabilities", "Expenses", "Revenue"],
-          answer: 1 }
-    ]
+tech:[
+{q:"HTML stands for?",o:["Hyper Text Markup Language","High Tool ML","Home Tool","None"],a:0},
+{q:"CSS is used for?",o:["Structure","Styling","Database","Logic"],a:1},
+{q:"JS is?",o:["Programming language","Markup","DB","None"],a:0},
+{q:"SQL used for?",o:["Styling","Database","Design","None"],a:1},
+{q:"CPU full form?",o:["Central Process Unit","Central Processing Unit","Control Unit","None"],a:1},
+{q:"RAM is?",o:["Storage","Memory","CPU","None"],a:1},
+{q:"Python is?",o:["Snake","Language","Car","None"],a:1},
+{q:"HTTP means?",o:["HyperText Transfer Protocol","High Transfer","None","Data"],a:0},
+{q:"AI stands for?",o:["Artificial Intelligence","Auto Info","None","None"],a:0},
+{q:"Cloud means?",o:["Weather","Online Storage","CPU","None"],a:1}
+],
+finance:[
+{q:"GST full form?",o:["Goods Service Tax","Goods and Services Tax","General Tax","None"],a:1},
+{q:"Balance Sheet shows?",o:["Profit","Assets & Liabilities","Sales","Tax"],a:1},
+{q:"Debit means?",o:["Left side","Right side","Profit","None"],a:0},
+{q:"Credit means?",o:["Left","Right","Loss","None"],a:1},
+{q:"Tally used for?",o:["Gaming","Accounting","Editing","None"],a:1},
+{q:"Income Tax is?",o:["Direct Tax","Indirect","None","GST"],a:0},
+{q:"P&L shows?",o:["Assets","Profit/Loss","Stock","None"],a:1},
+{q:"Capital means?",o:["Owner money","Loan","Expense","None"],a:0},
+{q:"Expense means?",o:["Income","Cost","Profit","None"],a:1},
+{q:"Liability means?",o:["Asset","Debt","Income","None"],a:1}
+],
+math:[
+{q:"10+5?",o:["15","10","5","20"],a:0},
+{q:"12x2?",o:["24","22","20","18"],a:0},
+{q:"Square of 5?",o:["10","15","25","30"],a:2},
+{q:"100/4?",o:["20","25","30","15"],a:1},
+{q:"15-5?",o:["5","10","15","20"],a:1},
+{q:"7x3?",o:["21","24","18","20"],a:0},
+{q:"9+6?",o:["14","15","16","13"],a:1},
+{q:"8x8?",o:["64","56","72","60"],a:0},
+{q:"50% of 100?",o:["25","50","75","100"],a:1},
+{q:"20+30?",o:["40","45","50","60"],a:2}
+],
+gk:[
+{q:"Capital of India?",o:["Mumbai","Delhi","Chennai","Kolkata"],a:1},
+{q:"National animal?",o:["Lion","Tiger","Elephant","Cow"],a:1},
+{q:"Largest ocean?",o:["Indian","Pacific","Atlantic","Arctic"],a:1},
+{q:"Sun is a?",o:["Planet","Star","Moon","Gas"],a:1},
+{q:"India independence year?",o:["1945","1947","1950","1930"],a:1},
+{q:"Earth shape?",o:["Flat","Round","Square","Triangle"],a:1},
+{q:"Water formula?",o:["H2O","CO2","O2","NaCl"],a:0},
+{q:"Prime Minister?",o:["President","PM","CM","Governor"],a:1},
+{q:"Largest continent?",o:["Asia","Africa","Europe","America"],a:0},
+{q:"Currency of India?",o:["Dollar","Rupee","Euro","Yen"],a:1}
+],
+web:[
+{q:"Flexbox is in?",o:["HTML","CSS","JS","SQL"],a:1},
+{q:"DOM means?",o:["Data Object","Document Object Model","Design","None"],a:1},
+{q:"JS used for?",o:["Styling","Logic","DB","None"],a:1},
+{q:"Responsive means?",o:["Fast","Mobile Friendly","Big","None"],a:1},
+{q:"Grid is?",o:["CSS Layout","JS","HTML","DB"],a:0},
+{q:"Form used in?",o:["HTML","SQL","Python","None"],a:0},
+{q:"API means?",o:["Application Programming Interface","None","Code","None"],a:0},
+{q:"LocalStorage used for?",o:["Saving Data","Styling","Design","None"],a:0},
+{q:"Backend means?",o:["Server Side","Front","Design","None"],a:0},
+{q:"Frontend means?",o:["User Side","Server","DB","None"],a:0}
+]
 };
 
-let currentCategory = "";
-let currentQuestion = 0;
-let score = 0;
+let currentCategory="";
+let index=0;
+let score=0;
+let username="";
 
-function startQuiz(category) {
-    currentCategory = category;
-    currentQuestion = 0;
-    score = 0;
-    document.getElementById("categorySection").style.display = "none";
-    document.getElementById("quizSection").style.display = "block";
-    loadQuestion();
+function startQuiz(cat){
+username=document.getElementById("username").value;
+if(username===""){alert("Enter Name");return;}
+currentCategory=cat;
+index=0;
+score=0;
+document.getElementById("startScreen").style.display="none";
+document.getElementById("quizScreen").style.display="block";
+loadQuestion();
 }
 
-function loadQuestion() {
-    let data = quizData[currentCategory][currentQuestion];
-    document.getElementById("question").innerText = data.q;
-    let optionsHTML = "";
-    data.options.forEach((option, index) => {
-        optionsHTML += `<button class="option" onclick="checkAnswer(${index})">${option}</button>`;
-    });
-    document.getElementById("options").innerHTML = optionsHTML;
+function loadQuestion(){
+let q=quizData[currentCategory][index];
+document.getElementById("question").innerText=q.q;
+document.getElementById("qNum").innerText=index+1;
+let ops="";
+q.o.forEach((opt,i)=>{
+ops+=`<button class="option" onclick="check(${i})">${opt}</button>`;
+});
+document.getElementById("options").innerHTML=ops;
 }
 
-function checkAnswer(selected) {
-    let correct = quizData[currentCategory][currentQuestion].answer;
-    if (selected === correct) {
-        score++;
-    }
-    currentQuestion++;
-
-    if (currentQuestion < quizData[currentCategory].length) {
-        loadQuestion();
-    } else {
-        showResult();
-    }
+function check(i){
+if(i===quizData[currentCategory][index].a) score++;
+index++;
+if(index<10) loadQuestion();
+else finish();
 }
 
-function showResult() {
-    let level = "Beginner";
-    let rank = "🥉";
+function finish(){
+document.getElementById("quizScreen").style.display="none";
+document.getElementById("resultScreen").style.display="block";
 
-    if (score === 2) {
-        level = "Advanced";
-        rank = "🥇";
-    } else if (score === 1) {
-        level = "Intermediate";
-        rank = "🥈";
-    }
+let percent=(score/10)*100;
+let level="Beginner";
+let rank="🥉";
 
-    document.getElementById("quizSection").style.display = "none";
-    document.getElementById("result").innerHTML = 
-        `✅ Quiz Completed! <br>
-         🎯 Score: ${score} / 2 <br>
-         🏆 Rank: ${rank} <br>
-         📈 Level: ${level}`;
+if(percent>=80){level="Expert";rank="🥇";}
+else if(percent>=50){level="Intermediate";rank="🥈";}
+
+document.getElementById("resultScreen").innerHTML=
+`<h3>Quiz Finished</h3>
+<p>Score: ${score}/10</p>
+<p>Percentage: ${percent}%</p>
+<p>Rank: ${rank}</p>
+<p>Level: ${level}</p>
+<button onclick="location.reload()">Play Again</button>`;
+
+saveLeaderboard(username,score);
+showLeaderboard();
 }
+
+function saveLeaderboard(name,score){
+let board=JSON.parse(localStorage.getItem("board"))||[];
+board.push({name,score});
+board.sort((a,b)=>b.score-a.score);
+localStorage.setItem("board",JSON.stringify(board.slice(0,5)));
+}
+
+function showLeaderboard(){
+let board=JSON.parse(localStorage.getItem("board"))||[];
+let html="<h3>🏆 Top Players</h3>";
+board.forEach((p,i)=>{
+html+=`<p>${i+1}. ${p.name} - ${p.score}</p>`;
+});
+document.getElementById("leaderboard").innerHTML=html;
+}
+
+showLeaderboard();
+
 </script>
-
 </body>
 </html>
