@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartCalc Pro - 30 Calculators</title>
+
+<style>
+body{margin:0;font-family:Arial;background:#0f172a;color:white}
+header{text-align:center;padding:20px;background:#1e293b}
+h1{margin:0;color:#38bdf8}
+.category{padding:20px}
+.category h2{border-left:5px solid #38bdf8;padding-left:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.card{background:#1e293b;padding:15px;text-align:center;border-radius:8px;cursor:pointer}
+.card:hover{background:#38bdf8;color:black}
+.calc{display:none;padding:20px;max-width:500px;margin:auto}
+input,button{width:100%;padding:10px;margin:6px 0;border:none;border-radius:5px}
+button{background:#38bdf8;font-weight:bold}
+.result{color:#22c55e;font-weight:bold;margin-top:8px}
+.back{background:#ef4444}
+footer{text-align:center;padding:20px;background:#1e293b;margin-top:30px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>SmartCalc Pro</h1>
+<p>All-in-One 30 Free Calculators</p>
+</header>
+
+<div id="home" class="category">
+<h2>All Calculators</h2>
+<div class="grid" id="buttons"></div>
+</div>
+
+<div id="calc" class="calc">
+<h2 id="title"></h2>
+<div id="inputs"></div>
+<div class="result" id="result"></div>
+<button class="back" onclick="goHome()">Back</button>
+</div>
+
+<footer>
+Made by Rajendra Rawat | All Rights Reserved
+</footer>
+
+<script>
+
+const calculators = {
+
+Age: () => {
+let dob = new Date(inp1.value);
+let today = new Date();
+let age = today.getFullYear() - dob.getFullYear();
+return "Your Age: " + age + " Years";
+},
+
+"Age in Days": () => {
+let dob = new Date(inp1.value);
+let diff = (new Date() - dob)/(1000*60*60*24);
+return "Age in Days: " + Math.floor(diff);
+},
+
+Percentage: () => {
+return "Percentage: " + ((inp1.value/inp2.value)*100).toFixed(2)+"%";
+},
+
+CGPA: () => {
+return "Percentage Equivalent: " + (inp1.value*9.5).toFixed(2)+"%";
+},
+
+Grade: () => {
+let m = inp1.value;
+return m>=90?"Grade A":m>=75?"Grade B":m>=50?"Grade C":"Grade D";
+},
+
+Attendance: () => {
+return "Attendance %: "+((inp1.value/inp2.value)*100).toFixed(2)+"%";
+},
+
+EMI: () => {
+let r=inp2.value/12/100,n=inp3.value*12;
+let emi=(inp1.value*r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1);
+return "Monthly EMI: ₹ "+emi.toFixed(2);
+},
+
+SIP: () => {
+let r=inp2.value/100/12,n=inp3.value*12;
+let fv=inp1.value*((Math.pow(1+r,n)-1)/r)*(1+r);
+return "Maturity Amount: ₹ "+fv.toFixed(2);
+},
+
+GST: () => {
+let gst=inp1.value*inp2.value/100;
+return "GST: ₹ "+gst+" | Total: ₹ "+(parseFloat(inp1.value)+gst);
+},
+
+"Simple Interest": () => {
+return "SI: ₹ "+(inp1.value*inp2.value*inp3.value/100);
+},
+
+"Compound Interest": () => {
+return "Amount: ₹ "+(inp1.value*Math.pow((1+inp2.value/100),inp3.value)).toFixed(2);
+},
+
+Discount: () => {
+let d=inp1.value*inp2.value/100;
+return "Final Price: ₹ "+(inp1.value-d);
+},
+
+"Profit & Loss": () => {
+return inp2.value>inp1.value?
+"Profit: ₹ "+(inp2.value-inp1.value):
+"Loss: ₹ "+(inp1.value-inp2.value);
+},
+
+"Income Tax": () => {
+let income=inp1.value;
+return income<250000?"No Tax":
+"Tax (10% approx): ₹ "+(income*0.1);
+},
+
+"Break Even": () => {
+return "Break Even Units: "+(inp1.value/(inp2.value-inp3.value)).toFixed(2);
+},
+
+"BMI": () => {
+let h=inp2.value/100;
+return "BMI: "+(inp1.value/(h*h)).toFixed(2);
+},
+
+"Ideal Weight": () => {
+return "Ideal Weight approx: "+((inp1.value-100)*0.9).toFixed(2)+" kg";
+},
+
+"Water Intake": () => {
+return "Water Needed: "+(inp1.value*0.033).toFixed(2)+" Litres/day";
+},
+
+"Calorie": () => {
+return "Estimated Calories: "+(inp1.value*24);
+},
+
+"Date Difference": () => {
+let d1=new Date(inp1.value),d2=new Date(inp2.value);
+return "Days Difference: "+Math.floor((d2-d1)/(1000*60*60*24));
+},
+
+"Time Duration": () => {
+return "Hours Difference: "+Math.abs(inp2.value-inp1.value);
+},
+
+Tip: () => {
+return "Tip Amount: ₹ "+(inp1.value*inp2.value/100);
+},
+
+"Fuel Cost": () => {
+return "Fuel Cost: ₹ "+(inp1.value/inp2.value*inp3.value).toFixed(2);
+},
+
+"Electricity Bill": () => {
+return "Bill Amount: ₹ "+(inp1.value*inp2.value);
+},
+
+"Unit Converter": () => {
+return "Meters: "+(inp1.value/100);
+},
+
+Salary: () => {
+return "Monthly Salary: ₹ "+(inp1.value/12).toFixed(2);
+},
+
+Inflation: () => {
+return "Future Value: ₹ "+(inp1.value*Math.pow(1+inp2.value/100,inp3.value)).toFixed(2);
+},
+
+Countdown: () => {
+let d=new Date(inp1.value);
+let diff=(d-new Date())/(1000*60*60*24);
+return "Days Remaining: "+Math.floor(diff);
+},
+
+Currency: () => {
+return "Converted Amount: "+(inp1.value*inp2.value);
+},
+
+"Loan Eligibility": () => {
+return "Eligible Loan approx: ₹ "+(inp1.value*60);
+}
+
+};
+
+const inputCount={
+Age:1,"Age in Days":1,Percentage:2,CGPA:1,Grade:1,Attendance:2,
+EMI:3,SIP:3,GST:2,"Simple Interest":3,"Compound Interest":3,
+Discount:2,"Profit & Loss":2,"Income Tax":1,"Break Even":3,
+BMI:2,"Ideal Weight":1,"Water Intake":1,Calorie:1,
+"Date Difference":2,"Time Duration":2,Tip:2,"Fuel Cost":3,
+"Electricity Bill":2,"Unit Converter":1,Salary:1,
+Inflation:3,Countdown:1,Currency:2,"Loan Eligibility":1
+};
+
+const btnContainer=document.getElementById("buttons");
+Object.keys(calculators).forEach(name=>{
+let div=document.createElement("div");
+div.className="card";
+div.innerText=name;
+div.onclick=()=>openCalc(name);
+btnContainer.appendChild(div);
+});
+
+function openCalc(name){
+home.style.display="none";
+calc.style.display="block";
+title.innerText=name;
+inputs.innerHTML="";
+result.innerText="";
+let count=inputCount[name];
+for(let i=1;i<=count;i++){
+let input=document.createElement("input");
+input.type="number";
+if(name.includes("Date")||name=="Countdown") input.type="date";
+input.id="inp"+i;
+inputs.appendChild(input);
+}
+let btn=document.createElement("button");
+btn.innerText="Calculate";
+btn.onclick=()=>{
+window.inp1=document.getElementById("inp1");
+window.inp2=document.getElementById("inp2");
+window.inp3=document.getElementById("inp3");
+result.innerText=calculators[name]();
+};
+inputs.appendChild(btn);
+}
+
+function goHome(){
+home.style.display="block";
+calc.style.display="none";
+}
+
+</script>
+
+</body>
+</html>
