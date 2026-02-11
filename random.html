@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Quiz App</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(0,0,0,0.5);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: auto;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: orange;
+            font-weight: bold;
+        }
+        .option {
+            display: block;
+            background: white;
+            color: black;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        #result {
+            font-size: 18px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🔥 Smart Quiz Website 🔥</h1>
+
+<div class="container">
+
+    <div id="categorySection">
+        <h3>Select Category</h3>
+        <button onclick="startQuiz('tech')">Technology</button>
+        <button onclick="startQuiz('finance')">Finance</button>
+    </div>
+
+    <div id="quizSection" style="display:none;">
+        <h3 id="question"></h3>
+        <div id="options"></div>
+    </div>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+const quizData = {
+    tech: [
+        { q: "What does HTML stand for?", 
+          options: ["Hyper Text Markup Language", "High Tech Modern Language", "Home Tool Markup Language", "None"],
+          answer: 0 },
+        { q: "Which language is used for styling?", 
+          options: ["Python", "HTML", "CSS", "SQL"],
+          answer: 2 }
+    ],
+    finance: [
+        { q: "Full form of GST?", 
+          options: ["Goods and Sales Tax", "General Sales Tax", "Goods and Services Tax", "None"],
+          answer: 2 },
+        { q: "Balance Sheet shows?", 
+          options: ["Profit only", "Assets & Liabilities", "Expenses", "Revenue"],
+          answer: 1 }
+    ]
+};
+
+let currentCategory = "";
+let currentQuestion = 0;
+let score = 0;
+
+function startQuiz(category) {
+    currentCategory = category;
+    currentQuestion = 0;
+    score = 0;
+    document.getElementById("categorySection").style.display = "none";
+    document.getElementById("quizSection").style.display = "block";
+    loadQuestion();
+}
+
+function loadQuestion() {
+    let data = quizData[currentCategory][currentQuestion];
+    document.getElementById("question").innerText = data.q;
+    let optionsHTML = "";
+    data.options.forEach((option, index) => {
+        optionsHTML += `<button class="option" onclick="checkAnswer(${index})">${option}</button>`;
+    });
+    document.getElementById("options").innerHTML = optionsHTML;
+}
+
+function checkAnswer(selected) {
+    let correct = quizData[currentCategory][currentQuestion].answer;
+    if (selected === correct) {
+        score++;
+    }
+    currentQuestion++;
+
+    if (currentQuestion < quizData[currentCategory].length) {
+        loadQuestion();
+    } else {
+        showResult();
+    }
+}
+
+function showResult() {
+    let level = "Beginner";
+    let rank = "🥉";
+
+    if (score === 2) {
+        level = "Advanced";
+        rank = "🥇";
+    } else if (score === 1) {
+        level = "Intermediate";
+        rank = "🥈";
+    }
+
+    document.getElementById("quizSection").style.display = "none";
+    document.getElementById("result").innerHTML = 
+        `✅ Quiz Completed! <br>
+         🎯 Score: ${score} / 2 <br>
+         🏆 Rank: ${rank} <br>
+         📈 Level: ${level}`;
+}
+</script>
+
+</body>
+</html>
