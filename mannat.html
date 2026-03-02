@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>sk trader  </title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>=sk trader </title>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -22,248 +21,180 @@ fbq('track', 'PageView');
 src="https://www.facebook.com/tr?id=1196471149343960&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
+  
 
 <style>
-  :root{
-    --bg:#071013;
-    --panel:#071e1d;
-    --teal1:#0ef2d5;
-    --teal2:#13f2ff;
-    --btn-text:#001818;
-    --muted:rgba(255,255,255,0.75);
-    --label-red:#ff2f5a;
-  }
+:root{
+  --bg:#031616;
+  --card:#062626;
+  --primary:#18f3da;
+  --text:#ffffff;
+  --muted:#9fded7;
+}
 
-  body{
-    margin:0;
-    padding:0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(180deg,#061214 0%, #081617 50%, #071013 100%);
-    color:#fff;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-  }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
 
-  .wrap{
-    max-width:480px;
-    width:90%;
-    background:var(--panel);
-    border-radius:20px;
-    padding:30px 20px;
-    box-shadow:0 20px 50px rgba(0,0,0,0.6);
-    text-align:center;
-  }
+body{
+  background: radial-gradient(circle at top, #053030, var(--bg));
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--text);
+}
 
-  .badge{
-    display:inline-block;
-    background: linear-gradient(90deg,var(--teal1),var(--teal2));
-    color:var(--btn-text);
-    padding:12px 24px;
-    border-radius:50px;
-    font-weight:800;
-    font-size:18px;
-    text-transform:uppercase;
-    margin-bottom:20px;
-    letter-spacing:1px;
-  }
+.container{
+  width:100%;
+  max-width:380px;
+  padding:18px;
+}
 
-  .profile-box{
-    width:150px;
-    height:150px;
-    margin: 15px auto 20px;
-    border-radius:16px;
-    overflow:hidden;
-    border:4px solid rgba(14,242,213,0.1);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:rgba(0,0,0,0.3);
-  }
-  .profile-box img{
-    width:92%;
-    height:92%;
-    object-fit:cover;
-    border-radius:12px;
-  }
+.card{
+  background:var(--card);
+  border-radius:20px;
+  padding:24px 20px 28px;
+  box-shadow:0 0 40px rgba(24,243,218,.25);
+  text-align:center;
+}
 
-  h1{
-    font-size:28px;
-    margin:10px 0 6px;
-    font-weight:800;
-    text-transform:uppercase;
-    letter-spacing:1px;
-    color:#fff;
-  }
-  .subtitle{
-    font-size:14px;
-    color:var(--muted);
-    margin-bottom:20px;
-  }
+/* badge */
+.badge{
+  background:var(--primary);
+  color:#012;
+  font-weight:700;
+  padding:8px 14px;
+  border-radius:999px;
+  font-size:13px;
+  margin-bottom:18px;
+  display:inline-block;
+}
 
-  .pill{
-    display:block;
-    width:100%;
-    padding:18px 0;
-    margin:10px 0;
-    border-radius:50px;
-    background:linear-gradient(90deg,var(--teal1),var(--teal2));
-    color:var(--btn-text);
-    font-weight:800;
-    font-size:18px;
-    text-decoration:none;
-    letter-spacing:1px;
-  }
-  .pill-sub{
-    font-size:12px;
-    color:var(--muted);
-    margin-bottom:10px;
-  }
+/* profile */
+.profile{
+  width:120px;
+  height:120px;
+  margin:0 auto 14px;
+  border-radius:18px;
+  overflow:hidden;
+  border:3px solid var(--primary);
+}
+.profile img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
 
-  .hurry{
-    margin-top:10px;
-    color:var(--teal1);
-    font-weight:800;
-    letter-spacing:1px;
-  }
+/* title */
+h1{
+  font-size:26px;
+  margin-bottom:6px;
+  letter-spacing:.5px;
+}
+.sub{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:18px;
+}
 
-  .timer{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    margin:15px 0 20px;
-  }
-  .cell{
-    background:rgba(1,40,38,0.6);
-    padding:12px 16px;
-    border-radius:10px;
-    width:70px;
-    box-shadow: inset 0 -6px 12px rgba(0,0,0,0.45);
-  }
-  .num{
-    font-size:28px;
-    font-weight:800;
-  }
-  .lab{
-    font-size:12px;
-    color:var(--label-red);
-    margin-top:6px;
-    font-weight:700;
-  }
+/* button */
+.btn{
+  display:block;
+  width:100%;
+  background:var(--primary);
+  color:#012;
+  font-weight:800;
+  text-decoration:none;
+  padding:16px 0;
+  border-radius:999px;
+  font-size:16px;
+  margin:14px 0 10px;
+  transition:.2s;
+}
+.btn:active{
+  transform:scale(.97);
+}
 
-  .features{
-    margin-top:15px;
-    margin-bottom:20px;
-  }
-  .feature-item{
-    display:flex;
-    gap:6px;
-    justify-content:center;
-    margin:6px 0;
-    font-weight:700;
-    color:var(--muted);
-    font-size:15px;
-  }
-  .star{
-    color:#ffd24d;
-  }
+/* urgency */
+.urgent{
+  font-size:14px;
+  color:#00ffe0;
+  margin-bottom:16px;
+  font-weight:600;
+}
 
-  .divider{
-    height:1px;
-    background:rgba(255,255,255,0.02);
-    margin:20px auto;
-    max-width:360px;
-  }
+/* features */
+.features{
+  text-align:left;
+  margin:16px 0;
+}
+.features li{
+  list-style:none;
+  font-size:14px;
+  margin:8px 0;
+  color:#e6fffc;
+}
+.features li::before{
+  content:"★";
+  color:#ffd54a;
+  margin-right:8px;
+}
 
-  .exp h2{
-    font-size:20px;
-    margin-bottom:6px;
-    color:#e7f8f4;
-    font-weight:800;
-  }
-  .big{
-    font-size:18px;
-    color:var(--teal1);
-    font-weight:800;
-    margin-bottom:4px;
-  }
-  .mini{
-    font-size:12px;
-    color:rgba(255,255,255,0.5);
-    letter-spacing:2px;
-  }
+/* footer */
+.footer{
+  border-top:1px solid rgba(255,255,255,.08);
+  margin-top:18px;
+  padding-top:14px;
+  font-size:13px;
+  color:#9fded7;
+}
+.highlight{
+  color:var(--primary);
+  font-weight:700;
+}
 </style>
-
-<script>
-  // 30-minute countdown timer
-  let timerMinutes = 30;
-  let timerSeconds = 0;
-
-  function updateTimer(){
-    const min = timerMinutes.toString().padStart(2,'0');
-    const sec = timerSeconds.toString().padStart(2,'0');
-    document.getElementById('timer-min').innerText = min;
-    document.getElementById('timer-sec').innerText = sec;
-
-    if(timerSeconds === 0){
-      if(timerMinutes === 0){
-        clearInterval(timerInterval);
-        return;
-      } else {
-        timerMinutes--;
-        timerSeconds = 59;
-      }
-    } else {
-      timerSeconds--;
-    }
-  }
-
-  const timerInterval = setInterval(updateTimer,1000);
-  window.onload = updateTimer;
-</script>
 </head>
 
 <body>
-<div class="wrap">
+  <div class="container">
+    <div class="card">
 
-  <div class="badge">SK TRADER </div>
+      <div class="badge">🔥 FREE VIP SURESHOT • LIMITED TIME</div>
 
-  <div class="profile-box">
-    <img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/tiger.jpg" alt="Profile Picture" />
-  </div>
+      <div class="profile">
+        <!-- ADD YOUR PROFILE PHOTO -->
+        <img src="https://raw.githubusercontent.com/rajendra9315/deepwebstudio/main/tiger.jpg" alt="Profile">
+      </div>
 
-  <h1>SK TRADER VIP PREDICTION</h1>
-  <div class="subtitle">JOIN FAST FOR FREE SURESHOT VIP HACKS</div>
+      <h1> RAJA GAMES 𝗢𝗙𝗙𝗜𝗖𝗜𝗔𝗟 𝗦𝗨𝗥𝗘𝗦𝗛𝗢𝗧</h1>
+      <div class="sub">Join fast for free VIP updates</div>
 
-  <a class="pill" href="https://t.me/+GEhgkP63JgUyODBl">JOIN SURESHOT GROUP</a>
-  <div class="pill-sub">FREE VIP HACKS</div>
+      <!-- TELEGRAM LINK -->
+      <a class="btn" href="https://t.me/+GEhgkP63JgUyODBl" target="_blank">
+        JOIN TELEGRAM NOW
+      </a>
 
-  <div class="hurry">HURRY UP! JOIN NOW</div>
+      <div class="urgent">⚡ Hurry up • Limited seats</div>
 
-  <div class="timer">
-    <div class="cell"><div class="num" id="timer-min">30</div><div class="lab">MINUTES</div></div>
-    <div class="cell"><div class="num" id="timer-sec">00</div><div class="lab">SECONDS</div></div>
-  </div>
+      <ul class="features">
+        <li>High accuracy prediction system</li>
+        <li>Smart risk management method</li>
+        <li>Daily free VIP updates</li>
+      </ul>
 
-  <div class="features">
-    <div class="feature-item"><span class="star">⭐</span> 100% WINNING SURESHOT <span class="star">⭐</span></div>
-    <div class="feature-item"><span class="star">⭐</span> 100% LOSS RECOVERY <span class="star">⭐</span></div>
-    <div class="feature-item"><span class="star">⭐</span> MONTHLY INCOME 30K–50K <span class="star">⭐</span></div>
-  </div>
-
-  <a class="pill" href="https://t.me/+GEhgkP63JgUyODBl">JOIN TELEGRAM NOW</a>
-  <div class="pill-sub">FREE VIP HACKS</div>
-
-  <div class="divider"></div>
-
-  <div class="exp">
-    <h2>5+ YEARS EXPERIENCE</h2>
-    <div class="big">10 LAKH+ WINNING</div>
-    <div class="mini">NUMBER KING</div>
-  </div>
+      <div class="footer">
+        <div>5+ Years Experience</div>
+        <div class="highlight">10 Lakh+ Winning Community</div>
+      </div>
 <div class="divider"></div>
 
-</div>
+
+
+    </div>
+  </div>
 </body>
 </html>
