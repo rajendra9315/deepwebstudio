@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Escape Offline</title>
+
+<style>
+body{
+margin:0;
+background:#0a0a0a;
+color:white;
+font-family:Arial, sans-serif;
+overflow:hidden;
+}
+
+/* Animated gradient background */
+body::before{
+content:"";
+position:fixed;
+width:200%;
+height:200%;
+background:radial-gradient(circle at center, #001f3f, #000);
+animation:move 10s linear infinite;
+z-index:-1;
+}
+@keyframes move{
+0%{transform:translate(0,0);}
+50%{transform:translate(-10%, -10%);}
+100%{transform:translate(0,0);}
+}
+
+.container{
+width:90%;
+max-width:420px;
+margin:60px auto;
+background:rgba(0,0,0,0.85);
+padding:20px;
+border-radius:15px;
+box-shadow:0 0 25px cyan;
+text-align:center;
+}
+
+h1{color:cyan;margin-top:0;}
+
+input{
+width:80%;
+padding:10px;
+margin-top:10px;
+font-size:16px;
+border-radius:8px;
+border:none;
+text-align:center;
+}
+
+button{
+padding:10px 20px;
+margin-top:10px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:cyan;
+color:black;
+font-weight:bold;
+}
+
+.timer{color:orange;margin-top:5px;}
+.attempts{color:lightgreen;margin-top:5px;}
+#feedback{margin-top:10px;font-size:14px;}
+#leaderboard{margin-top:15px;font-size:14px;text-align:left;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>MASTER ESCAPE</h1>
+<div id="game"></div>
+<div id="leaderboard"></div>
+</div>
+
+<script>
+
+/* -------- SIMPLE OFFLINE SOUND -------- */
+function sound(freq){
+try{
+const ctx=new (window.AudioContext||window.webkitAudioContext)();
+const osc=ctx.createOscillator();
+const gain=ctx.createGain();
+osc.connect(gain);
+gain.connect(ctx.destination);
+osc.frequency.value=freq;
+gain.gain.value=0.1;
+osc.start();
+osc.stop(ctx.currentTime+0.15);
+}catch(e){}
+}
+
+/* -------- GAME VARIABLES -------- */
+let playerName="";
+let level=1;
+let attempts=10;
+let secret="";
+let timer;
+let timeLeft=60;
+let score=0;
+let codeLength=3;
+
+/* -------- GENERATE CODE -------- */
+function generateCode(length){
+let c="";
+for(let i=0;i<length;i++){
+c+=Math.floor(Math.random()*10);
+}
+return c;
+}
+
+/* -------- NAME SCREEN -------- */
+function askName(){
+document.getElementById("game").innerHTML=`
+<p>Enter Your Name</p>
+<input id="nameInput">
+<br>
+<button onclick="startGame()">Start</button>`;
+}
+
+/* -------- START GAME -------- */
+function startGame(){
+playerName=document.getElementById("nameInput").value||"Player";
+level=1;
+score=0;
+codeLength=3;
+startLevel();
+}
+
+/* -------- START LEVEL -------- */
+function startLevel(){
+secret=generateCode(codeLength);
+attempts=10;
+timeLeft=60;
+
+document.getElementById("game").innerHTML=`
+<p>Level ${level}</p>
+<p>${codeLength}-digit code</p>
+<div class="timer">Time: <span id="time">${timeLeft}</span>s</div>
+<div class="attempts">Attempts: <span id="att">${attempts}</span></div>
+<input id="guess" maxlength="${codeLength}">
+<br>
+<button onclick="check()">Submit</button>
+<div id="feedback"></div>`;
+
+startTimer();
+}
+
+/* -------- TIMER -------- */
+function startTimer(){
+clearInterval(timer);
+timer=setInterval(()=>{
+timeLeft--;
+document.getElementById("time").innerText=timeLeft;
+if(timeLeft<=0) gameOver();
+},1000);
+}
+
+/* -------- CHECK -------- */
+function check(){
+let guess=document.getElementById("guess").value;
+
+if(guess===secret){
+sound(600);
+score+=timeLeft*5 + attempts*3;
+nextLevel();
+return;
+}
+
+attempts--;
+document.getElementById("att").innerText=attempts;
+
+let correctPos=0;
+let correctDigit=0;
+
+for(let i=0;i<secret.length;i++){
+if(guess[i]===secret[i]){
+correctPos++;
+}else if(secret.includes(guess[i])){
+correctDigit++;
+}
+}
+
+document.getElementById("feedback").innerHTML=
+`Correct Position: ${correctPos}<br>
+Correct Digit Wrong Place: ${correctDigit}`;
+
+sound(200);
+
+if(attempts<=0) gameOver();
+}
+
+/* -------- NEXT LEVEL -------- */
+function nextLevel(){
+clearInterval(timer);
+level++;
+
+if(level%2===0) codeLength++;
+
+if(level<=4){
+startLevel();
+}else{
+bossLevel();
+}
+}
+
+/* -------- BOSS -------- */
+function bossLevel(){
+secret=generateCode(6);
+attempts=10;
+timeLeft=60;
+
+document.getElementById("game").innerHTML=`
+<p style="color:red;">BOSS LEVEL</p>
+<div class="timer">Time: <span id="time">${timeLeft}</span>s</div>
+<div class="attempts">Attempts: <span id="att">${attempts}</span></div>
+<input id="guess" maxlength="6">
+<br>
+<button onclick="checkBoss()">Override</button>`;
+
+startTimer();
+}
+
+function checkBoss(){
+let guess=document.getElementById("guess").value;
+if(guess===secret){
+score+=2000;
+win();
+return;
+}
+attempts--;
+document.getElementById("att").innerText=attempts;
+if(attempts<=0) gameOver();
+}
+
+/* -------- WIN -------- */
+function win(){
+clearInterval(timer);
+saveScore();
+
+document.getElementById("game").innerHTML=`
+<h2>You Escaped 🎉</h2>
+<p>Score: ${score}</p>
+<button onclick="continueGame()">Continue</button>
+<button onclick="askName()">New Player</button>`;
+
+showLeaderboard();
+}
+
+/* -------- CONTINUE -------- */
+function continueGame(){
+level=1;
+score=0;
+codeLength=4;
+startLevel();
+}
+
+/* -------- GAME OVER -------- */
+function gameOver(){
+clearInterval(timer);
+sound(100);
+document.getElementById("game").innerHTML=
+`<h2 style="color:red;">SYSTEM LOCKED ❌</h2>
+<button onclick="askName()">Restart</button>`;
+}
+
+/* -------- SAVE SCORE -------- */
+function saveScore(){
+let scores=JSON.parse(localStorage.getItem("scores"))||[];
+scores.push({name:playerName,score:score});
+scores.sort((a,b)=>b.score-a.score);
+scores=scores.slice(0,5);
+localStorage.setItem("scores",JSON.stringify(scores));
+}
+
+/* -------- SHOW LEADERBOARD -------- */
+function showLeaderboard(){
+let scores=JSON.parse(localStorage.getItem("scores"))||[];
+let html="<h3>Leaderboard</h3>";
+scores.forEach(s=>{
+html+=`${s.name} - ${s.score}<br>`;
+});
+document.getElementById("leaderboard").innerHTML=html;
+}
+
+askName();
+
+</script>
+</body>
+</html>
