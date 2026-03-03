@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>System</title>
+<title>Glitch Protocol</title>
 
 <style>
 body{
@@ -15,12 +15,12 @@ display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-overflow:hidden;
 text-align:center;
-transition:0.3s;
+overflow:hidden;
+transition:0.2s;
 }
 
-h1{font-size:6vw;}
+h1{font-size:6vw;margin:10px;}
 
 button{
 padding:12px 25px;
@@ -35,7 +35,6 @@ cursor:pointer;
 position:fixed;
 top:10px;
 right:10px;
-color:lime;
 font-size:4vw;
 }
 
@@ -48,25 +47,53 @@ background:#111;
 color:white;
 padding:10px;
 display:none;
-font-size:4vw;
 }
 
-.glitch{animation:flicker 0.08s infinite;}
+.glitch{
+animation:flicker 0.08s infinite;
+}
+
 @keyframes flicker{
 0%{opacity:1}
 50%{opacity:0.4}
 100%{opacity:1}
 }
 
-.blood{background:#2b0000 !important;color:red !important;}
+.shake{
+animation:shake 0.1s infinite;
+}
 
-.shake{animation:shake 0.1s infinite;}
 @keyframes shake{
 0%{transform:translate(2px,2px)}
 25%{transform:translate(-2px,-2px)}
 50%{transform:translate(2px,-2px)}
 75%{transform:translate(-2px,2px)}
 100%{transform:translate(0,0)}
+}
+
+.blood{
+background:#2b0000 !important;
+color:red !important;
+}
+
+.blue{
+background:#0000aa !important;
+color:white !important;
+}
+
+#fingerprint{
+display:none;
+margin-top:20px;
+border:2px solid lime;
+padding:15px;
+border-radius:50%;
+animation:pulse 1s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.1)}
+100%{transform:scale(1)}
 }
 </style>
 </head>
@@ -77,113 +104,133 @@ font-size:4vw;
 <div id="notify">⚠ UNKNOWN DEVICE CONNECTED</div>
 
 <h1 id="title">Tap To Start</h1>
-<button id="btn">ENTER</button>
+<button id="startBtn">ENTER</button>
+<div id="fingerprint">SCAN FINGERPRINT</div>
 
 <script>
-const title=document.getElementById("title");
-const btn=document.getElementById("btn");
-const battery=document.getElementById("battery");
-const notify=document.getElementById("notify");
+const title = document.getElementById("title");
+const startBtn = document.getElementById("startBtn");
+const battery = document.getElementById("battery");
+const notify = document.getElementById("notify");
+const fingerprint = document.getElementById("fingerprint");
 
-let audioStarted=false;
+let batteryLevel = 100;
+let audioStarted = false;
 
-/* ---------- Web Audio Glitch Sound ---------- */
-function playGlitch(){
+/* ----------- SOUND ----------- */
+function playGlitchSound(){
 if(audioStarted) return;
-audioStarted=true;
+audioStarted = true;
 
-const ctx=new (window.AudioContext||window.webkitAudioContext)();
-const oscillator=ctx.createOscillator();
-const gain=ctx.createGain();
-
-oscillator.type="sawtooth";
-oscillator.frequency.setValueAtTime(100,ctx.currentTime);
-gain.gain.setValueAtTime(0.1,ctx.currentTime);
-
-oscillator.connect(gain);
+try{
+const ctx = new (window.AudioContext || window.webkitAudioContext)();
+const osc = ctx.createOscillator();
+const gain = ctx.createGain();
+osc.type="square";
+osc.frequency.value=120;
+gain.gain.value=0.15;
+osc.connect(gain);
 gain.connect(ctx.destination);
-
-oscillator.start();
-oscillator.frequency.exponentialRampToValueAtTime(1000,ctx.currentTime+1);
-gain.gain.exponentialRampToValueAtTime(0.001,ctx.currentTime+1);
-
-oscillator.stop(ctx.currentTime+1);
+osc.start();
+osc.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime+0.5);
+osc.stop(ctx.currentTime+0.6);
+}catch(e){}
 }
 
-/* ---------- Fullscreen ---------- */
-function goFullScreen(){
-if(document.documentElement.requestFullscreen){
-document.documentElement.requestFullscreen();
-}
-}
+/* ----------- START GAME ----------- */
+function startGame(){
 
-/* ---------- Battery Drain ---------- */
-function drainBattery(){
-let level=100;
-let interval=setInterval(()=>{
-level--;
-battery.innerText="🔋 "+level+"%";
-if(level<=0){
-clearInterval(interval);
-title.innerText="DEVICE POWER FAILURE";
-}
-},300);
-}
-
-/* ---------- Notifications ---------- */
-function showNotification(){
-notify.style.display="block";
-if(navigator.vibrate){
-navigator.vibrate([200,100,200]);
-}
-setTimeout(()=>notify.style.display="none",3000);
-}
-
-/* ---------- Horror Sequence ---------- */
-function startHorror(){
-
-goFullScreen();
-playGlitch();
-
+startBtn.style.display="none";
 title.innerText="UNAUTHORIZED ACCESS";
 document.body.classList.add("glitch");
-
-setTimeout(()=>{
-showNotification();
-},2000);
-
-setTimeout(()=>{
+playGlitchSound();
 drainBattery();
-},4000);
+}
 
-setTimeout(()=>{
+/* ----------- FAST BATTERY ----------- */
+function drainBattery(){
+
+let interval = setInterval(()=>{
+
+batteryLevel -= 5;
+battery.innerText="🔋 "+batteryLevel+"%";
+
+/* Random whispers */
+if(Math.random() > 0.6){
+let whisper = document.createElement("div");
+whisper.innerText = ["behind you","run","don't blink","i see you","too late"][Math.floor(Math.random()*5)];
+whisper.style.position="fixed";
+whisper.style.left=Math.random()*90+"%";
+whisper.style.top=Math.random()*90+"%";
+whisper.style.color="red";
+whisper.style.fontSize="4vw";
+document.body.appendChild(whisper);
+setTimeout(()=>whisper.remove(),1200);
+}
+
+/* Random red flash */
+if(Math.random() > 0.7){
 document.body.classList.add("blood");
-},7000);
+setTimeout(()=>document.body.classList.remove("blood"),120);
+}
 
-setTimeout(()=>{
+/* Timed horror events */
+
+if(batteryLevel === 80){
+notify.style.display="block";
+if(navigator.vibrate) navigator.vibrate([200,100,200]);
+setTimeout(()=>notify.style.display="none",2000);
+}
+
+if(batteryLevel === 60){
+fingerprint.style.display="block";
+}
+
+if(batteryLevel === 40){
 document.body.classList.add("shake");
-title.innerText="YOU CANNOT EXIT";
-},10000);
+}
+
+if(batteryLevel === 20){
+title.innerText="YOU STAYED TOO LONG.";
+}
+
+/* End */
+if(batteryLevel <= 0){
+clearInterval(interval);
+finalStage();
+}
+
+},150);
+}
+
+/* ----------- FINAL STAGE ----------- */
+function finalStage(){
+
+// Jump flash
+document.body.style.background="white";
+setTimeout(()=>{document.body.style.background="black";},150);
+
+document.body.classList.remove("glitch");
+document.body.classList.add("blue");
+
+title.innerText="CRITICAL SYSTEM ERROR";
 
 setTimeout(()=>{
-document.body.innerHTML="<h1 style='color:red'>SYSTEM OVERRIDDEN</h1>";
-},15000);
+let code = prompt("FINAL OVERRIDE CODE (3 seconds):");
+
+if(code === "1234"){
+document.body.classList.remove("blue");
+document.body.style.background="black";
+document.body.style.color="white";
+title.innerText="SYSTEM RESTORED";
+}else{
+title.innerText="DEVICE PERMANENTLY LOCKED";
 }
 
-/* ---------- Button Interaction ---------- */
-btn.addEventListener("click",()=>{
-startHorror();
-});
-
-/* Move button */
-btn.addEventListener("mouseover",move);
-btn.addEventListener("touchstart",move);
-
-function move(){
-btn.style.position="absolute";
-btn.style.left=Math.random()*(window.innerWidth-100)+"px";
-btn.style.top=Math.random()*(window.innerHeight-50)+"px";
+},2000);
 }
+
+startBtn.addEventListener("click", startGame);
 
 </script>
 </body>
