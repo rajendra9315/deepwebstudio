@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System</title>
+
+<style>
+body {
+    margin:0;
+    background:black;
+    color:#00ff00;
+    font-family:monospace;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    overflow:hidden;
+    text-align:center;
+    transition:0.2s;
+}
+
+h1{
+    font-size:6vw;
+}
+
+button{
+    padding:12px 25px;
+    font-size:4vw;
+    background:black;
+    color:#00ff00;
+    border:1px solid #00ff00;
+    cursor:pointer;
+}
+
+/* Flicker */
+.glitch{
+    animation:flicker 0.08s infinite;
+}
+@keyframes flicker{
+    0%{opacity:1}
+    50%{opacity:0.3}
+    100%{opacity:1}
+}
+
+/* Shake */
+.shake{
+    animation:shake 0.1s infinite;
+}
+@keyframes shake{
+    0%{transform:translate(2px,2px)}
+    25%{transform:translate(-2px,-2px)}
+    50%{transform:translate(2px,-2px)}
+    75%{transform:translate(-2px,2px)}
+    100%{transform:translate(0,0)}
+}
+
+/* Blood flash */
+.blood{
+    background:#2b0000 !important;
+    color:red !important;
+}
+
+/* Face flash overlay */
+#faceFlash{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:radial-gradient(circle at center, rgba(255,255,255,0.2) 10%, black 60%);
+    display:none;
+    pointer-events:none;
+}
+
+/* Eye illusion */
+#eye{
+    position:fixed;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:white;
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+#pupil{
+    width:30px;
+    height:30px;
+    background:black;
+    border-radius:50%;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">System Initializing...</h1>
+<button id="btn">ENTER</button>
+
+<div id="faceFlash"></div>
+
+<div id="eye">
+    <div id="pupil"></div>
+</div>
+
+<script>
+const title = document.getElementById("title");
+const btn = document.getElementById("btn");
+const faceFlash = document.getElementById("faceFlash");
+const eye = document.getElementById("eye");
+const pupil = document.getElementById("pupil");
+
+console.log("🔒 Secret Code: 6677");
+
+/* --- Stage 1: Glitch --- */
+setTimeout(()=>{
+    document.body.classList.add("glitch");
+    title.innerText="UNAUTHORIZED ACCESS";
+},3000);
+
+/* --- Stage 2: Whisper Text --- */
+let whispers=["i see you","don't move","you stayed","too late","behind you"];
+setTimeout(()=>{
+    setInterval(()=>{
+        let w=document.createElement("div");
+        w.innerText=whispers[Math.floor(Math.random()*whispers.length)];
+        w.style.position="fixed";
+        w.style.left=Math.random()*90+"%";
+        w.style.top=Math.random()*90+"%";
+        w.style.color="red";
+        w.style.fontSize="3vw";
+        document.body.appendChild(w);
+        setTimeout(()=>w.remove(),2000);
+    },1500);
+},6000);
+
+/* --- Stage 3: Face Flash --- */
+setTimeout(()=>{
+    faceFlash.style.display="block";
+    setTimeout(()=>faceFlash.style.display="none",200);
+},9000);
+
+/* --- Stage 4: Eye Tracking --- */
+setTimeout(()=>{
+    eye.style.display="flex";
+},11000);
+
+document.addEventListener("mousemove",(e)=>{
+    let x=e.clientX/20;
+    let y=e.clientY/20;
+    pupil.style.transform=`translate(${x}px,${y}px)`;
+});
+
+/* --- Stage 5: Blood Flicker --- */
+setTimeout(()=>{
+    setInterval(()=>{
+        if(Math.random()>0.7){
+            document.body.classList.add("blood");
+            setTimeout(()=>document.body.classList.remove("blood"),200);
+        }
+    },500);
+},13000);
+
+/* --- Stage 6: Final Horror Ending --- */
+setTimeout(()=>{
+    document.body.classList.add("shake");
+    title.innerText="YOU SHOULD HAVE LEFT.";
+},16000);
+
+setTimeout(()=>{
+    document.body.innerHTML="<h1 style='color:red;'>SYSTEM LOST.</h1>";
+},20000);
+
+/* --- Button Movement --- */
+btn.addEventListener("mouseover",move);
+btn.addEventListener("touchstart",move);
+
+function move(){
+    btn.style.position="absolute";
+    btn.style.left=Math.random()*(window.innerWidth-100)+"px";
+    btn.style.top=Math.random()*(window.innerHeight-50)+"px";
+}
+
+/* --- Secret Code --- */
+btn.addEventListener("click",()=>{
+    let code=prompt("ENTER ACCESS CODE:");
+    if(code==="6677"){
+        document.body.innerHTML="<h1 style='color:white;'>ACCESS GRANTED</h1>";
+    }else{
+        alert("ACCESS DENIED");
+    }
+});
+</script>
+
+</body>
+</html>
